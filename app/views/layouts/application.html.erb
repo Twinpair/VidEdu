@@ -7,8 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rideshare</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
 
+<div class = "container">
+    <ul class = "nav nav-tabs">
+        <li><%= link_to "Home", pages_home_path %></li>
+        <li><%= link_to "About Us", pages_about_path %></li>
+        <li><%= link_to "Contact", pages_contact_path %></li>
+        <li><%= link_to "Profile", pages_profile_path %></li>
+        <li><%= link_to "Features", pages_features_path %></li>
+        <li><%= link_to "Subject", pages_subjects_path %></li>
+        <li><%= link_to "Login", root_path %></li>
+
+    </ul>
 <%= yield %>
-
+</div>
 </body>
 </html>
