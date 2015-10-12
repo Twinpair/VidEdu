@@ -19,13 +19,14 @@
 
 <div class = "container">
     <ul class = "nav nav-tabs">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "About Us", welcome_about_path %></li>
-        <li><%= link_to "Contact", welcome_contact_path %></li>
-        <li><%= link_to "Features", welcome_features_path %></li>
-        <li><%= link_to "FAQs", welcome_faq_path %></li>
-        <li><%= link_to "Pricing", welcome_pricing_path %></li>
+        <li><%= link_to "Splash", pages_splash_path %></li>
+        <li><%= link_to "About Us", pages_about_path %></li>
+        <li><%= link_to "Contact", pages_contact_path %></li>
+        <li><%= link_to "Profile", pages_profile_path %></li>
+        <li><%= link_to "Features", pages_features_path %></li>
+        <li><%= link_to "Subject", pages_subjects_path %></li>
         <li><%= link_to "Login", root_path %></li>
+
     </ul>
 <%= yield %>
 </div>
