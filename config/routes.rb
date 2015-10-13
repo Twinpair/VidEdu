@@ -17,5 +17,6 @@ Rails.application.routes.draw do
 
   get 'pages/splash'
 
-  root to: 'pages#home'
+# controller#method_name
+  root to: 'pages#splash'
 end
