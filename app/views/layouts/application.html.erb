@@ -1,13 +1,32 @@
+<!-- EVERY page will have this section -->
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>TermH</title>
+  <title>VidEdu</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<div>
+    <ul>
+        <%= link_to "Home", pages_home_path %>
+        <%= link_to "About Us", pages_about_path %>
+        <%= link_to "Subjects", pages_subjects_path %>
+        <%= link_to "Profile", pages_profile_path %>
+        <%= link_to "Contact", pages_contact_path %>
+        <%= link_to "Featured", pages_featured_path %>
+        <%= link_to "FAQs", pages_faq_path %>
+        <%= link_to "Splash", pages_splash_path %>
+        <%= link_to "Login", root_path %>
+    </ul>
+</div>
+
+
+
+<!-- picks the view to show -->
 <%= yield %>
 
 </body>
