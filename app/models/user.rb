@@ -4,8 +4,14 @@ class User < ActiveRecord::Base
   has_many :videos
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable,
+         :omniauthable, :omniauth_providers => [:google_oauth2,:facebook,:twitter]
+
 
   #Validations for the sign up page
   validates_presence_of :firstname, :on => :create, :message => "cant be blank"
@@ -13,17 +19,37 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :on => :create, :message => "cant be blank"
   validates_uniqueness_of :username, :on => :create, :message => "is already taken."
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user.provider = auth.provider
-        user.uid = auth.uid
-        user.firstname = auth.info.name.split.first
-        user.lastname = auth.info.name.split.last
-        user.username = auth.info.nickname
-        user.email = auth.info.email
-    end
-  end
- 
+  # def self.from_omniauth(auth)
+  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  #       user.provider = auth.provider
+  #       user.uid = auth.uid
+  #       user.firstname = auth.info.name.split.first
+  #       user.lastname = auth.info.name.split.last
+  #       user.username = auth.info.nickname
+  #       user.email = auth.info.email
+  #   end
+  # end
+  
+ def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+    data = access_token.info
+    user = User.where(:provider => access_token.provider, :uid => access_token.uid ).first
+    if user
+      return user
+    else
+      registered_user = User.where(:email => access_token.info.email).first
+      if registered_user
+        return registered_user
+      else
+        user = User.create(name: data["name"],
+          provider:access_token.provider,
+          email: data["email"],
+          uid: access_token.uid ,
+          password: Devise.friendly_token[0,20]
+        )
+      end
+   end
+end
+
 
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
@@ -40,3 +66,13 @@ class User < ActiveRecord::Base
     super && provider.blank?
   end
 end
+
+  # class << self
+  #   def from_omniauth(auth)
+  #     user = User.find_or_initialize_by(uid: auth['uid'])
+  #     user.name = auth['info']['name']
+  #     user.token = auth['credentials']['token']
+  #     user.save!
+  #     user
+  #   end
+  # end

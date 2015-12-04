@@ -22,7 +22,7 @@ Devise.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   require 'devise/orm/active_record'
-
+  require 'omniauth-google-oauth2'
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for
@@ -238,6 +238,9 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook, '781360041973939', 'ea719fce657647f6c4c0ef446e23ac3a'
   config.omniauth :twitter, 'nXh29f4P6mnvH5gmuUrSTgirz', 'N1dSToYsxJ0vz28bR1TgE2g08DxQ9n5VqSjdBnJGhFffxQHIjt'
+  #config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { scope: 'userinfo.profile,youtube' }
+  #config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { access_type: "offline", approval_prompt: "" }
+  config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { scope: 'userinfo.profile,youtube,email,profile', access_type: "offline", approval_prompt: "" }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

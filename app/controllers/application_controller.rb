@@ -32,6 +32,14 @@ def search
 #   response.headers.delete "X-Frame-Options" 
 # end 
 
+# Added from tutorial: 
+  # private
+
+  # def current_user
+  #   @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  # end
+
+  # helper_method :current_user
 
 end
 
@@ -47,6 +55,7 @@ class ApplicationController < ActionController::Base
 #  def set_header_for_iframe 
 #   response.headers.delete "X-Frame-Options" 
 # end 
+
 
 
 
