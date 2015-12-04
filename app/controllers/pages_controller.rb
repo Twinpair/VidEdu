@@ -19,15 +19,8 @@ class PagesController < ApplicationController
   end
 
   def featured
-      #@videos = Video.order('created_at DESC')
-
-      if (current_user)
-        @videos = current_user.videos
-      else
-        @videos = Video.order('created_at DESC')
-      end
-
-
+    @videos = Video.order('created_at DESC')
+  
   end
 
   def faq

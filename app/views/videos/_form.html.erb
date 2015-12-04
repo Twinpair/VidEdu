@@ -105,8 +105,7 @@
 
                <br />
                <br />
-                   <!-- TODO: Save to local drive -->
-                <div class="save_to_local">
+      <div class="save_to_local">
                   <span><strong>Save to computer</strong></span>&nbsp;
                     <button id="create" type="button" class="btn btn-primary">
                       <span class="glyphicon glyphicon-save"></span>
@@ -118,25 +117,31 @@
                   <a download="VidEdu_Notes.txt" id="downloadlink" style="display: none">Download</a>
                 <% end %>
 
-
                 </div>
+                
+
+                <% if current_user %>
+                  <%= check_box(:is_public, 1) %> 
+                  <%= label_tag(:is_public, "Public Video?") %>
+                  <p><i>Public videos will show your notes to other users</i></p>
+                <% end%>
               
-                  <%= f.text_area :note_summary, :size => "80x10", :placeholder=>"Write a Summary/Description", id:"summary_area"%>
+                <%= f.text_area :note_summary, :size => "80x10", :placeholder=>"Write a Summary/Description", id:"summary_area"%>
+
 
                 <div>       
 
-                <% if current_user %>
-                 <%= f.submit 'Save', class: 'btn btn-primary', :id=>'save_btn' %>
-                 <%= link_to 'See Videos', videos_path, class: 'btn btn-primary', :id=>"back" %>
+                  <% if current_user %>
+                   <%= f.submit 'Save', class: 'btn btn-primary', :id=>'save_btn' %>
+                   <%= link_to 'See Videos', videos_path, class: 'btn btn-primary', :id=>"back" %>
 
-                <% else %>
-                 <%= link_to "Sign Up!", new_user_registration_path,class: 'btn btn-primary',:id=>'save_btn' %>
-                 <%= link_to 'See Featured', videos_path, class: 'btn btn-primary', :id=>"back" %>
-                <% end %>
+                  <% else %>
+                   <%= link_to "Sign Up!", new_user_registration_path,class: 'btn btn-primary',:id=>'save_btn' %>
+                   <%= link_to 'See Featured', pages_featured_path, class: 'btn btn-primary', :id=>"back" %>
+                  <% end %>
 
                 </div>
 
-              <!-- Everything here is used for TESTING purposes - to be deleted -->
                 <br />
                 <br />
                 <br />
@@ -209,12 +214,6 @@ if (window.location.href.indexOf('reload')==-1) {
             } // END SETUP
 
     });
-
-
-
-
-
-
 
 
 

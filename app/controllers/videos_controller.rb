@@ -8,8 +8,11 @@ class VideosController < ApplicationController
   def index
       #@videos = Video.order('created_at DESC')
       #@videos = get_videos
-      @videos = current_user.videos
-
+      if (current_user)
+        @videos = current_user.videos.order('created_at DESC')
+      else
+        redirect_to pages_featured_path
+      end
   end
 
   def oldest_to_new
@@ -40,6 +43,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    @user = User.find(params[:id])
 
 
   end

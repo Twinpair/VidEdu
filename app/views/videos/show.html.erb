@@ -125,7 +125,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Your Summary</a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><%= @user.firstname %>'s Summary</a>
                 </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
@@ -141,7 +141,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Video Review</a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><%= @user.firstname %>'s Review</a>
                 </h4>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
@@ -202,16 +202,18 @@
 
 
 
-            
-            <p class="lead">
-              <p class="text-center">
-              <%= link_to "Back to Videos", videos_path, :class=>"btn btn-lg btn-default" %>
-              <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-default" %>
-              <%= link_to 'Delete', @video, :confirm => 'You sure?',:class=>"btn btn-lg btn-default", :method => :delete %>
+              <p class="lead">
+                <p class="text-center">
+                <%= link_to "Back to Videos", videos_path, :class=>"btn btn-lg btn-default" %>
+                <% if current_user %>
+                <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-default" %>
+                <%= link_to 'Delete', @video, :confirm => 'You sure?',:class=>"btn btn-lg btn-default", :method => :delete %>
 
 
-                </p>
-            </p>
+                  </p>
+              </p>
+
+            <% end %>
 
 
          
