@@ -1,0 +1,133 @@
+/*
+ *= require 'masonry/transitions'
+ */
+
+@import 'masonry/transitions';
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import 'bootstrap/theme';
+@import "bootstrap-wysihtml5/bootstrap3-wysihtml5";
+
+
+
+/* For header and footer */
+.nav > li > span {
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: #9d9d9d;
+}
+
+#footer {
+  margin-top: 50px;
+}
+
+#search_submit{
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+
+
+
+/* For video "_form.html.erb" => new AND edit pages */
+
+textarea {
+  padding-left: 10px;
+  }  
+  #note_area{
+      max-width: 100%;
+      min-width: 100%;
+      max-height: 300%;
+      min-height: 300%;
+  }
+  iframe{
+  width: 100%;
+  height: 400px;
+  }
+  .insert_video{
+  width: 60%;
+  }
+  .video_button{
+  width: 15%;
+  }
+  #input_area{
+  width: 100%;
+  float: left;
+  }
+  #submit_btn{
+  width: 100px;
+  margin-left: 10px;
+  }
+  #save_btn{
+      padding-top: 15px;
+      padding-bottom:15px;
+      float: right;
+      margin-top: 20px;
+  }
+  .rating{
+  padding-top: 0px;
+  padding-bottom: 10px;
+  }
+  #write_review{
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 300%;
+  min-height: 300%;
+  }
+  #right_side{
+  float:right !important; 
+  margin-top: 0px;
+  }
+  #video_title{
+    width:90%;
+    float:right;
+    margin-bottom: 10px;
+  }
+  #player{
+    width:100%;
+  }
+
+  #content{
+    width:80%;
+    height: 300px;
+  }
+  #timestamp{
+    width: 10%;
+    height: 370px;
+    float: left;
+    border-style: solid;
+    border-width: 1px;
+    margin-top: 140px;
+    font-size: 11px;
+}
+  #form_content{
+    width: 90%;
+    float:right;
+  }
+ 
+    #button{
+        width: 75% !important;
+        float:left;
+    }
+    .btn-primary{
+          width: 20%;
+          float: right;
+          margin-left: 10px;
+    }
+    #review_section{
+        margin-top: 20px;
+    }
+
+   #summary_content {
+    margin-top: 20px;
+    width: 90%;
+    float: right;
+    height: 30px;
+}
+/*    rows=>"5", cols=>"80"*/
+
+/*# sourceMappingURL=custom.css.map */
+
+  
+

@@ -1,0 +1,81 @@
+<%= stylesheet_link_tag "log-in" %>
+
+<!-- Navigation==========================================-->
+<nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>        
+      <%= link_to "VidEdu", pages_home_path, class: "navbar-brand", :id => "white" %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", pages_home_path, class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "About", pages_home_path+"#tf-about", class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "Team", pages_home_path+"#tf-team", class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "Feedback", pages_home_path+"#tf-services", class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "FAQS", pages_home_path+"#tf-clients", class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "Contact", pages_home_path+"#tf-contact", class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "Login", new_user_session_path , :id => "white" %></li>
+        <li><%= link_to "Signup", new_user_registration_path , :id => "white"%></li>
+     </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<!-- Team Page==========================================-->
+<div id="tf-team" class="text-center">
+  <div class="overlay">
+    <div class="container">
+      <div class="section-title center">
+      <h2><strong>Login</strong></h2>
+        <div class="line">
+          <hr>
+        </div>
+      </div>
+
+    <div class="login">
+      <div class="container">
+        <div class="form">
+          <p class ="page-scroll" ><%= notice %></p>
+          <p class ="page-scroll" ><%= alert %></p>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="field">
+              <%= f.email_field :email, :placeholder => "Email", autofocus: true %>
+            </div>
+
+            <div class="field">
+              <%= f.password_field :password, :placeholder => "Password", autocomplete: "off" %>
+            </div>
+
+            <% if devise_mapping.rememberable? -%>
+              <div class="field">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end -%>
+            
+            <div class="actions">
+              <%= f.submit "Log in", class: "btn-submit" %>
+            </div>
+          <% end %>
+        </div>
+        <br>
+        <ul class="footer-social">
+          <li><%= button_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => "FacebookButton", :method => :get  %><li>
+          <li><%= button_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), :class => "TwitterButton", :method => :get  %></li>
+        </ul>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+

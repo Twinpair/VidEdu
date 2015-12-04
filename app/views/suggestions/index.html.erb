@@ -1,0 +1,28 @@
+<style type="text/css">
+    td,th{
+        font-size: 25px;
+    }
+    body{
+        padding-top: 10px;
+    }
+</style>
+
+
+<h1 align="center">All Suggestions</h1>
+
+
+<table align= "center", border = "5", id="suggestions"> 
+
+        <th>Name</th>
+        <th>Email</th>
+        <th>Suggestion</th>
+    </tr>
+    <% @suggestions.each do |suggestion| %>
+    <tr>
+        <td><%= suggestion.name %></td>
+        <td><%= suggestion.email %></td>
+        <td><%= suggestion.suggestion %></td>
+    </tr>
+  <% end %>
+
+</table>

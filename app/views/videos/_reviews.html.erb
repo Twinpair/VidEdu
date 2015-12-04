@@ -1,0 +1,8 @@
+<li>
+    <%= link_to review.user.name, review.user %>
+    <span class="date"><%= time_ago_in_words(review.created_at) %> ago</span>
+    <!-- also include the number of stars people gave on this video -->
+    <p>
+        <%= review.body %>
+    </p>
+</li>

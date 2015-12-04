@@ -1,0 +1,85 @@
+<style type="text/css">
+  .caption{
+    margin-left: 10px;
+  }
+</style>
+
+
+    <% @subject.videos.in_groups_of(3) do |group| %>
+      <div class="row">
+        <% group.each do |video| %>
+          <% if video %>
+            <div class="col-md-4">
+              <div class="yt_video thumbnail">
+                  <div class="text-center">
+                    <h5><%= video.title %></h5>
+                  </div>
+                  <br />
+              <!-- Need to change this to the "edit" page -->
+                <%= link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,
+                                      class: 'img-rounded'),
+                            video_path(video.id), target: '_blank' %>
+
+                <div class="caption">
+                  <% if video.published_at %>
+                    <p>Video published on <i>YouTube</i> at <%= video.published_at.strftime('%-d %B %Y') %></p>
+                  <% end %>
+
+            
+                    
+                    <p>
+                      <div class="star-rating" data-score=<%= video.rating%>><strong>Rating:</strong>  </div>
+                    </p>
+
+
+
+                    <% if video.review? %>
+                     <p><strong>Review:</strong> <%= truncate video.review, length: 100 %><%= link_to 'read more', video %> 
+                     </p>
+                    <% else %>
+                      <p><i>No Review</i></p>
+                     <% end %>
+
+
+
+                    <% if video.note_summary? %>
+                       <p><strong>Summary:</strong> <%= truncate video.note_summary, length: 100%><%= link_to 'read more', video %>
+                       </p>
+                    <% else %>
+                      <p><i>No Summary</i></p>
+                     <% end %>
+
+
+
+                     <p><strong>Updated:</strong> <%=video.updated_at.strftime('%-d %B %Y %H:%M:%S') %></p>
+                     
+              
+                  <div>
+<!--                       %= link_to 'See Notes', video_path(video.id) % |-->                      <%= link_to 'Edit' ,edit_video_path(video.id) %> |
+                      <%= link_to 'Delete', video, :confirm => 'You sure?', :method => :delete %>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+
+
+  <script>
+      $('.star-rating').raty({
+        path: '/assets/',
+        readOnly: true,
+        scoreName: "data-score",
+        score: function() {
+            return $(this).attr('data-score').toString();
+          }
+      });
+
+
+  </script>

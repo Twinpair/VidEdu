@@ -1,0 +1,31 @@
+Script started on Mon Nov  2 19:48:33 2015
+[?1034hbash-3.2$ rails dbls[Kcd temp/Term-H/[C[C[C[C[C[C[C[C[C[Cls[Kcd temp/Term-H/[C[C[C[C[C[C[C[C[C[Cls[Krails db[Kgn[Kenerate tinymce_installation
+bash: generate: command not found
+bash-3.2$ cd ..
+bash-3.2$ ls
+tinymce_installation
+bash-3.2$ cd ..
+bash-3.2$ ls
+generators	tasks		tinymce
+bash-3.2$ cd tinymce/
+bash-3.2$ ls
+hammer		hammer.rb
+bash-3.2$ cd ..
+bash-3.2$ ls
+generators	tasks		tinymce
+bash-3.2$ cd ..
+bash-3.2$ ls
+README.rdoc	app		config		init.rb		lib
+bash-3.2$ cd ..
+bash-3.2$ ls
+trevorrowe-tinymce_hammer-0c185e5
+trevorrowe-tinymce_hammer-0c185e5 (1).zip
+bash-3.2$ cd trevorrowe-tinymce_hammer-0c185e5
+bash-3.2$ ls
+README.rdoc	app		config		init.rb		lib
+bash-3.2$ generate tim[Knymce_installation
+bash: generate: command not found
+bash-3.2$ exit
+exit
+
+Script done on Mon Nov  2 19:49:29 2015

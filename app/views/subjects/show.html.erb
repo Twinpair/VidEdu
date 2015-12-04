@@ -1,0 +1,61 @@
+<%= render 'videos/nav' %>
+<div class="container">
+<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+
+          <div class="inner cover">
+
+            <h1 class="cover-heading">
+              <p class="text-center"><%= @subject.subject %> Videos</p>
+            </h1>
+
+            <p class="lead">
+                <p class="text-center">
+                    <%= @subject.description %>
+                </p>
+            </p>
+    
+          <% if @subject.image? %>
+            <p class="lead">
+                <p class="text-center">
+                    <%= image_tag @subject.image.url(:small) %>
+                </p>
+            </p>
+
+            <% end %>
+
+            <br />
+            <br />
+
+
+
+
+         <%= render 'subject_videos' %>
+
+
+
+
+            <p class="lead">
+                <p class="text-center">
+                    <%= link_to 'Edit Subject', edit_subject_path(@subject) %> |
+                    <%= link_to 'Back to Subjects Home', subjects_path %>
+                
+                </p>
+            </p>
+
+
+          </div>
+
+     
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>

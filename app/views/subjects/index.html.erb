@@ -1,0 +1,70 @@
+<%= render 'videos/nav' %>
+
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+<style type="text/css">
+  .btn-primary {
+    width: 15%;
+    float: left;
+    margin-left: 0px;
+}
+</style>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Subject Playlists</h1>
+    <p>View your subjects here</p>
+    <p>
+      <%= link_to 'Add subject!', new_subject_path, class: 'btn btn-primary btn-lg' %>
+    </p>
+  </div>
+</div>
+
+  <div class="container">
+    <% @subjects.in_groups_of(3) do |group| %>
+      <div class="row">
+        <% group.each do |subject| %>
+          <% if subject %>
+            <div class="col-md-4">
+
+              <div class="yt_video thumbnail">  
+                
+                <br />
+              <% if subject.image? %>
+                <%= link_to (image_tag subject.image.url(:medium), alt: subject.subject),subject %>
+                <h3><%= link_to subject.subject, subject,:style=>"padding-left:10px;" %></h3>
+
+              <% else %>
+                  <h3><%= link_to subject.subject, subject,:style=>"padding-left:10px;"%></h3>
+                                                                        
+
+
+              <% end %>
+
+
+                <div class="caption">
+                <div>
+                  
+                  <% if subject.description? %>
+                  <p>
+                    <%= truncate subject.description, length: 150 %>
+                    <%= link_to 'read more', subject %> 
+                  </p>
+                  <% else %>
+                    <p><i>No Description</i></p>
+                  <% end %>
+                  <!-- Need to link this to an array of IDs associated with the
+                  subject we created -->
+                  <!-- %= link_to 'View', subject % | -->
+                  <%= link_to '', edit_subject_path(subject),:class=>"glyphicon glyphicon-edit" %> |
+                  <%= link_to '', subject, method: :delete, data: { confirm: 'Are you SURE? Removing this subject will delete ALL your videos under this subject!'},:class=>"glyphicon glyphicon-trash" %>
+                </div>
+              </div>
+            </div>
+      </div>
+
+          <% end %>
+        <% end %>
+        </div>
+    <% end %>
+    
+  </div>

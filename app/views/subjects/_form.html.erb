@@ -1,0 +1,50 @@
+<style type="text/css">
+  #subject_container{
+    text-align: center;
+  }
+
+</style>
+
+<div id = "subject_container">
+  <%= form_for(@subject) do |f| %>
+    <% if @subject.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
+
+        <ul>
+        <% @subject.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :image %><br>
+      <%= f.file_field :image %>
+    </div>
+
+    <div class="field">
+      <%= f.label :subject %><br>
+      <%= f.text_field :subject %>
+    </div>
+
+     <br />
+
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
+
+    <br />
+
+    <div class="actions">
+      <%= link_to 'Back', subjects_path, class: 'btn btn-default btn-lg' %>
+      <%= f.submit "Submit",class: 'btn btn-default btn-lg' %>
+
+    </div>
+    <br />
+    <br />
+    <br />
+  <% end %>
+</div>

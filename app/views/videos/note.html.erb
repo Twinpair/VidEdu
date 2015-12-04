@@ -1,0 +1,114 @@
+<%= tinymce_assets %>
+<%= tinymce %>
+
+<style type="text/css">
+   textarea {
+  padding-left: 10px;
+  }  
+  #note_area{
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 300%;
+  min-height: 300%;
+  }
+  iframe{
+  width: 100%;
+  height: 400px;
+  }
+  .insert_video{
+  width: 60%;
+  }
+  .video_button{
+  width: 15%;
+  }
+  #input_area{
+  width: 70%;
+  float: left;
+  }
+  #submit_btn{
+  width: 100px;
+  margin-left: 10px;
+  }
+  #save_btn{
+  padding-right:25px; 
+  padding-left:25px;
+  padding-top: 15px;
+  padding-bottom:15px;
+  float: right;
+  margin-top: 10px;
+  }
+  .rating{
+  float: right;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  }
+  #write_review{
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 300%;
+  min-height: 300%;
+  }
+  #right_side{
+  float:right !important; 
+  margin-top: 50px;
+  }
+
+/*# sourceMappingURL=custom.css.map */
+
+  
+</style>
+
+
+<!--  ------------------------------------------------------------------------------ -->
+<script type="text/javascript">
+  var URL; 
+  var embeded_url_code;
+  
+  console.log("Locked and Loaded");
+  
+  $(function(){
+  $("#submit_btn").click(function(){
+       URL = document.getElementById("input_area").value;
+      parse_embeded_code(URL);
+      get_embeded_code();
+  });
+  });
+  
+  
+  function parse_embeded_code(URL){
+  embeded_url_code = URL.split("=").pop();
+  
+  }
+  
+  function get_embeded_code(){
+  console.log(embeded_url_code); 
+  document.getElementById("ytplayer").src="http://www.youtube.com/embed/"+embeded_url_code+"?autoplay=0";
+  }
+  
+  console.log("tinymce");
+  
+</script>
+
+<!--  ------------------------------------------------------------------------------ -->
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class = "col-sm-12">
+      <!-- LEFT side-->
+      <div class="col-sm-6">
+        <!-- Currently takes you to the profile page -->
+        <%= render :partial=>"new", :locals=> {:video=>Video.new} %>
+        <%= render :partial=>"iframe" %>
+      </div>
+      <div id="right_side" class="col-sm-6">
+        <%= render :partial=>"note_take" %>
+      </div>
+      <div class="col-sm-6">
+        <%= render :partial=>"review" %>
+      </div>
+    </div>
+  </div>
+  <!-- END ROW -->
+</div>
+

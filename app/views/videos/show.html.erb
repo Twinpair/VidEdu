@@ -1,0 +1,465 @@
+<%= render 'nav' %>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+
+<style type="text/css">
+  #uid{
+    display: none;
+  }
+    .bs-example{
+      margin: 50px;
+    }
+    #url{
+      text-decoration: none;
+    }
+    #right_side{
+        border:1px solid black;
+    }
+    #note_area{
+       overflow-y: scroll; 
+       height:375px;
+       width:100%;
+        margin-left: 5px; 
+        margin-right:5px;
+    }
+    .save_to_local{
+      float:left;
+      margin-left: 30px;
+    }
+  #create{
+    width: 40px;
+    margin-right: 10px;
+  }
+</style>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="inner cover">
+
+            <h1 class="cover-heading"><p class="text-center"><a href="<%= @video.link %>", id="url"> <%= @video.title %></a></p></h1>
+
+<br />
+<br />
+           
+           
+           <div class="text-center">
+                <div id="uid"><%= @video.uid %></div>
+
+            </div>
+            
+
+
+
+    <div class="container-fluid">
+          <div class = "col-sm-12">
+            <!-- LEFT side-->
+            <div class="col-sm-6">
+                  <div id="player"></div>
+
+
+                    <p>
+                      <strong>Video rated at: </strong>
+                      <%if @video.rating? %>
+                      <%= @video.rating %> stars
+                      <% else %>
+                       0 stars
+                      <% end %>
+                    </p>
+              
+      
+            </div>
+
+
+
+            <!-- RIGHT SIDE -->
+            <div id="right_side" class="col-sm-6">
+                <% if @video.note? %>
+                    <p>
+                        <div id="note_area">
+                            <%=raw @video.note %>
+                        </div>
+                    </p>
+                    <% else %>
+                        <p class="text-center"><h2><i>No Notes</i></h2></p>
+                    <% end %>
+
+
+
+                 
+            </div>
+
+          </div>
+
+          <!-- Save to local drive -->
+                <div class="save_to_local">
+                  <span><strong>Save to computer</strong></span>&nbsp;
+                    <button id="create" type="button" class="btn btn-primary">
+                      <span class="glyphicon glyphicon-save"></span>
+                    </button>
+              
+                <% if @video %>
+                  <a download="<%= @video.title %>.txt" id="downloadlink" style="display: none">Download</a>
+                <% else %>
+                  <a download="VidEdu_Notes.txt" id="downloadlink" style="display: none">Download</a>
+                <% end %>
+
+
+                </div>
+             
+      </div>
+
+            
+
+<div class="bs-example">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Your Summary</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <% if @video.note_summary? %>
+                    <p><%= @video.note_summary %></p>
+                    <% else %>
+                        <p><i>No Summary</i></p>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Video Review</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                      <% if @video.review? %>
+                          <p>
+                             <%= @video.review %>
+                          </p>
+                       <% else %>
+                          <p><i>No Review</i></p>
+                      <% end %>
+
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">YouTube Data</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                 <p><i><strong>Published on: </strong></i>
+                 <%= @video.published_at %>
+
+                 <p><i><strong>Channel Name: </strong></i>
+                 <%= @video.channel_title %>
+
+                 <p><i><strong>Views: </strong></i>
+                 <%= @video.view_count %>
+
+                 <p><i><strong>Youtube Category: </strong></i>
+                 <%= @video.category_title %>
+
+           
+                  <p><i><strong>Likes/Dislikes:</strong></i>
+                  
+                    <span class="glyphicon glyphicon glyphicon-thumbs-up"></span> <%= @video.likes %>
+                    <span class="glyphicon glyphicon glyphicon-thumbs-down"></span> <%= @video.dislikes %>
+                  </p>
+                  <br />
+
+           
+                      <p><i><strong>Description</strong></i>
+                     <%=raw @video.yt_description %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+            
+            <p class="lead">
+              <p class="text-center">
+              <%= link_to "Back to Videos", videos_path, :class=>"btn btn-lg btn-default" %>
+              <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-default" %>
+              <%= link_to 'Delete', @video, :confirm => 'You sure?',:class=>"btn btn-lg btn-default", :method => :delete %>
+
+
+                </p>
+            </p>
+
+
+         
+
+
+          </div>
+
+     
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+ <script>
+  
+
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+
+      var time_with_s;
+      var time;
+      var video_id;
+      video_id = $('#uid').text();
+      console.log(video_id); 
+
+      var ps = document.getElementsByClassName('timestamp_note');
+      var real; 
+        for(var i = 0; i < ps.length; i++){
+             
+           console.log("Element: " + ps[i].text); 
+        }
+        
+
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: video_id,
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      var the_time;
+      var video_time;
+
+      var current_timestamp;
+      function onPlayerStateChange(event) {
+
+        current_timestamp = ps[counter].text.replace("s",'');
+        var the_time = current_timestamp * 1000; 
+
+        console.log("the_time: " + the_time); 
+        console.log("counter: " + counter); 
+
+        if (event.data == YT.PlayerState.PLAYING) {
+
+          setInterval(checkTime, the_time);
+
+        //   video_time = player.getCurrentTime();
+
+        //   // time_with_s = event.currentTarget.text;
+
+        //   // console.log(time_with_s); 
+
+
+        //   time = time_with_s.replace("s",'');
+        //   console.log("time:" + time);
+        //   console.log("video time: " + video_time);  
+
+        //   highlight_time();
+
+        // if(video_time.toFixed(0) === time){
+        //    pauseVideo(); 
+        //    the_time = player.getCurrentTime();
+        //    console.log(the_time); 
+        //    done = true;
+
+        //   }
+
+
+           // setTimeout(pauseVideo(), 6000);
+           // done = true;
+           // the_time = player.getCurrentTime();
+           // console.log(the_time); 
+        }
+      }
+
+      var counter = 0; 
+      function checkTime(){
+        // time_with_s = event.currentTarget.text;
+        // time = time_with_s.replace("s",'');
+
+        //video_time = player.getCurrentTime();
+        
+         // if(video_time.toFixed(0) === time){
+           $(this.real[counter]).css('background-color','#FFFF00');
+              counter++; 
+              
+          // }
+
+      }
+
+      function stopVideo() {
+        player.stopVideo();
+      }
+
+      function pauseVideo(){
+        player.pauseVideo(); 
+      }
+
+      function currentTime(){
+        document.getElementById('player').innerHTML = player.getCurrentTime();
+
+      }
+
+
+       
+      
+
+        function highlight_time(e){
+         
+          $('a.timestamp_note').css('background-color','none');
+
+          video_time = player.getCurrentTime();
+
+          time_with_s = e.currentTarget.text;
+
+          console.log(time_with_s); 
+
+          time = time_with_s.replace("s",'');
+          console.log("time:" + time);
+          console.log("video time: " + video_time.toFixed(0)); 
+
+          // highlights text as you continue on
+          //if(video_time.toFixed(0) === time){
+          //    $(e.currentTarget).css('background-color','#FFFF00');
+         // }
+
+
+        }
+
+         function noBackColor(){
+           $('a.timestamp_note').css('background-color','none');
+
+        }
+
+
+
+
+
+      
+
+
+      function goToTime(e){
+          e.preventDefault();
+          time_with_s = e.currentTarget.text;
+          time = time_with_s.replace("s",'');
+          append_timestamp(time);
+        }
+
+      var ps = document.getElementsByClassName('timestamp_note');
+
+      $('a.timestamp_note').click(goToTime);
+      $('a.timestamp_note').click(highlight_time);
+
+
+
+        // for(var i = 0; i < ps.length; i++){
+        //   ps[i].addEventListener('click', goToTime, false);
+        //   ps[i].addEventListener('click', highlight_time, false);
+
+        // }
+
+
+
+
+
+
+
+        function append_timestamp(time) {
+            playerSeekTo(player, time); 
+        }
+
+       function playerSeekTo(player, seconds) {
+            player.seekTo(seconds);
+        }
+
+   var content;
+    // saving notes to local machine
+    $('#create').click(function(){
+         content = $('#note_area').text();
+         console.log(content);
+      });
+  var textFile = null,
+  makeTextFile = function () {
+      var data = new Blob([content], {type: 'text/plain'});
+      if (textFile !== null) {
+        window.URL.revokeObjectURL(textFile);
+      }
+      textFile = window.URL.createObjectURL(data);
+      return textFile;
+  };
+  var create = document.getElementById('create'),
+    textbox = content;
+        console.log(textbox); 
+  create.addEventListener('click', function () {
+      var link = document.getElementById('downloadlink');
+      link.href = makeTextFile(textbox);
+      link.style.display = 'block';
+  }, false);
+
+
+    </script>
+<script type="text/javascript">
+  
+   $('.star-rating').raty({
+        path: '/assets/',
+        readOnly: true,
+        scoreName: "data-score",
+        score: function() {
+            return $(this).attr('data-score');
+          }
+      });
+
+  
+</script>
+   
+
+

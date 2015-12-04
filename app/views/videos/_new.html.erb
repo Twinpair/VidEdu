@@ -1,0 +1,26 @@
+<style type="text/css">
+    #button{
+        width: 75% !important;
+        float:left;
+    }
+    .btn-primary{
+          width: 20%;
+          float: right;
+          margin-left: 10px;
+    }
+
+</style>
+
+
+
+  <%= form_for(video) do |f| %>
+    <%= render 'shared/errors', object: video %>
+
+    <div class="form-group" id="button">
+      <%= f.text_field :link, id: 'input_area', class: 'form-control', placeholder:"Paste YouTube Link Here", required: true %>
+    </div>
+
+    <%= f.submit class: 'btn btn-primary',id:'button_sbmt' %>
+
+  <% end %>
+
