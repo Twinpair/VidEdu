@@ -240,7 +240,11 @@ Devise.setup do |config|
   config.omniauth :twitter, 'nXh29f4P6mnvH5gmuUrSTgirz', 'N1dSToYsxJ0vz28bR1TgE2g08DxQ9n5VqSjdBnJGhFffxQHIjt'
   #config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { scope: 'userinfo.profile,youtube' }
   #config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { access_type: "offline", approval_prompt: "" }
-  config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { scope: 'userinfo.profile,youtube,email,profile', access_type: "offline", approval_prompt: "" }
+  config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { 
+    :scope => "email, profile, youtube, plus.me, http://gdata.youtube.com",
+    :access_type => "offline", 
+    :approval_prompt => "" 
+  }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
