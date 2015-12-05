@@ -19,32 +19,71 @@
       </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :image %><br>
-      <%= f.file_field :image %>
-    </div>
 
-    <div class="field">
-      <%= f.label :subject %><br>
-      <%= f.text_field :subject %>
-    </div>
-
-     <br />
-
-    <div class="field">
-      <%= f.label :description %><br>
-      <%= f.text_area :description %>
-    </div>
-
-    <br />
-
-    <div class="actions">
-      <%= link_to 'Back', subjects_path, class: 'btn btn-default btn-lg' %>
-      <%= f.submit "Submit",class: 'btn btn-default btn-lg' %>
-
-    </div>
+  
+  
     <br />
     <br />
     <br />
-  <% end %>
+
 </div>
+
+
+ <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+         
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Upload Image</label>
+                                    <div class="field">
+                                        <%= f.file_field :image %>
+                                      </div>
+
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Subject Title</label>
+                                    <div class="field">
+                                      <%= f.text_field :subject,:class=>"form-control"  %>
+                                    </div>
+
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Description</label>
+
+
+                                    <div class="field">
+                                      <%= f.text_area :description, :class=>"form-control" %>
+                                    </div>
+
+                             
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                        
+                                <div class="actions">
+                                    <%= link_to 'Back', subjects_path, :class=>"btn btn-success btn-lg" %>
+                                    <%= f.submit "Submit", :class=> "btn btn-success btn-lg" %>
+
+                                  </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <% end %>

@@ -7,4 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
  
 
- Subject.create(subject: 'Uncategorized', user_id: current_user.id)
+ Subject.create(subject: 'Uncategorized')
