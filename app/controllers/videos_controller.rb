@@ -39,6 +39,9 @@ class VideosController < ApplicationController
 
   def new
     @video = Video.new
+    #@subject = Subject.new
+    u = Subject.last
+    @subject = Subject.where user_id: u.user_id
   end
 
   def show
@@ -68,6 +71,7 @@ class VideosController < ApplicationController
   def create
      @video = Video.new(video_params)
      @video.user_id=current_user.id if current_user
+
 
     if @video.save
 

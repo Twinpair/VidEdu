@@ -93,7 +93,7 @@
            
           <% if current_user %>
             <p><strong>Choose a Category</strong></p>
-           <%= collection_select(:video, :subject_id, Subject.all, :id, :subject, {:default=>true}, { :multiple => false}) %>
+           <%= collection_select(:video, :subject_id, @subject, :id, :subject, {:default=>true}, { :multiple => false}) %>
 
            <% else %>
               <p><strong><i>Sign Up or Login to place your video into a category</i></strong></p>
