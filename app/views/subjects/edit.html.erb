@@ -1,6 +1,15 @@
-<h1>Editing Subject</h1>
+
+<style type="text/css">
+    #header{
+        
+    }    
+
+</style>
+<%= render 'videos/nav' %>
+
+<span class='text-center'>
+    <h1>Editing "<%= @subject.subject %>"</h1>
+</span>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @subject %> |
-<%= link_to 'Back', subjects_path %>
