@@ -50,5 +50,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'bootstrap-glyphicons', '~> 0.0.1'
 gem 'imagesLoaded_rails'
+gem 'pusher'
 
 
