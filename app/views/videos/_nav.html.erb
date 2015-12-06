@@ -17,18 +17,16 @@
        <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
                 <li><%= link_to "Home", root_path %></li>
-                <li><%= link_to "About", pages_home_path + '#tf-about' %></li>
-                <li><%= link_to "Team", pages_home_path + '#tf-team' %></li>
-                <li><%= link_to "Feedback", pages_home_path + '#tf-services' %></li>
-                <li><%= link_to "FAQS", pages_home_path + '#tf-clients' %></li>
-                <li><%= link_to "Contact", pages_home_path + '#tf-contact' %></li>
-                <li><%= link_to "Featured", pages_featured_path %></li>
-                <li><%= link_to "Your Subjects", subjects_path %></li>
-                <li><%= link_to "Your Videos", videos_path %></li>
-                <li><%= link_to "Add Video", new_video_path %></li>
-                <li><%= link_to "Add Subject", new_subject_path %></li>
+              
+               
+                    
+                    <li><%= link_to "Your Subjects", subjects_path %></li>
+                    <li><%= link_to "Your Videos", videos_path %></li>
+                    <li><%= link_to "Add Video", new_video_path %></li>
+                    <li><%= link_to "Add Subject", new_subject_path %></li>
 
 
+              
 
               <p style = "color: orange;" class="navbar-text">Welcome, <%= current_user.firstname %>!</p>
               <li><%= link_to "Profile", edit_user_registration_path %></li>
@@ -42,8 +40,11 @@
                 <li><%= link_to "Contact", pages_home_path + '#tf-contact' %></li>
                 <li><%= link_to "Featured", pages_featured_path %></li>
 
-              <li><%= link_to "Login", new_user_session_path %></a></li>
-              <li><%= link_to "Signup", new_user_registration_path %></a></li>
+                 <ul class="nav navbar-nav navbar-right">
+                   <li><%= link_to "Login", new_user_session_path %></a></li>
+                    <li><%= link_to "Signup", new_user_registration_path %></a></li>
+                 </ul> 
+              
           <% end %>
         </ul>
 

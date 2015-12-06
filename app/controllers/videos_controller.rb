@@ -46,7 +46,10 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+
+    
     @user = User.find(params[:id])
+   
 
 
   end

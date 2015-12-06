@@ -40,9 +40,13 @@
         <% group.each do |video| %>
           <% if video %>
             <div class="col-md-4">
+
               <div class="yt_video thumbnail">
                   <div class="text-center">
-                    <h5><%= video.title %></h5>
+
+                      <div class="panel-heading"><h4><%= video.title %></h4></div>
+
+                    
                   </div>
                   <br />
               <!-- Need to change this to the "edit" page -->
@@ -89,15 +93,12 @@
                       <p><i>Subject Undefined</i></p>
                   <% end %>
 
-                  <% if current_user %>
-                    <% if current_user.id == video.user_id %>
+                <% if video.user_id == current_user.id %>
                     <div class = "trash_and_edit">
                               <%= link_to '' ,edit_video_path(video.id),:class=>"glyphicon glyphicon-edit",:id=>'edit' %> |
                               <%= link_to '', video, :confirm => 'You sure?', :class=>"glyphicon glyphicon-trash", :method => :delete %>
                     </div>
                    
-
-                    <% end %>
 
                   <% end %>
 
