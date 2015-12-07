@@ -13,6 +13,7 @@ class VideosController < ApplicationController
       else
         redirect_to pages_featured_path
       end
+      
   end
 
   def oldest_to_new
@@ -74,6 +75,8 @@ class VideosController < ApplicationController
 
   def edit
     @video = Video.find(params[:id])
+     u = current_user.id
+     @subject = Subject.where user_id: u
   end
 
 
@@ -106,11 +109,22 @@ class VideosController < ApplicationController
      @videos = Video.order('created_at DESC')
   end
 
-  def find
-    @video = Video.find(:all, :conditions=>["title = ? OR subject = ?",
-      params[:search_string], params[:search_string]])
-  end
+  # def find
+  #   @video = Video.find(:all, :conditions=>["title = ? OR subject = ?",
+  #     params[:search_string], params[:search_string]])
+  # end
 
+  def search
+    if params[:search].present?
+
+      @videos = Video.search(params[:search])
+      @subjects = Subject.search(params[:search])
+
+    else
+      @videos = Video.all
+    end
+    
+  end
 
 
   private

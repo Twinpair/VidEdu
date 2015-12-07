@@ -44,30 +44,3 @@
 
 
 
-<script src="https://js.pusher.com/3.0/pusher.min.js"></script>
-  <script>
-    // Enable pusher logging - don't include this in production
-    Pusher.log = function(message) {
-      if (window.console && window.console.log) {
-        window.console.log(message);
-      }
-    };
-
-    var pusher = new Pusher('dfa7ca9e4d986fdf804d', {
-      encrypted: true
-    });
-    var channel = pusher.subscribe('test_channel');
-    channel.bind('my_event', function(data) {
-      alert(data.message);
-    });
-
-
-
-    $(function() {     
-      var pusher = new Pusher('dfa7ca9e4d986fdf804d');
-      var chatWidget = new PusherChatWidget(pusher, {
-        chatEndPoint: 'pusher-realtime-chat-widget/src/php/chat.php'
-      });
-    });
-  </script>
-

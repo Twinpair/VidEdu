@@ -68,11 +68,10 @@
 
 
                     <p>
-                      <strong>Video rated at: </strong>
-                      <%if @video.rating? %>
-                        <div class="star-rating" data-score=<%= @video.rating %> ></div><%= @video.rating %>
+                      <%if @video.rating? %> <div class="star-rating" data-score="<%= @video.rating %>" ></div>  
+                        <strong>Video rated at: </strong> <%= @video.rating %> stars
                       <% else %>
-                       0 stars
+                        <strong>Video rated at: </strong> 0 stars
                       <% end %>
                     </p>
               
@@ -247,14 +246,9 @@
 
  <script>
       
-      $('.star-rating').raty({
-        path: '/assets/',
-        readOnly: true,
-        score: function() {
-          return $(this).attr('data-score');
-        }
-      });
+     
 
+     
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
 
@@ -471,19 +465,16 @@
 
 
     </script>
-<script type="text/javascript">
-  
-   $('.star-rating').raty({
+  <script>
+
+      $('.star-rating').raty({
         path: '/assets/',
         readOnly: true,
         scoreName: "data-score",
         score: function() {
-            return $(this).attr('data-score');
+            return $(this).attr('data-score').toString();
           }
       });
 
-  
-</script>
-   
 
-
+  </script>
