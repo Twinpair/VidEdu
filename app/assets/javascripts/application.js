@@ -18,5 +18,7 @@
 //= require masonry/jquery.masonry
 //= require tinymce-jquery
 //= require imagesloaded
+//= require faye
+//= require comments
 //= require_tree .
 

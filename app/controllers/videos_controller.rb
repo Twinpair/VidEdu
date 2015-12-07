@@ -46,11 +46,17 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    # @user = User.find(params[:id])
+    #  u = @video.user_id
 
+    # @user = User.find(u)
     
-    @user = User.find(params[:id])
-   
+    # @review.user_id = current_user.id
 
+
+    @comment = Comment.new
+    @comments = Comment.where user_id: 4
+    @comments = Comment.order('created_at DESC')
 
   end
 

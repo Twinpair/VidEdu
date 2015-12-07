@@ -23,6 +23,7 @@ class Video < ActiveRecord::Base
 
     belongs_to :user
     has_one :user
+    has_many :comments
 
     belongs_to :subject
     has_many :ratings

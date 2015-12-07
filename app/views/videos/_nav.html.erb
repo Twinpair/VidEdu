@@ -1,3 +1,10 @@
+<style type="text/css">
+  #button_search{
+    width: 25%;
+    margin-top: 7px;
+  }
+
+</style>
 <!-- Navigation==========================================-->
 <nav id="tf-menu" class="navbar navbar-default navbar-top">
   <div class="container">
@@ -17,14 +24,18 @@
        <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
                 <li><%= link_to "Home", root_path %></li>
-              
-               
-                    
-                    <li><%= link_to "Your Subjects", subjects_path %></li>
-                    <li><%= link_to "Your Videos", videos_path %></li>
-                    <li><%= link_to "Add Video", new_video_path %></li>
-                    <li><%= link_to "Add Subject", new_subject_path %></li>
-
+                <li><%= link_to "Your Subjects", subjects_path %></li>
+                <li><%= link_to "Your Videos", videos_path %></li>
+                <li><%= link_to "Add Video", new_video_path %></li>
+                <li><%= link_to "Add Subject", new_subject_path %></li>
+                <li>
+                  <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Search VidEdu">
+                    </div>
+                  </form>
+                  <button type="submit" class="btn btn-default" id="button_search">Submit</button>
+                </li>
 
               
 

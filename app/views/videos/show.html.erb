@@ -70,7 +70,7 @@
                     <p>
                       <strong>Video rated at: </strong>
                       <%if @video.rating? %>
-                      <%= @video.rating %> stars
+                        <div class="star-rating" data-score=<%= @video.rating %> ></div><%= @video.rating %>
                       <% else %>
                        0 stars
                       <% end %>
@@ -125,7 +125,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><%= @user.firstname %>'s Summary</a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    <%= @user %>'s Summary</a>
                 </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
@@ -141,7 +142,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><%= @user.firstname %>'s Review</a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                    <%= @user %>'s Review</a>
                 </h4>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
@@ -198,8 +200,17 @@
 
 
 
-
-
+<% if current_user %>
+  <%= render 'comments/form' %>
+  <div class="panel panel-default" id="comments">
+    <div class="panel-body">
+      <ul class="media-list">
+      </ul>
+    </div>
+  </div>
+<% else %>
+  <%= render 'comments/welcome' %>
+<% end %>
 
 
               <p class="lead">
@@ -235,7 +246,14 @@
 
 
  <script>
-  
+      
+      $('.star-rating').raty({
+        path: '/assets/',
+        readOnly: true,
+        score: function() {
+          return $(this).attr('data-score');
+        }
+      });
 
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');

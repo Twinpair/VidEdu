@@ -51,5 +51,9 @@ gem 'omniauth-twitter'
 gem 'bootstrap-glyphicons', '~> 0.0.1'
 gem 'imagesLoaded_rails'
 gem 'pusher'
+gem 'faye-rails', '~> 2.0'
+gem 'thin'
+
+
 
 

@@ -19,7 +19,10 @@ Rails.application.routes.draw do
     resources :videos
   end
 
-  
+  resources :comments, only: [:new, :create]
+  #root to: 'comments#new'
+
+
   resources :suggestions
 
 
