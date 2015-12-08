@@ -51,9 +51,9 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     # @user = User.find(params[:id])
     #  u = @video.user_id
-
-    # @user = User.find(u)
-    
+    u = @video.user_id
+    @user = User.where id: u
+    @user.name
     # @review.user_id = current_user.id
 
 
