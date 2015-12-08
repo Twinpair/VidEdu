@@ -41,8 +41,10 @@ class VideosController < ApplicationController
   def new
     @video = Video.new
      
-     u = current_user.id
-     @subject = Subject.where user_id: u
+     if current_user
+       u = current_user.id
+       @subject = Subject.where user_id: u
+     end
   end
 
   def show
