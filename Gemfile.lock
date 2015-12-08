@@ -352,7 +352,6 @@ DEPENDENCIES
   simple_form
   thin
   tinymce-rails
-  turbolinks
   tzinfo-data
   uglifier (>= 1.3.0)
   unicorn

@@ -12,9 +12,7 @@
 //
 
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require masonry/jquery.masonry
 //= require tinymce-jquery
 //= require imagesloaded
