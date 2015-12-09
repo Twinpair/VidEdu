@@ -1,4 +1,4 @@
-<title>VidEdu - Learning, one clip at a time!</title>
+<% provide(:title, "Home") %>
 
     <!-- Bootstrap -->
     <%= stylesheet_link_tag "bootstrap" %>
@@ -73,7 +73,8 @@
 
               
 
-              <p style = "color: orange;" class="navbar-text">Welcome, <%= link_to current_user.firstname, edit_user_registration_path,  {:style=>'color:orange;'} %>!</p>
+              <p style = "color: orange;" class="navbar-text">Welcome, <%= current_user.firstname %></p>
+              <li><%= link_to "Profile",edit_user_registration_path %></li>
               <li><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
           <% else %>
               <li><a href="#tf-home" class="page-scroll">Home</a></li>
@@ -85,8 +86,8 @@
                  <li><%= link_to "Featured", pages_featured_path %></li>
                 <li><%= link_to "Try it!", new_video_path %></li>
 
-                <li><span class="glyphicon glyphicon-log-in"><%= link_to "Login", new_user_session_path,{:style=>'color:orange;'} %></a></li>&nbsp;&nbsp;
-              <li><span class="glyphicon glyphicon-user"><%= link_to "Signup", new_user_registration_path, {:style=>'color:orange;'} %></a></li>
+                <li><%= link_to "Login", new_user_session_path,{:style=>'color:orange;'} %></li>
+              <li><%= link_to "Signup", new_user_registration_path, {:style=>'color:orange;'} %></li>
           <% end %>
         </ul>
 
@@ -113,7 +114,7 @@
 
                         <% if !user_signed_in? %>
                         <p class="text-center">
-                          <%= link_to "Click to try it now!", new_video_path, :class=>'btn btn-default btn-lg' %>
+                          <%= link_to "TRY IT NOW!", new_video_path, :class=>'btn btn-default btn-lg' %>
                         </p>
                         <%else%>
                           <%= link_to "Add Video", new_video_path, :class=>'btn btn-default btn-lg' %>
