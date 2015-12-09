@@ -1,66 +1,15 @@
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
-
-<style type="text/css">
-
-     .caption{
-    margin-left: 10px;
-  }
-    #sort {
-        margin-left: 85px;
-        margin-top: -25px;
-    }
-    #label {
-        margin-top:6px;
-    }
-
-   #videos {
-    margin-left: 0 auto;
-    width: 100%;
-  }
-
-
-
-    .box {
-        margin:15px;
-        width: 340px;
-    }
-    .box img{
-      margin-left: 9px;
-    }
-    #video-box{
-    }
- 
-
-</style>
-
-
-
-<div class="row">
-    <ul class="nav navbar-nav" id="sort">
-        <li id = "label"><h4>Sort by: </h4></li>
-        <li><%= link_to 'Most Recent',"most_recent"%></li>
-        <li> <%= link_to "Oldest to Newest", "oldest_to_new"%> </li>
-        <li> <%= link_to "Highest Rating", "highest_rating"%> </li>
-        <li id = "label"><h4>By title: </h4></li>
-
-        <li> <%= link_to "A-Z", "a_to_z"%> </li>
-        <li> <%= link_to "Z-A", "z_to_a"%> </li>
-
-    </ul>
-    </div>
-
-
-    
+<%= render 'videos/glyphicon_links' %>
+<%= render 'videos/sort' %>
 
   <div id="videos" class="transitions-enabled">
     <% @videos.each do |video| %>
       <div class="box panel panel-default">
                   <div class="text-center">
-                    <h5><%= video.title %></h5>
+                      <div class="panel-heading"><h4><%= video.title %></h4></div>
                   </div>
-                  <br />
-                <%= link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,
-                                      class: 'img-rounded'),
+                  
+                <%= link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title
+                              ),
                             video_path(video.id), target: '_self' %>
 
                 <div class="panel-body">
@@ -115,30 +64,7 @@
 
 <script type="text/javascript">
 
-     // reloads the page at least once
-if (window.location.href.indexOf('reload')==-1) {
-     window.location.replace(window.location.href+'?reload');
-}
 
-
-
-var $container = $('#videos');
-
-      $container.imagesLoaded(function(){
-        $container.masonry({
-          itemSelector : '.box',
-          columnWidth : 100
-        });
-      });
-
-
-// $('#videos').imagesLoaded( function(){
-//   $('#videos').masonry({
-//    itemSelector: '.box',
-//    isAnimated: true,
-//     columnWidth : 100
-//   });
-// });
 
   var $star = $('.star-rating');
 
@@ -153,15 +79,6 @@ var $container = $('#videos');
 
 
   
-
-
-  // $('#videos').load(function(){
-  //           $("#videos").masonry();
-  //       });
-  //       $("#videos").masonry();
-
-
-
 
 
 

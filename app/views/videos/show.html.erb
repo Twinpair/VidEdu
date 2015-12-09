@@ -7,38 +7,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-
-<style type="text/css">
-  #uid{
-    display: none;
-  }
-    .bs-example{
-      margin: 50px;
-    }
-    #url{
-      text-decoration: none;
-    }
-    #right_side{
-        border:1px solid black;
-    }
-    #note_area{
-       overflow-y: scroll; 
-       height:375px;
-       width:100%;
-        margin-left: 5px; 
-        margin-right:5px;
-    }
-    .save_to_local{
-      float:left;
-      margin-left: 30px;
-    }
-  #create{
-    width: 40px;
-    margin-right: 10px;
-  }
-</style>
-
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <div class="site-wrapper">
@@ -50,25 +18,15 @@
           <div class="inner cover">
 
             <h1 class="cover-heading"><p class="text-center"><a href="<%= @video.link %>", id="url"> <%= @video.title %></a></p></h1>
-
-<br />
-<br />
-           
-           
-           <div class="text-center">
-                <div id="uid"><%= @video.uid %></div>
-
+            <div class="text-center">
+              <div id="uid"><%= @video.uid %></div>
             </div>
             
-
-
-
     <div class="container-fluid">
           <div class = "col-sm-12">
             <!-- LEFT side-->
             <div class="col-sm-6">
                   <div id="player"></div>
-
 
                     <p>
                       <%if @video.rating? %> <div class="star-rating" data-score="<%= @video.rating %>" ></div>  
@@ -77,36 +35,29 @@
                         <strong>Video rated at: </strong> 0 stars
                       <% end %>
                     </p>
-              
-      
             </div>
 
 
 
             <!-- RIGHT SIDE -->
-            <div id="right_side" class="col-sm-6">
+            <div id="right_side_show" class="col-sm-6">
                 <% if @video.note? %>
                     <p>
-                        <div id="note_area">
+                        <div id="note_area_show">
                             <%=raw @video.note %>
                         </div>
                     </p>
                     <% else %>
                         <p class="text-center"><h2><i>No Notes</i></h2></p>
                     <% end %>
-
-
-
-                 
             </div>
-
           </div>
 
-          <!-- Save to local drive -->
+          <div class="row">
           <% if current_user %>
-                <div class="save_to_local">
+                <div class="save_to_local_show">
                   <span><strong>Save to computer</strong></span>&nbsp;
-                    <button id="create" type="button" class="btn btn-primary">
+                    <button id="create_show" type="button" class="btn btn-primary">
                       <span class="glyphicon glyphicon-save"></span>
                     </button>
               
@@ -116,11 +67,10 @@
                   <a download="VidEdu_Notes.txt" id="downloadlink" style="display: none">Download</a>
                 <% end %>
 
-
                 </div>
              <% end %>
-      </div>
-
+      
+          </div>
             
 
 <div class="bs-example">
@@ -449,8 +399,8 @@
 
    var content;
     // saving notes to local machine
-    $('#create').click(function(){
-         content = $('#note_area').text();
+    $('#create_show').click(function(){
+         content = $('#note_area_show').text();
          console.log(content);
       });
   var textFile = null,
@@ -462,7 +412,7 @@
       textFile = window.URL.createObjectURL(data);
       return textFile;
   };
-  var create = document.getElementById('create'),
+  var create = document.getElementById('create_show'),
     textbox = content;
         console.log(textbox); 
   create.addEventListener('click', function () {

@@ -31,16 +31,14 @@
                 <li>
       
               <%= form_tag search_videos_path, method: :get, class: "navbar-form navbar-right", role:"search" do %>
-                <p>
+                <li>
                   <%= text_field_tag :search, params[:search], class: "form-control" %>
                   <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
-
-                </p>
-
+                </li>
                 <% end %>
 
-              <p style = "color: orange;" class="navbar-text">Welcome, <%= current_user.firstname %>!</p>
-              <li><%= link_to "Profile", edit_user_registration_path %></li>
+              <li><p style = "color: orange;" class="navbar-text">Welcome, <%= link_to current_user.firstname, edit_user_registration_path, {:style =>"color: orange;"} %>! </p></li>
+
               <li><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
           <% else %>
                 <li><%= link_to "Home", pages_home_path %></li>
