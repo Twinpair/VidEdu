@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207050602) do
+ActiveRecord::Schema.define(version: 20151209045525) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "average_caches", force: :cascade do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "avg",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -21,7 +33,50 @@ ActiveRecord::Schema.define(version: 20151207050602) do
     t.integer  "video_id"
   end
 
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "overall_averages", force: :cascade do |t|
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "overall_avg",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "stars",         null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
+
+  create_table "rating_caches", force: :cascade do |t|
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "subjects", force: :cascade do |t|
     t.string   "subject"
@@ -62,10 +117,11 @@ ActiveRecord::Schema.define(version: 20151207050602) do
     t.datetime "updated_at",                          null: false
     t.string   "provider"
     t.string   "uid"
+    t.string   "token"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "videos", force: :cascade do |t|
     t.string   "link"
@@ -74,11 +130,6 @@ ActiveRecord::Schema.define(version: 20151207050602) do
     t.integer  "likes"
     t.integer  "dislikes"
     t.string   "uid"
-    t.string   "name"
-    t.text     "video_description"
-    t.string   "subject"
-    t.integer  "rating"
-    t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "note_summary"
@@ -87,6 +138,7 @@ ActiveRecord::Schema.define(version: 20151207050602) do
     t.float    "time"
     t.text     "user_reviews"
     t.integer  "subject_id"
+    t.integer  "rating"
     t.text     "yt_description"
     t.string   "category_title"
     t.string   "channel_title"
@@ -95,6 +147,7 @@ ActiveRecord::Schema.define(version: 20151207050602) do
     t.boolean  "is_public"
   end
 
-  add_index "videos", ["uid"], name: "index_videos_on_uid"
+  add_index "videos", ["uid"], name: "index_videos_on_uid", using: :btree
 
+  add_foreign_key "comments", "users"
 end
