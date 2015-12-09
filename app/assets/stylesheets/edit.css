@@ -1,0 +1,184 @@
+/* FORM PAGES */
+
+      .form {
+        text-align:center;
+        margin: 0 auto 10px;
+        padding-top: 15px;
+        font-size: 16px;
+        width: 300px;
+      }
+
+      input[type=text],
+      input[type=email],
+      input[type=password] {
+        color: #666666;
+        width: 100%;
+        border: 1px solid #E6E6E6;
+        border-radius: 0px; 
+        height: 50px;
+        margin: 6px auto;
+        text-indent: 10px;
+      }
+
+      .btn-submit {
+        color: #FFFFFF;
+        font-size: 18px;
+        text-transform: uppercase;
+        background: #c91717;
+        padding: 10px 20px;
+        border: 0;
+        margin-top: 6px;
+      }
+        
+      /*  RESPONSIVE */
+
+      @media screen and (max-width: 992px) {
+        .img-container img {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 512px) {
+        .pull-right {
+          background-color: #f1f2f2;
+          position: relative;
+          margin: 0;
+          width: 100%;
+        }
+
+        .pull-right ul {
+          margin: 0;
+          -webkit-margin-after: 0;
+          -webkit-margin-before: 0;
+          -webkit-padding-start: 0;
+        }
+
+        .pull-right ul li {
+          display: block;
+          float: left;
+          margin: 0;
+          padding: 20px 0;
+          text-align: center;
+          width: 50%;
+        }
+
+        .pull-right ul li a {
+          display: block;
+          width: 100%;
+        }
+
+        .img-container {
+          height: 200px;
+        }
+      }
+
+      
+
+    
+  #tf-team{
+    background: url('https://wallpaperscraft.com/image/san_francisco_fog_lights_79360_1920x1080.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #ffffff;
+  }
+  #tf-team .overlay{
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, rgba(0,0,0,0.66) 35%, rgba(0,0,0,0.55) 62%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.8)), color-stop(17%,rgba(0,0,0,0.73)), color-stop(35%,rgba(0,0,0,0.66)), color-stop(62%,rgba(0,0,0,0.55)), color-stop(100%,rgba(0,0,0,0.4))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#66000000',GradientType=0 ); /* IE6-9 */
+    height: auto;
+    background-attachment: fixed;
+    padding: 5.7% 0;
+  }
+  .section-title.center{
+   
+  }
+  .section-title h2,
+  .section-title.center h2{
+    font-weight: 300;
+  }
+  .section-title.center .line{
+    border-top: 4px solid #fcac45;
+    height: 10px;
+    width: 60px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .section-title.center hr {
+    border-top: 4px solid rgba(252, 172, 69, 0.34);
+    width: 40px;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    left: 17%;
+  }
+  #team{ margin: 0 auto}
+  #team .item{
+      padding: 0;
+      margin: 15px;
+      color: #FFF;
+      text-align: center;
+  }
+
+  #white{
+    color: white;
+  }
+
+  #orange{
+    color: orange;
+  }
+
+  p{ 
+    font-size: 13px;
+  }
+
+  .myButton {
+  -moz-box-shadow: 0px 10px 14px -7px #4f4d4b;
+  -webkit-box-shadow: 0px 10px 14px -7px #4f4d4b;
+  box-shadow: 0px 10px 14px -7px #4f4d4b;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f09c1d), color-stop(1, #f09c1d));
+  background:-moz-linear-gradient(top, #f09c1d 5%, #f09c1d 100%);
+  background:-webkit-linear-gradient(top, #f09c1d 5%, #f09c1d 100%);
+  background:-o-linear-gradient(top, #f09c1d 5%, #f09c1d 100%);
+  background:-ms-linear-gradient(top, #f09c1d 5%, #f09c1d 100%);
+  background:linear-gradient(to bottom, #f09c1d 5%, #f09c1d 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09c1d', endColorstr='#f09c1d',GradientType=0);
+  background-color:#f09c1d;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  border-radius:4px;
+  border:1px solid #f09c1d;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:13px;
+  font-weight:bold;
+  padding:14px 27px;
+  text-decoration:none;
+  text-shadow:0px 1px 0px #5e441e;
+}
+.myButton:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f09c1d), color-stop(1, #f09c1d));
+  background:-moz-linear-gradient(top, #f09c1d 5%, #f09c1d 100%);
+  background:-webkit-linear-gradient(top, #f09c1d 5%, #f09c1d 100%);
+  background:-o-linear-gradient(top, #f09c1d 5%, #f09c1d 100%);
+  background:-ms-linear-gradient(top, #f09c1d 5%, #f09c1d 100%);
+  background:linear-gradient(to bottom, #f09c1d 5%, #f09c1d 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09c1d', endColorstr='#f09c1d',GradientType=0);
+  background-color:#f09c1d;
+}
+.myButton:active {
+  position:relative;
+  top:1px;
+}
+
+.myButton p {
+  font-size: 20px;
+}

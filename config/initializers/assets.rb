@@ -32,6 +32,7 @@ Rails.application.config.assets.precompile += %w( suggestions-new.css )
 Rails.application.config.assets.precompile += %w( suggestions-new-(font).min.css )
 Rails.application.config.assets.precompile += %w( sign-up.css ) 
 Rails.application.config.assets.precompile += %w( log-in.css )
+Rails.application.config.assets.precompile += %w( edit.css )
 
 Rails.application.config.assets.precompile += %w( modernizr.custom.js )
 Rails.application.config.assets.precompile += %w( jquery.1.11.1.js )

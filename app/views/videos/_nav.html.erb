@@ -1,8 +1,20 @@
 <style type="text/css">
   #button_search{
     width: 25%;
-    margin-top: 7px;
   }
+
+  #white{
+    color: white;
+  }
+
+  #orange{
+    color: orange;
+  }
+
+  #tf-menu{
+    background: black;
+  }
+
 
 </style>
 <!-- Navigation==========================================-->
@@ -23,11 +35,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
        <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
-                <li><%= link_to "Home", root_path %></li>
-                <li><%= link_to "Your Subjects", subjects_path %></li>
-                <li><%= link_to "Your Videos", videos_path %></li>
-                <li><%= link_to "Add Video", new_video_path %></li>
-                <li><%= link_to "Add Subject", new_subject_path %></li>
+                <li><%= link_to "Home", root_path, :id => "white" %></li>
+                <li><%= link_to "Your Subjects", subjects_path, :id => "white" %></li>
+                <li><%= link_to "Your Videos", videos_path, :id => "white" %></li>
+                <li><%= link_to "Add Video", new_video_path, :id => "white" %></li>
+                <li><%= link_to "Add Subject", new_subject_path, :id => "white" %></li>
                 <li>
       
               <%= form_tag search_videos_path, method: :get, class: "navbar-form navbar-right", role:"search" do %>
@@ -39,7 +51,7 @@
 
               <li><p style = "color: orange;" class="navbar-text">Welcome, <%= link_to current_user.firstname, edit_user_registration_path, {:style =>"color: orange;"} %>! </p></li>
 
-              <li><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
+              <li><%= link_to "Log out", destroy_user_session_path, :method => :delete, :id => "orange" %></li>
           <% else %>
                 <li><%= link_to "Home", pages_home_path %></li>
                 <li><%= link_to "About", pages_home_path + '#tf-about' %></li>
