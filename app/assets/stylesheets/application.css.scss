@@ -10,6 +10,37 @@
 
 
 
+
+  #star-rating{
+    margin-top: 10px;
+    float:left;
+  }
+
+
+  #create{
+    width: 40px;
+    margin-right: 10px;
+  }
+  .save_to_local{
+    margin-top: -68px;
+    margin-left: 55px;
+    margin-bottom: 10px;
+    float: right;
+    padding-bottom: 10px;
+  }
+  #warning{
+        margin-left:50px; 
+  }
+  #back{
+      padding-top: 15px;
+      padding-bottom:15px;
+      float: right;
+      margin-top: 20px;
+  }
+
+
+
+
 #comments {
   max-height: 500px;
   overflow: auto;

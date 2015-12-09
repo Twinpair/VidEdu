@@ -1,10 +1,13 @@
 <%= render 'nav' %>
+<%= render 'glyphicon_links' %>
+
+
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+
 
 <style type="text/css">
   #uid{
@@ -126,7 +129,11 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                    <%= @user %>'s Summary</a>
+                    <% if @user.username %>
+                      <%= @user.username %>'s Summary</a>
+                    <% else %>
+                      Summary</a>
+                    <% end %>
                 </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
@@ -143,7 +150,12 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                    <%= @user %>'s Review</a>
+                    <% if @user.username %>
+                      <%= @user.username  %>'s Review</a>
+                      <% else %>
+                        Review</a>
+                    <% end %>
+
                 </h4>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
@@ -162,7 +174,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">YouTube Data</a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><%= @video.title%>'s YouTube Data</a>
                 </h4>
             </div>
             <div id="collapseThree" class="panel-collapse collapse">
@@ -228,10 +240,6 @@
               </p>
 
             <% end %>
-
-
-         
-
 
           </div>
 

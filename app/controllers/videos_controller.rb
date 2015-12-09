@@ -49,13 +49,11 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
-    # @user = User.find(params[:id])
-    #  u = @video.user_id
-    u = @video.user_id
-    @user = User.where id: u
-    @user.name
-    # @review.user_id = current_user.id
-
+   
+    if (@video.user_id)
+      u = @video.user_id
+      @user = User.find(@video.user_id)
+    end
 
     @comment = Comment.new
     @comments = Comment.where user_id: 4
