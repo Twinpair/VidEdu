@@ -64,10 +64,20 @@
 
 <script type="text/javascript">
 
-$('#videos').masonry({
-  itemSelector: '.box',
-  isFitWidth: true
+// $('#videos').masonry({
+//   itemSelector: '.box',
+//   isFitWidth: true
+// });
+
+$(document).ready(function() {
+  $('#videos').masonry({
+  isFitWidth: true,
+   itemSelector: '.box'
+  }).imagesLoaded(function() {
+   $('#videos').masonry('reload');
+  });
 });
+
 
   var $star = $('.star-rating');
 
