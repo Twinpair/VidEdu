@@ -1,5 +1,5 @@
 <%= render 'glyphicon_links' %>
-  <%= render 'videos/nav' %>
+<%= render 'videos/nav' %>
 
   <%= simple_form_for @video do |f| %>
     <%= render 'shared/errors', object: @video %>
@@ -41,10 +41,6 @@
              <%= f.text_area :review, :cols=>"95%",:rows=>"5", :placeholder=>"Write a Review" %>
 
             </div>
-
-
-
-
 
             <!-- RIGHT SIDE -->
             <div id="right_side" class="col-sm-6">
