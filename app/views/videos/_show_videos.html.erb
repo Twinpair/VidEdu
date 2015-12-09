@@ -64,11 +64,10 @@
 
 <script type="text/javascript">
 
-$('#videos').masonry('reload');
-$('#videos').data('masonry');
-
-
-
+$('#videos').masonry({
+  itemSelector: '.box',
+  isFitWidth: true
+});
 
   var $star = $('.star-rating');
 
