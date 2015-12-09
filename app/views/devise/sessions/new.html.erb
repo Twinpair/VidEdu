@@ -1,3 +1,5 @@
+<% provide(:title, "Log In") %>
+
 <%= stylesheet_link_tag "log-in" %>
 
 <!-- Navigation==========================================-->
@@ -71,6 +73,7 @@
         <ul class="footer-social">
           <li><%= button_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => "FacebookButton", :method => :get  %><li>
           <li><%= button_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter), :class => "TwitterButton", :method => :get  %></li>
+          <li><%= button_to "Sign in with Google+", user_omniauth_authorize_path(:google_oauth2), :class => "GoogleButton", :method => :get  %></li>
         </ul>
         <%= render "devise/shared/links" %>
       </div>

@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.0'
+gem 'pg'
 group :development do
-  gem 'pg'
   gem 'eventmachine'
   gem 'better_errors', '~> 2.1.0'
   gem 'binding_of_caller'
@@ -10,7 +10,6 @@ group :development do
   gem 'web-console', '~> 2.0'
 end
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 gem 'thin'
@@ -18,7 +17,6 @@ gem 'sass-rails',   '~> 5.0.1'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'bootstrap-sass'
-gem 'autoprefixer-rails'
 gem 'bootstrap-wysihtml5-rails'
 gem 'simple_form'
 gem 'jquery-rails'
@@ -28,7 +26,6 @@ gem 'rails-observers'
 gem 'omniauth-google-oauth2'
 gem 'active_type', '0.3.1'
 gem 'ratyrate'
-gem 'unicorn'
 # gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem "paperclip", "~> 4.3"
 gem 'wysihtml-rails'
@@ -49,11 +46,10 @@ gem 'devise'
 gem 'certified'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
-gem 'bootstrap-glyphicons', '~> 0.0.1'
 gem 'imagesLoaded_rails'
 gem 'pusher'
 gem 'faye-rails', '~> 2.0'
-gem 'thin'
+gem 'sqlite3'
 
 
 
