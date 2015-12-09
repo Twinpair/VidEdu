@@ -28,7 +28,7 @@ gem "paperclip", "~> 4.3"
 gem 'wysihtml-rails'
 gem 'searchkick', '~> 0.9.1'
 gem 'masonry-rails'
-gem 'jquery-turbolinks'
+#gem 'jquery-turbolinks'
 gem 'bootstrap-glyphicons', '~> 0.0.1'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'yt', '~> 0.13.7'
