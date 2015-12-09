@@ -35,6 +35,13 @@
                         <strong>Video rated at: </strong> 0 stars
                       <% end %>
                     </p>
+
+                    <p>
+                      <% if @video.subject %>
+                        <strong>Category: </strong><%= @video.subject.subject %>
+                      <% end %>
+
+                    </p>
             </div>
 
 
@@ -69,6 +76,8 @@
 
                 </div>
              <% end %>
+
+         
       
           </div>
             

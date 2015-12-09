@@ -55,6 +55,11 @@ class VideosController < ApplicationController
       @user = User.find(@video.user_id)
     end
 
+    if current_user
+       u = current_user.id
+       @subject = Subject.where user_id: u
+     end
+
     @comment = Comment.new
     @comments = Comment.where user_id: 4
     @comments = Comment.order('created_at DESC')

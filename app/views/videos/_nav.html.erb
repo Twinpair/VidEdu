@@ -36,6 +36,7 @@
        <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
                 <li><%= link_to "Home", root_path, :id => "white" %></li>
+                <li><%= link_to "Featured", pages_featured_path, :id => "white" %></li>
                 <li><%= link_to "Your Subjects", subjects_path, :id => "white" %></li>
                 <li><%= link_to "Your Videos", videos_path, :id => "white" %></li>
                 <li><%= link_to "Add Video", new_video_path, :id => "white" %></li>

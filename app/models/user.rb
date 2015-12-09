@@ -42,7 +42,6 @@ class User < ActiveRecord::Base
           username: data["name"],
           provider:access_token.provider,
           email: data["email"],
-          token: data['credentials']['token'],
           uid: access_token.uid ,
           password: Devise.friendly_token[0,20]
         )
@@ -59,7 +58,6 @@ def self.from_omniauth(auth)
         user.lastname = auth.info.name.split.last
         user.username = auth.info.nickname
         user.email = auth.info.email
-        user.token = auth['credentials']['token']
     end
 end
 

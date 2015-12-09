@@ -7,4 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
  
 
- Subject.create(subject: 'Uncategorized')
+Subject.create!(:subject =>'Uncategorized')
+User.create!(:subject => 'Uncategorized')
