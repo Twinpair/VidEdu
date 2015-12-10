@@ -58,10 +58,13 @@
                   <div>
                     
                     <% if current_user %>
-
+                      <% if current_user.id === video.user_id %>
                       <%= link_to '' ,edit_video_path(video.id),:class=>"glyphicon glyphicon-edit" %> |
                       <%= link_to '', video, :confirm => 'You sure?', :method => :delete,:class=>"glyphicon glyphicon-trash" %>
                       <% end %>
+                    <% end %>
+
+
                   </div>
 
                 </div>
