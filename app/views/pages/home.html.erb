@@ -19,7 +19,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400' rel='stylesheet' type='text/css'>
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+<% render 'videos/glyphicon_links' %>
 
     <%= javascript_include_tag 'modernizr.custom.js' %>
 
@@ -71,11 +71,15 @@
                     <li><%= link_to "Add Video", new_video_path %></li>
                     <li><%= link_to "Add Subject", new_subject_path %></li>
 
-
+              <%= form_tag search_videos_path, method: :get, class: "navbar-form navbar-right", role:"search" do %>
+                <li>
+                  <%= text_field_tag :search, params[:search], class: "form-control" %>
+                  <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+                </li>
+                <% end %>
               
 
-              <p style = "color: orange;" class="navbar-text">Welcome, <%= current_user.firstname %></p>
-              <li><%= link_to "Profile",edit_user_registration_path %></li>
+            <li><p style = "color: orange;" class="navbar-text">Welcome, <%= link_to current_user.firstname, edit_user_registration_path, {:style =>"color: orange;"} %>! </p></li>
               <li><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
           <% else %>
               <li><a href="#tf-home" class="page-scroll">Home</a></li>
@@ -305,16 +309,16 @@
                         <hr>
                     </div>
                 </div>
-                <p>Q: Where can I get videos?</p>
+                <strong><p>Q: Where can I get videos?</p></strong>
 
                 <p>A: Go to a video on YouTube. Copy the URL of the video. Paste the video URL into our "Add Video" page and take notes. Be sure to save at the end of your session.</p>
                 <br>
-                <p>Q: How do I create a Subject playlist? </p>
+                <strong><p>Q: How do I create a Subject playlist? </p></strong>
 
                 <p>A: For logged in users, go to "Add Subject" and from there you can add a photo representing your subject, a title, and a description.</p>
                 <br>
 
-                <p>Q: How do I share videos with other people?</p>
+                <strong><p>Q: How do I share videos with other people?</p></strong>
 
                 <p>A: As of this moment VidEdu does not support a link sharing capability with other users.</p>
             </div>

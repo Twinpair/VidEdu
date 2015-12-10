@@ -64,26 +64,27 @@
 
                <br />
                <br />
-      <div class="save_to_local">
+          
+     <!--        <div class="save_to_local">
                   <span><strong>Save to computer</strong></span>&nbsp;
                     <button id="create" type="button" class="btn btn-primary">
                       <span class="glyphicon glyphicon-save"></span>
                     </button>
               
-                <% if @video %>
+                % if @video %
                   <a download="<%= @video.title %>.txt" id="downloadlink" style="display: none">Download</a>
-                <% else %>
+                % else %
                   <a download="VidEdu_Notes.txt" id="downloadlink" style="display: none">Download</a>
-                <% end %>
+                % end %
 
-                </div>
+                </div> -->
                 
 
-                <% if current_user %>
-                  <%= check_box(:is_public, 1) %> 
-                  <%= label_tag(:is_public, "Public Video?") %>
+            <!--     % if current_user %
+                  %= check_box(:is_public, 1) %
+                  %= label_tag(:is_public, "Public Video?") %
                   <p><i>Public videos will show your notes to other users</i></p>
-                <% end%>
+                % end% -->
               
                 <%= f.text_area :note_summary, :size => "80x10", :placeholder=>"Write a Summary/Description", id:"summary_area"%>
 

@@ -38,7 +38,7 @@
 
                     <p>
                       <% if @video.subject %>
-                        <strong>Category: </strong><%= @video.subject.subject %>
+                        <strong>Category: </strong><%= link_to @video.subject.subject, subject_path(@video.subject.id) %>
                       <% end %>
 
                     </p>

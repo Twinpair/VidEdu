@@ -1,5 +1,54 @@
 <%= render 'videos/glyphicon_links' %>
 <%= render 'videos/nav'%>
+
+
+
+
+<style type="text/css">
+  .btn-primary {
+    width: 15%;
+    float: left;
+    margin-left: 0px;
+}
+</style>
+
+
+<div class="jumbotron">
+  <div class="container">
+  <% if user_signed_in? %>
+    <h1><%= @subject.subject %> Videos</h1>
+    <% if @subject.image? %>
+          <%= image_tag @subject.image.url(:small),:target=> '_self', :class=>'img img-rounded' %>
+        <% end %>
+        <br />
+      <p><lead><i style="font-size:20px;"><%= @subject.description %></i></lead></p>
+
+         <br />
+  <% else %>
+    <% if !current_user && !user_signed_in?%>
+      <h1><%= User.find(@subject.user_id).username %> 's <%= @subject.subject %> Videos</h1>
+        <br />
+        <% if @subject.image? %>
+          <%= image_tag @subject.image.url(:small),:target=> '_self', :class=>'img img-rounded' %>
+        <% end %>
+        <br />
+      <p><lead><i style="font-size:20px;"><%= @subject.description %></i></lead></p>
+    <% end %>            
+  <% end %>
+  <br />
+<div class = "add_video">
+  <% if user_signed_in? %>
+    <%= link_to 'Add video!', new_video_path, class: 'btn btn-primary btn-lg' %>
+  <%else %>
+    <%= link_to 'Sign Up!', new_user_registration_path , class: 'btn btn-primary btn-lg' %>
+  <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
 <div class="container">
 <div class="site-wrapper">
 
@@ -10,38 +59,23 @@
 
           <div class="inner cover">
 
-            <h1 class="cover-heading">
-              <p class="text-center"><%= @subject.subject %> Videos</p>
-            </h1>
-
-            <p class="lead">
-                <p class="text-center">
-                    <%= @subject.description %>
-                </p>
-            </p>
-    
-          <% if @subject.image? %>
-            <p class="lead">
-                <p class="text-center">
-                    <%= image_tag @subject.image.url(:small) %>
-                </p>
-            </p>
-
-            <% end %>
-
-            <br />
-            <br />
-
-
-
+      
 
          <%= render 'subject_videos' %>
+
+
+
             <p class="lead">
                 <p class="text-center">
 
-                    <%= link_to 'Edit Subject', edit_subject_path(@subject),:class=> 'btn btn-success btn-lg'  %>
-                    <%= link_to 'Back to Subjects Home', subjects_path, :class=> 'btn btn-success btn-lg'  %>
-                
+                    <% if current_user %>
+                      <%= link_to 'Edit Subject', edit_subject_path(@subject),:class=> 'btn btn-success btn-lg'  %>
+                      <%= link_to 'Back to Subjects Home', subjects_path, :class=> 'btn btn-success btn-lg'  %>
+                    <% else %>
+                      <%= link_to 'Back', :back, :class=> 'btn btn-success btn-lg'  %>
+                      <%= link_to 'See Featured', pages_featured_path, :class=> 'btn btn-success btn-lg'  %>
+
+                    <% end %>                
                 </p>
             </p>
 

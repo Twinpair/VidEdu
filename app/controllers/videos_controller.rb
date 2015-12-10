@@ -6,8 +6,8 @@ class VideosController < ApplicationController
 
 
   def index
-      #@videos = Video.order('created_at DESC')
-      #@videos = get_videos
+
+    
       if (current_user)
         @videos = current_user.videos.order('created_at DESC')
       else

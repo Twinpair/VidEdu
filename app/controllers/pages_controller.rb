@@ -20,7 +20,7 @@ class PagesController < ApplicationController
 
   def featured
     @videos = Video.order('created_at DESC')
-  
+    
   end
 
   def faq

@@ -1,3 +1,9 @@
+<% if !@videos.any? %>
+  <div class="text-center">
+      <i><h1>You have no videos! Click "Add Video" to add one now!</h1></i>
+  </div>
+<% else %>
+
 <%= render 'videos/glyphicon_links' %>
 <style type="text/css">
      .caption{
@@ -13,21 +19,8 @@
 
 </style>
 
-<div class="row">
-    <ul class="nav navbar-nav" id="sort">
-        <li id = "label"><h4>Sort by: </h4></li>
-        <li><%= link_to 'Most Recent',most_recent_path %></li>
-        <li> <%= link_to "Oldest to Newest", oldest_to_new_path %> </li>
-        <li id = "label"><h4>By title: </h4></li>
+<%= render 'videos/sort' %>
 
-        <li> <%= link_to "A-Z", a_to_z_path %> </li>
-        <li> <%= link_to "Z-A", z_to_a_path %> </li>
-
-    </ul>
-    </div>
-
-
-    <br />
 <br />
 
 
@@ -50,7 +43,7 @@
                   <br />
               <!-- Need to change this to the "edit" page -->
                 <%= link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,
-                                      class: 'img-rounded'),
+                                      ),
                             video_path(video.id), target: '_self' %>
 
                 <div class="caption">
@@ -93,6 +86,23 @@
                   <% else %>
                       <p><i>Subject Undefined</i></p>
                   <% end %>
+
+              <% if user_signed_in? %>
+                <% if current_user %>
+                  <% if video.user_id == current_user.id %>
+                    <div><strong>Created by:</strong> <i>You!</i></div>
+                  <% else %>
+                    <div><strong>Created by:</strong> <i><%= User.find(video.user_id).username %></i></div>
+                  <% end %>
+                <% end %>
+             
+              <% else %>
+                <div><strong>Created by:</strong> <i><%= User.find(video.user_id).username %></i></div>
+                
+              <% end %>
+           
+<br />
+
               <% if current_user %>
                 <% if video.user_id == current_user.id %>
                     <div class = "trash_and_edit">
@@ -130,3 +140,5 @@
 
 
   </script>
+
+  <% end %>

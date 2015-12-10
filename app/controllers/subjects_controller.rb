@@ -23,7 +23,11 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   def show
     @videos = Video.order('created_at DESC')
-    
+
+    @user = @subject.user_id
+    # @user = User.find(1)
+ 
+
   end
 
   # GET /subjects/new

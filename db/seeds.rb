@@ -8,4 +8,4 @@
  
 
 Subject.create!(:subject =>'Uncategorized')
-User.create!(:subject => 'Uncategorized')
+

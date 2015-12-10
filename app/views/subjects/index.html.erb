@@ -11,7 +11,7 @@
 <div class="jumbotron">
   <div class="container">
     <h1>Subject Playlists</h1>
-    <p>View your subjects here</p>
+    <p>View your subjects here or...</p>
     <p>
       <%= link_to 'Add subject!', new_subject_path, class: 'btn btn-primary btn-lg' %>
     </p>
@@ -30,13 +30,11 @@
                 <br />
               <% if subject.image? %>
                 <%= link_to (image_tag subject.image.url(:medium), alt: subject.subject),subject %>
-                <h3><%= link_to subject.subject, subject,:style=>"padding-left:10px;" %></h3>
+                <h3><%= link_to subject.subject, subject,:style=>"padding-left:22px;" %></h3>
 
               <% else %>
-                  <h3><%= link_to subject.subject, subject,:style=>"padding-left:10px;"%></h3>
-                                                                        
-
-
+                  <h3><%= link_to subject.subject, subject,:style=>"padding-left:22px;"%></h3>
+                    
               <% end %>
 
 
@@ -45,12 +43,17 @@
                   
                   <% if subject.description? %>
                   <p>
-                    <%= truncate subject.description, length: 150 %>
+                    <%= truncate subject.description, length: 150,:style=>"margin-left:25px;" %>
                     <%= link_to 'read more', subject %> 
                   </p>
                   <% else %>
                     <p><i>No Description</i></p>
                   <% end %>
+
+
+                  <br />
+
+
                   <!-- Need to link this to an array of IDs associated with the
                   subject we created -->
                   <!-- %= link_to 'View', subject % | -->
@@ -67,3 +70,5 @@
     <% end %>
     
   </div>
+
+  
