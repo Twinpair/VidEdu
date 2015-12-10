@@ -1,6 +1,6 @@
 VidEdu
 ____________________________________________
-www.videdu.org
+Link to Application: www.videdu.org
 
 
 
