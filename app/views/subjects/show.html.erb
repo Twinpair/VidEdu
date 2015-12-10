@@ -25,7 +25,7 @@
 
          <br />
   <% else %>
-    <% if !current_user && !user_signed_in?%>
+    <% if !current_user || !user_signed_in?%>
       <h1><%= User.find(@subject.user_id).username %> 's <%= @subject.subject %> Videos</h1>
         <br />
         <% if @subject.image? %>
