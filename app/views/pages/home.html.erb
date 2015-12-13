@@ -119,10 +119,10 @@
 
                         <% if !user_signed_in? %>
                         <p class="text-center">
-                          <%= link_to "TRY IT NOW!", new_video_path, :class=>'btn btn-default btn-lg' %>
+                          <%= link_to "TRY IT NOW!", new_video_path, :class=>'homeButton' %>
                         </p>
                         <%else%>
-                          <%= link_to "Add Video", new_video_path, :class=>'btn btn-default btn-lg' %>
+                          <%= link_to "Add Video", new_video_path, :class=>'homeButton' %>
 
                         <%end%>
                         </div>
@@ -286,7 +286,7 @@
       <h1 class="pull-right"><i class=" icon-envelope icon-3x"></i> <i class="icon-flag icon-3x"></i> <i class="icon-lightbulb icon-3x"></i></h1>
       </div>
       <div class="col-md-4 text-center" id="ContactButton">
-      <%= button_to "Contact Us", "#tf-contact", :class => "btn btn-default btn-lg", :method => :get  %>
+      <%= button_to "Contact Us", "#tf-contact", :class => "contactButton", :method => :get  %>
      </div>
     </div>
 <br><br><br><br>
@@ -383,10 +383,9 @@
             <div class="pull-right fnav">
                 <ul class="footer-social">
                     <li><a href="https://www.facebook.com/VidEduCSC667" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="https://twitter.com/VidEduCSC667" target="_blank"><i class="fa fa-twitter" ></i></a></li>
-                    <li><a href="https://plus.google.com/117714759027314320835/posts?hl=en" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#" target="_blank"><i class="fa fa-github"></i></a></li>
-                    <li><a href="https://docs.google.com/document/d/16lotARoZ2KsIzn06sAM0vDntKwQaTTYQFjGzJO3iamU/edit?usp=sharing" target="_blank">View Documentation</a></li>
+                    <li><a href="https://twitter.com/VidEduApp" target="_blank"><i class="fa fa-twitter" ></i></a></li>
+                    <li><a href="https://gmail.com" target="_blank">Email:  VidEduApp@gmail.com</a><li>
+                    <li><a href="https://docs.google.com/document/d/16lotARoZ2KsIzn06sAM0vDntKwQaTTYQFjGzJO3iamU/edit?usp=sharing" target="_blank">View Documentation</a><li>
                 </ul>
             </div>
         </div>
