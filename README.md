@@ -45,8 +45,8 @@ Files/Folders
 Assets:
 - "images" --> images on the application
 - "javascript" --> javascript interaction for HTML
-- "stylesheets"  --> styling sheets for HTML markup
-- 
+- "stylesheets" --> styling sheets for HTML markup
+
 Models:
 - database entities
 
