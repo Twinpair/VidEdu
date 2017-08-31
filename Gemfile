@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.8'
 gem 'pg'
 group :development do
   gem 'eventmachine'
@@ -45,8 +45,3 @@ gem 'omniauth-twitter'
 gem 'imagesLoaded_rails'
 gem 'pusher'
 gem 'faye-rails', '~> 2.0'
-
-
-
-
-
