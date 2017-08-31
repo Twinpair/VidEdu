@@ -1,45 +1,26 @@
-<!-- EVERY page will have this section -->
 <!DOCTYPE html>
 <html>
-
 <head>
-<%= favicon_link_tag 'favicon.ico' %>
-<title>VidEdu | <%= yield(:title) %></title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  <title>VidEdu | <%= yield(:title) %></title>
+
+  <%= favicon_link_tag 'favicon.ico' %>
+
+  <!-- Meta Tags -->
   <%= csrf_meta_tags %>
-  
-
-
-  <style type="text/css">
-  @import url(http://fonts.googleapis.com/css?family=Voltaire);
-  .navbar{
-    background: black;
-    color: white;
-    font-size: 12px;
-    text-transform:uppercase;
-    font-family:'Voltaire',Arial,sans-serif;
-    letter-spacing:2px;
-  }
-  </style>
-  <!-- Basic Page Needs
-  ================================================== -->
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="VidEdu: Take notes side by side with your favorite videos.">
 
+  <!-- Stylesheets -->
+  <%= stylesheet_link_tag    'application', media: 'all' %>
 
+  <!-- Javascript Files -->
+  <%= javascript_include_tag 'application' %>
 </head>
-
 <body>
-
   <%= yield %> 
-
 </body>
-
-<%= render 'layouts/footer' %>
-
 </html>
 
 
