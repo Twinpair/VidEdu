@@ -53,28 +53,28 @@
               <%= devise_error_messages! %>
 
             <div class="field">
-                <%= f.text_field :firstname,  :placeholder => "First Name", autofocus: true %>
+                <%= f.text_field :firstname,  :placeholder => "First Name", :type => "text", :required => true %>
               </div>
 
               <div class="field">
-                <%= f.text_field :lastname,  :placeholder => "Last Name", autofocus: true %>
+                <%= f.text_field :lastname,  :placeholder => "Last Name", :type => "text", :required => true %>
               </div>
 
               <div class="field">
-                <%= f.text_field :username,  :placeholder => "Username", autofocus: true %>
+                <%= f.text_field :username,  :placeholder => "Username", :type => "text", :required => true %>
               </div>
 
               <div class="field">
-                <%= f.email_field :email,  :placeholder => "Email", autofocus: true %>
+                <%= f.email_field :email,  :placeholder => "Email", :type => "email", :required => true %>
               </div>
 
               <% if f.object.password_required? %>
                 <div class="field">
-                  <%= f.password_field :password, :placeholder => "Password (6 characters minimum)", autocomplete: "off" %>
+                  <%= f.password_field :password, :placeholder => "Password (6 characters minimum)", autocomplete: "off", :type => "password", :required => true %>
                 </div>
 
                 <div class="field">
-                  <%= f.password_field :password_confirmation, :placeholder => "Password Confirmation ", autocomplete: "off" %>
+                  <%= f.password_field :password_confirmation, :placeholder => "Password Confirmation ", autocomplete: "off", :type => "password", :required => true %>
                 </div>
               <% end %>
 
@@ -87,9 +87,9 @@
       </div>
     </div>
     <ul class="footer-social">
-      <li><%= button_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), :class => "FacebookButton", :method => :get  %><li>
-      <li><%= button_to "Sign up with Twitter", user_omniauth_authorize_path(:twitter), :class => "TwitterButton", :method => :get  %></li>
-      <li><%= button_to "Sign Up with Google+", user_omniauth_authorize_path(:google_oauth2), :class => "GoogleButton", :method => :get  %></li>
+      <li><%= button_to "Sign up with Facebook", user_facebook_omniauth_authorize_path, :class => "FacebookButton", :method => :get  %><li>
+      <li><%= button_to "Sign up with Twitter", user_twitter_omniauth_authorize_path, :class => "TwitterButton", :method => :get  %></li>
+      <li><%= button_to "Sign Up with Google+", user_google_oauth2_omniauth_authorize_path, :class => "GoogleButton", :method => :get  %></li>
     </ul>
     <%= render "devise/shared/links" %>
   </div>
