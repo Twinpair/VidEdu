@@ -45,8 +45,6 @@ gem 'omniauth-twitter'
 gem 'imagesLoaded_rails'
 gem 'pusher'
 gem 'faye-rails', '~> 2.0'
-gem 'thin'
-gem 'masonry-rails'
 
 
 
