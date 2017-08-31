@@ -8,6 +8,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'annotate'
   gem 'web-console', '~> 2.0'
+  gem 'sqlite3'
 end
 group :production do
   gem 'rails_12factor'
