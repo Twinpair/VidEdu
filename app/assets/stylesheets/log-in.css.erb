@@ -1,121 +1,135 @@
 /* FORM PAGES */
-    .form {
-      text-align:center;
-      margin: 0 auto 10px;
-      padding: 20px 0 10px 0;
-      font-size: 16px;
-      width: 300px;
-    }
-    input[type=text],
-    input[type=email],
-    input[type=password] {
-      color: #666666;
-      width: 100%;
-      border: 1px solid #E6E6E6;
-      border-radius: 0px; 
-      height: 50px;
-      margin: 6px auto;
-      text-indent: 10px;
-    }
-    .btn-submit {
-      color: #FFFFFF;
-      font-size: 18px;
-      text-transform: uppercase;
-      background: #c91717;
-      padding: 10px 20px;
-      border: 0;
-      margin-top: 6px;
-    }
-      
-    /*  RESPONSIVE */
-    @media screen and (max-width: 992px) {
-      .img-container img {
-        width: 100%;
-      }
-    }
-    @media screen and (max-width: 512px) {
-      .pull-right {
-        background-color: #f1f2f2;
-        position: relative;
-        margin: 0;
-        width: 100%;
-      }
-      .pull-right ul {
-        margin: 0;
-        -webkit-margin-after: 0;
-        -webkit-margin-before: 0;
-        -webkit-padding-start: 0;
-      }
-      .pull-right ul li {
-        display: block;
-        float: left;
-        margin: 0;
-        padding: 20px 0;
-        text-align: center;
-        width: 50%;
-      }
-      .pull-right ul li a {
-        display: block;
-        width: 100%;
-      }
-      .img-container {
-        height: 200px;
-      }
-    }
-     #tf-team{
-  background: url('https://upload.wikimedia.org/wikipedia/commons/7/74/San_Francisco_downtown.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: #ffffff;
-}
-#tf-team .overlay{
-  background: -moz-linear-gradient(top,  rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, rgba(0,0,0,0.66) 35%, rgba(0,0,0,0.55) 62%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.8)), color-stop(17%,rgba(0,0,0,0.73)), color-stop(35%,rgba(0,0,0,0.66)), color-stop(62%,rgba(0,0,0,0.55)), color-stop(100%,rgba(0,0,0,0.4))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#66000000',GradientType=0 ); /* IE6-9 */
-  height: auto;
-  background-attachment: fixed;
-  padding: 1.65% 0;
-}
-.section-title.center{
-  padding-top: 30px
-}
-.section-title h2,
-.section-title.center h2{
-  font-weight: 300;
-}
-.section-title.center .line{
-  border-top: 4px solid #fcac45;
-  height: 10px;
-  width: 60px;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 20px;
-}
-.section-title.center hr {
-  border-top: 4px solid rgba(252, 172, 69, 0.34);
-  width: 40px;
-  text-align: center;
-  margin-top: 10px;
-  position: relative;
-  left: 17%;
-}
-#team{ margin: 0 auto}
-#team .item{
-    padding: 0;
-    margin: 15px;
-    color: #FFF;
-    text-align: center;
-}
-#white{
-  color: white;
-}
 
- p{
+      .form {
+        text-align:center;
+        margin: 0 auto 10px;
+        padding-top: 15px;
+        font-size: 16px;
+        width: 300px;
+      }
+
+      input[type=text],
+      input[type=email],
+      input[type=password] {
+        color: #666666;
+        width: 100%;
+        border: 1px solid #E6E6E6;
+        border-radius: 0px; 
+        height: 60px;
+        margin: 6px auto;
+        text-indent: 10px;
+      }
+
+      .btn-submit {
+        color: #FFFFFF;
+        font-size: 18px;
+        text-transform: uppercase;
+        background: #c91717;
+        padding: 10px 20px;
+        border: 0;
+        margin-top: 6px;
+      }
+        
+      /*  RESPONSIVE */
+
+      @media screen and (max-width: 992px) {
+        .img-container img {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 512px) {
+        .pull-right {
+          background-color: #f1f2f2;
+          position: relative;
+          margin: 0;
+          width: 100%;
+        }
+
+        .pull-right ul {
+          margin: 0;
+          -webkit-margin-after: 0;
+          -webkit-margin-before: 0;
+          -webkit-padding-start: 0;
+        }
+
+        .pull-right ul li {
+          display: block;
+          float: left;
+          margin: 0;
+          padding: 20px 0;
+          text-align: center;
+          width: 50%;
+        }
+
+        .pull-right ul li a {
+          display: block;
+          width: 100%;
+        }
+
+        .img-container {
+          height: 200px;
+        }
+      }
+
+      
+
+    #tf-team{
+    background: url(<%= asset_path("Downtown-San-Francisco.jpg") %>);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #ffffff;
+  }
+  #tf-team .overlay{
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, rgba(0,0,0,0.66) 35%, rgba(0,0,0,0.55) 62%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.8)), color-stop(17%,rgba(0,0,0,0.73)), color-stop(35%,rgba(0,0,0,0.66)), color-stop(62%,rgba(0,0,0,0.55)), color-stop(100%,rgba(0,0,0,0.4))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.73) 17%,rgba(0,0,0,0.66) 35%,rgba(0,0,0,0.55) 62%,rgba(0,0,0,0.4) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#66000000',GradientType=0 ); /* IE6-9 */
+    height: auto;
+    background-attachment: fixed;
+    padding: 7.01% 0;
+  }
+  .section-title.center{
+   
+  }
+  .section-title h2,
+  .section-title.center h2{
+    font-weight: 300;
+  }
+  .section-title.center .line{
+    border-top: 4px solid #fcac45;
+    height: 10px;
+    width: 60px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .section-title.center hr {
+    border-top: 4px solid rgba(252, 172, 69, 0.34);
+    width: 40px;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    left: 17%;
+  }
+  #team{ margin: 0 auto}
+  #team .item{
+      padding: 0;
+      margin: 15px;
+      color: #FFF;
+      text-align: center;
+  }
+
+  #white{
+    color: white;
+  }
+
+  p{
     color: white;
     font-family:'Voltaire',Arial,sans-serif;  
     font-size: 20px;
