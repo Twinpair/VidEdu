@@ -32,6 +32,9 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
+  # Enable leverage browser caching for static resources
+  config.static_cache_control = "public, s-maxage=31536000, maxage=15552000"
+
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.
