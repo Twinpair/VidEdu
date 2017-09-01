@@ -13,19 +13,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "VidEdu", pages_home_path, class: "navbar-brand", :id => "white" %>
+      <%= link_to "VidEdu", root_path, class: "navbar-brand", :id => "white" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", pages_home_path, class: "page-scroll", :id => "white" %></li>
-        <li><%= link_to "About", pages_home_path+"#tf-about", class: "page-scroll", :id => "white" %></li>
-        <li><%= link_to "Team", pages_home_path+"#tf-team", class: "page-scroll", :id => "white" %></li>
-        <li><%= link_to "Feedback", pages_home_path+"#tf-services", class: "page-scroll", :id => "white" %></li>
-        <li><%= link_to "FAQS", pages_home_path+"#tf-clients", class: "page-scroll", :id => "white" %></li>
-        <li><%= link_to "Contact", pages_home_path+"#tf-contact", class: "page-scroll", :id => "white" %></li>
-          <li><%= link_to "Featured", pages_featured_path,:id => "white" %></li>
+        <li><%= link_to "Home", root_path, class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "About", root_path+"#tf-about", class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "Team", root_path+"#tf-team", class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "Feedback", root_path+"#tf-services", class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "FAQS", root_path+"#tf-clients", class: "page-scroll", :id => "white" %></li>
+        <li><%= link_to "Contact", root_path+"#tf-contact", class: "page-scroll", :id => "white" %></li>
+          <li><%= link_to "Featured", featured_path,:id => "white" %></li>
           <li><%= link_to "Try it!", new_video_path,:id => "white" %></li>
 
         <li><%= link_to "Login", new_user_session_path , :id => "white" %></li>

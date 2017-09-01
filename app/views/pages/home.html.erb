@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to "VidEdu", pages_home_path, class: "navbar-brand" %>
+          <%= link_to "VidEdu", root_path, class: "navbar-brand" %>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,7 +46,7 @@
           <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
             <li><a href="#tf-home" class="page-scroll">Home</a></li>
-            <li><%= link_to "Featured", pages_featured_path %></li>
+            <li><%= link_to "Featured", featured_path %></li>
             <li><%= link_to "Your Subjects", subjects_path %></li>
             <li><%= link_to "Your Videos", videos_path %></li>
             <li><%= link_to "Add Video", new_video_path %></li>
@@ -66,7 +66,7 @@
             <li><a href="#tf-services" class="page-scroll">Feedback</a></li>
             <li><a href="#tf-clients" class="page-scroll">FAQS</a></li>
             <li><a href="#tf-contact" class="page-scroll">Contact</a></li>
-            <li><%= link_to "Featured", pages_featured_path %></li>
+            <li><%= link_to "Featured", featured_path %></li>
             <li><%= link_to "Try it!", new_video_path %></li>
             <li><%= link_to "Login", new_user_session_path,{:style=>'color:orange;'} %></li>
             <li><%= link_to "Signup", new_user_registration_path, {:style=>'color:orange;'} %></li>

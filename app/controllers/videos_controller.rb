@@ -11,7 +11,7 @@ class VideosController < ApplicationController
       if (current_user)
         @videos = current_user.videos.order('created_at DESC')
       else
-        redirect_to pages_featured_path
+        redirect_to featured_path
       end
       
   end

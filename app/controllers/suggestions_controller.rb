@@ -9,6 +9,6 @@ class SuggestionsController < ApplicationController
       @suggestion = Suggestion.new(suggestion_params)
       @suggestion.save
 
-      redirect_to pages_home_path
+      redirect_to root_path
     end
 end

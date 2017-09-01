@@ -28,7 +28,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>        
-      <%= link_to "VidEdu", pages_home_path, class: "navbar-brand", :id => "white" %>
+      <%= link_to "VidEdu", root_path, class: "navbar-brand", :id => "white" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,7 +36,7 @@
        <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
                 <li><%= link_to "Home", root_path, :id => "white" %></li>
-                <li><%= link_to "Featured", pages_featured_path, :id => "white" %></li>
+                <li><%= link_to "Featured", featured_path, :id => "white" %></li>
                 <li><%= link_to "Your Subjects", subjects_path, :id => "white" %></li>
                 <li><%= link_to "Your Videos", videos_path, :id => "white" %></li>
                 <li><%= link_to "Add Video", new_video_path, :id => "white" %></li>
@@ -54,13 +54,13 @@
 
               <li><%= link_to "Log out", destroy_user_session_path, :method => :delete, :id => "orange" %></li>
           <% else %>
-                <li><%= link_to "Home", pages_home_path,:id => "white" %></li>
-                <li><%= link_to "About", pages_home_path + '#tf-about',:id => "white" %></li>
-                <li><%= link_to "Team", pages_home_path + '#tf-team',:id => "white" %></li>
-                <li><%= link_to "Feedback", pages_home_path + '#tf-services',:id => "white" %></li>
-                <li><%= link_to "FAQS", pages_home_path + '#tf-clients',:id => "white" %></li>
-                <li><%= link_to "Contact", pages_home_path + '#tf-contact',:id => "white" %></li>
-                <li><%= link_to "Featured", pages_featured_path,:id => "white" %></li>
+                <li><%= link_to "Home", root_path,:id => "white" %></li>
+                <li><%= link_to "About", root_path + '#tf-about',:id => "white" %></li>
+                <li><%= link_to "Team", root_path + '#tf-team',:id => "white" %></li>
+                <li><%= link_to "Feedback", root_path + '#tf-services',:id => "white" %></li>
+                <li><%= link_to "FAQS", root_path + '#tf-clients',:id => "white" %></li>
+                <li><%= link_to "Contact", root_path + '#tf-contact',:id => "white" %></li>
+                <li><%= link_to "Featured", featured_path,:id => "white" %></li>
                 <li><%= link_to "Try it!", new_video_path,:id => "white" %></li>
 
                  <ul class="nav navbar-nav navbar-right">
