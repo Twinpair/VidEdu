@@ -1,144 +1,107 @@
-<% if !@videos.any? %>
-  <div class="text-center">
-      <i><h1>You have no videos! Click "Add Video" to add one now!</h1></i>
-  </div>
-<% else %>
-
-<%= render 'videos/glyphicon_links' %>
-<style type="text/css">
-     .caption{
-    margin-left: 10px;
-  }
+  <style type="text/css">
+    .caption{
+      margin-left: 10px;
+    }
     #sort{
-        margin-left: 80px;
-        margin-top: -25px;
+      margin-left: 80px;
+      margin-top: -25px;
     }
     #label{
-        margin-top:6px;
+      margin-top:6px;
     }
+  </style>
 
-</style>
-
-<%= render 'videos/sort' %>
-
-<br />
-
-
+<% if !@videos.any? %>
+  <div class="text-center">
+    <i><h1>You have no videos! Click "Add Video" to add one now!</h1></i>
+  </div>
+<% else %>
+  <%= render 'videos/glyphicon_links' %>
+  <%= render 'videos/sort' %>
+  <br>
 <% if @videos.any? %>
   <div class="container">
     <div id="player-wrapper"></div>
     <% @videos.in_groups_of(3) do |group| %>
       <div class="row">
-        <% group.each do |video| %>
-          <% if video %>
-            <div class="col-md-4">
-
-              <div class="yt_video thumbnail">
-                  <div class="text-center">
-
-                      <div class="panel-heading"><h4><%= video.title %></h4></div>
-
-                    
-                  </div>
-                  <br />
-              <!-- Need to change this to the "edit" page -->
-                <%= link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,
-                                      ),
-                            video_path(video.id), target: '_self' %>
-
-                <div class="caption">
-                  <% if video.published_at %>
-                    <p>Video published on <i>YouTube</i> at <%= video.published_at.strftime('%-d %B %Y') %></p>
-                  <% end %>
-
-            
-                    
-                    <p>
-                      <div class="star-rating" data-score=<%= video.rating.to_s %> ><strong>Rating:</strong>  </div>
-                    </p>
-
-                    
-
-
-
-                    <% if video.review? %>
-                     <p><strong>Review:</strong> <%= truncate video.review, length: 100 %> <%= link_to 'read more', video %> 
-                     </p>
-                    <% else %>
-                      <p><i>No Review</i></p>
-                     <% end %>
-
-
-
-                    <% if video.note_summary? %>
-                       <p><strong>Summary:</strong> <%= truncate video.note_summary, length: 100%> <%= link_to 'read more', video %>
-                       </p>
-                    <% else %>
-                      <p><i>No Summary</i></p>
-                     <% end %>
-
-
-
-                     <p><strong>Updated:</strong> <%=video.updated_at.strftime('%-d %B %Y %H:%M:%S') %></p>
-                     
-                  <% if video.subject_id? %>
-                     <p><strong>Subject: </strong><%= Subject.find(video.subject_id).subject %></p>
-                  <% else %>
-                      <p><i>Subject Undefined</i></p>
-                  <% end %>
-
-              <% if user_signed_in? %>
-                <% if current_user %>
-                  <% if video.user_id == current_user.id %>
-                    <div><strong>Created by:</strong> <i>You!</i></div>
-                  <% else %>
-                    <div><strong>Created by:</strong> <i><%= User.find(video.user_id).username %></i></div>
-                  <% end %>
-                <% end %>
-             
-              <% else %>
-                <div><strong>Created by:</strong> <i><%= User.find(video.user_id).username %></i></div>
-                
-              <% end %>
-           
-<br />
-
-              <% if current_user %>
-                <% if video.user_id == current_user.id %>
-                    <div class = "trash_and_edit">
-                              <%= link_to '' ,edit_video_path(video.id),:class=>"glyphicon glyphicon-edit",:id=>'edit' %> |
-                              <%= link_to '', video, :confirm => 'You sure?', :class=>"glyphicon glyphicon-trash", :method => :delete %>
-                    </div>
-                   
-
-                  <% end %>
-                  <% end %>
-
-                </div>
-
-              </div>
-
+      <% group.each do |video| %>
+      <% if video %>
+        <div class="col-md-4">
+          <div class="yt_video thumbnail">
+            <div class="text-center">
+              <div class="panel-heading"><h4><%= video.title %></h4></div> 
             </div>
+            <br>
+            <!-- Need to change this to the "edit" page -->
+            <%= link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,), video_path(video.id), target: '_self' %>
+            <div class="caption">
+            <% if video.published_at %>
+              <p>Video published on <i>YouTube</i> at <%= video.published_at.strftime('%-d %B %Y') %></p>
+            <% end %>
+              <p>
+                <div class="star-rating" data-score=<%= video.rating.to_s %> ><strong>Rating:</strong>  </div>
+              </p>
+
+            <% if video.review? %>
+              <p><strong>Review:</strong> <%= truncate video.review, length: 100 %> <%= link_to 'read more', video %></p>
+            <% else %>
+              <p><i>No Review</i></p>
+            <% end %>
+
+            <% if video.note_summary? %>
+              <p><strong>Summary:</strong> <%= truncate video.note_summary, length: 100%> <%= link_to 'read more', video %></p>
+            <% else %>
+              <p><i>No Summary</i></p>
+            <% end %>
+              <p><strong>Updated:</strong> <%=video.updated_at.strftime('%-d %B %Y %H:%M:%S') %></p>
+
+            <% if video.subject_id? %>
+              <p><strong>Subject: </strong><%= Subject.find(video.subject_id).subject %></p>
+            <% else %>
+              <p><i>Subject Undefined</i></p>
+            <% end %>
+
+        <% if user_signed_in? %>
+          <% if current_user %>
+            <% if video.user_id == current_user.id %>
+              <div><strong>Created by:</strong> <i>You!</i></div>
+            <% else %>
+              <div><strong>Created by:</strong> <i><%= User.find(video.user_id).username %></i></div>
+            <% end %>
           <% end %>
+        <% else %>
+              <div><strong>Created by:</strong> <i><%= User.find(video.user_id).username %></i></div>
         <% end %>
-      </div>
+              <br>
+
+          <% if current_user %>
+            <% if video.user_id == current_user.id %>
+              <div class = "trash_and_edit">
+                <%= link_to '' ,edit_video_path(video.id),:class=>"glyphicon glyphicon-edit",:id=>'edit' %> |
+                <%= link_to '', video, :confirm => 'You sure?', :class=>"glyphicon glyphicon-trash", :method => :delete %>
+              </div>
+            <% end %>
+          <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-  </div>
-<% end %>
+      </div>
+  <% end %>
+    </div>
+  <% end %>
 
 
   <script>
-
-      $('.star-rating').raty({
-        path: '/assets/',
-        readOnly: true,
-        scoreName: "data-score",
-        score: function() {
-            return $(this).attr('data-score').toString();
-          }
-      });
-
-
+    $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      scoreName: "data-score",
+      score: function() {
+        return $(this).attr('data-score').toString();
+      }
+    });
   </script>
 
-  <% end %>
+<% end %>
