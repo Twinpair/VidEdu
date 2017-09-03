@@ -23,9 +23,9 @@
 
           <!-- Puts the video into the IFrame -->
           <div id="iframe-div">
-            <div id="info-text">
+            <div id="info-text" style="width: 100%; height: 390px; border: 5px solid black; margin-top: 50px;">
               <br><br>
-              <h3 style="text-align: center;">Paste Youtube Link To Start Taking Notes</h3>
+              <h3 style="text-align: center;">Paste Your Youtube Link To Start Taking Notes</h3>
               <br><br>
             </div>
           </div>
@@ -59,6 +59,18 @@
   <% end %>
 
   <script>
+
+    // Prevent the Enter key from submitting the new video form
+    // Instead it will load the video into the iframe
+    function stopRKey(evt) { 
+      var evt = (evt) ? evt : ((event) ? event : null); 
+      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+      if ((evt.keyCode == 13) && (node.type=="text"))  {
+        loadVideoIntoIframe(URL);
+        return false;
+      } 
+    } 
+    document.onkeypress = stopRKey; 
 
     // Get Star Rating Images
     $('#star-rating').raty({
@@ -98,16 +110,30 @@
 
     // Load video to Iframe when input button is submitted
     $("#button_sbmt").click(function () {
-      tinymce.activeEditor.getBody().setAttribute('contenteditable', true);
-      $("#info-text").remove();
-      $("#iframe-div").append('<div id="player"></div>');
-      console.log(URL);
-
-      URL = document.getElementById("input_area").value;
-      parse_embeded_code(URL);
-      get_embeded_code();
-      youTubeIframeAPIReady();
+      loadVideoIntoIframe(URL);
     });
+
+    // 0. Load video into iFrame
+    function loadVideoIntoIframe(URL){
+      URL = document.getElementById("input_area").value;
+
+      // If video input field is empty or is not a youtube link, an error is given.
+      if (URL == "" || URL.indexOf("youtube") === -1){
+        $("#video-input-error").remove();
+        $("#iframe-div").prepend('<div id="video-input-error"><br><br><h5 style="color:red;"><strong>^Please enter a youtube link^</strong></h5></div>');
+      }
+      else {
+        $("#video-input-error").remove();
+        console.log(URL);
+        tinymce.activeEditor.getBody().setAttribute('contenteditable', true);
+        $("#info-text").remove();
+        $("#iframe-div").append('<div id="player"></div>');
+        console.log(URL);
+        parse_embeded_code(URL);
+        get_embeded_code();
+        youTubeIframeAPIReady();
+      }
+    }
 
     // 1. Parse youtube code
     function parse_embeded_code(URL) {
