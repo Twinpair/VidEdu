@@ -4,6 +4,7 @@ class PagesController < ApplicationController
 
   def home
     @suggestion = Suggestion.new
+    @custom_nav = true
   end
 
   def about

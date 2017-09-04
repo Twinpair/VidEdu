@@ -19,23 +19,37 @@
   <%= javascript_include_tag 'application' %>
 </head>
 <body>
+<% if !@custom_nav%>
+  <style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Voltaire);
+
+    #button_search{
+      width: 25%;
+    }
+    #white{
+      color: white;
+    }
+    #orange{
+      color: orange;
+    }
+    #tf-menu{
+      background: #222222;
+      border-color: #222222;
+      border-radius: 0px;
+      margin-bottom: 0px;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-family: 'Voltaire',Arial,sans-serif;
+      letter-spacing: 2px;
+    }
+  </style>
+
+  <%= render 'shared/nav' %>
+<% end%>
+
   <%= yield %> 
 
-  <!-- Footer -->
-  <nav id="footer">
-    <div class="container">
-      <div class="pull-left fnav">
-        <p>ALL RIGHTS RESERVED. VidEdu © SFSU, CSC 667 Internet Application Design and Development</p>
-      </div>
-      <div class="pull-right fnav">
-        <ul class="footer-social">
-          <li><a href="https://www.facebook.com/VidEduCSC667" target="_blank"><i class="fa fa-facebook"></i></a></li>
-          <li><a href="https://github.com/Twinpair/VidEdu" target="_blank"><i class="fa fa-github"></i></a></li>
-          <li><a id="docs" href="https://drive.google.com/file/d/0B-4Vah9LEYrLNDhjay13NXA2V1E/view?usp=sharing" target="_blank">View Documentation</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <%= render 'shared/footer' %>
 
 </body>
 </html>
