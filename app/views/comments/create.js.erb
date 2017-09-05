@@ -1,12 +1,4 @@
-publisher = client.publish('/comments', {
-  message: '<%= j render @comment %>'
-});
-
-publisher.callback(function() {
-  $('#comment_body').val('');
-  $('#new_comment').find("input[type='submit']").val('Submit').prop('disabled', false)
-});
-
-publisher.errback(function() {
-  alert('There was an error while posting your comment.');
-});
+$('#comment_body').val('');
+$(".media-list").prepend("<%= j render @comment %>");
+$("#comment_<%= @comment.id %>").hide().fadeIn(800);
+$("#comment_count").text("Comments (<%= @comment.video.comments.count %>)");

@@ -61,8 +61,7 @@ class VideosController < ApplicationController
      end
 
     @comment = Comment.new
-    @comments = Comment.where user_id: 4
-    @comments = Comment.order('created_at DESC')
+    @comments = Comment.where("video_id = ?", params[:id]).order('created_at DESC')
 
   end
 

@@ -12,13 +12,13 @@ Rails.application.routes.draw do
   end
 
   resources :videos do
+    resources :comments
     collection do
       get 'search'
     end
-    resources :videos
   end
 
-  resources :comments, only: [:new, :create]
+  resources :comments, only: [:create, :destroy]
 
   resources :suggestions
 

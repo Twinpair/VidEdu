@@ -1,26 +1,16 @@
 class CommentsController < ApplicationController
-  def new
-    @comment = Comment.new
-    @comments = Comment.order('created_at DESC')
-  end
 
   def create
+    @comment = current_user.comments.build(comment_params)
+    @comment.video_id = params[:video_id]
 
     respond_to do |format|
-      if current_user
-        @comment = current_user.comments.build(comment_params)
-        
-
-        if @comment.save
-          flash.now[:success] = 'Your comment was successfully posted!'
-        else
-          flash.now[:error] = 'Your comment cannot be saved.'
-        end
+      if @comment.save
         format.html {redirect_to root_url}
         format.js
+        format.json { render @comment }
       else
         format.html {redirect_to root_url}
-        format.js {render nothing: true}
       end
     end
   end
