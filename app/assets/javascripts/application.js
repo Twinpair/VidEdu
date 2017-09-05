@@ -15,7 +15,5 @@
 //= require jquery_ujs
 //= require tinymce-jquery
 //= require imagesloaded
-//= require faye
-//= require comments
 //= require_tree .
 
