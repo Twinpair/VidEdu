@@ -48,12 +48,12 @@
             <li><%= link_to "Your Subjects", subjects_path %></li>
             <li><%= link_to "Add Video", new_video_path %></li>
             <li><%= link_to "Your Videos", videos_path %></li>
-          <%= form_tag search_videos_path, method: :get, class: "navbar-form navbar-right", role:"search" do %>
             <li>
-              <%= text_field_tag :search, params[:search], class: "form-control" %>
-              <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+              <%= form_tag search_videos_path, method: :get, class: "navbar-form", role:"search" do %>
+                <%= text_field_tag :search, params[:search], class: "form-control" %>
+                <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+              <% end %>  
             </li>
-          <% end %>
             <li><%= link_to "Account", edit_user_registration_path, {:style =>"color: orange;"} %></li>
             <li><%= link_to "Log out", destroy_user_session_path, :method => :delete, :style =>"color: orange;" %></li>
         <% else %>
@@ -65,6 +65,12 @@
             <li><a href="#tf-contact" class="page-scroll">Contact</a></li>
             <li><%= link_to "Featured", featured_path %></li>
             <li><%= link_to "Try it!", new_video_path %></li>
+            <li>
+              <%= form_tag search_videos_path, method: :get, class: "navbar-form", role:"search" do %>
+                <%= text_field_tag :search, params[:search], class: "form-control" %>
+                <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+              <% end %>  
+            </li>
             <li><%= link_to "Login", new_user_session_path,{:style=>'color:orange;'} %></li>
             <li><%= link_to "Signup", new_user_registration_path, {:style=>'color:orange;'} %></li>
         <% end %>

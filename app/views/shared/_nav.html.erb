@@ -22,13 +22,13 @@
           <li><%= link_to "Your Subjects", subjects_path, :id => "white" %></li>
           <li><%= link_to "Add Video", new_video_path, :id => "white" %></li>
           <li><%= link_to "Your Videos", videos_path, :id => "white" %></li>
-          <%= form_tag search_videos_path, method: :get, class: "navbar-form navbar-right", role:"search" do %>
-            <li>
+          <li>
+            <%= form_tag search_videos_path, method: :get, class: "navbar-form", role:"search" do %>
               <%= text_field_tag :search, params[:search], class: "form-control" %>
               <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
-            </li>
-          <% end %>
-          <li><p style = "color: orange;" class="navbar-text"><%= link_to "Account", edit_user_registration_path, {:style =>"color: orange; text-decoration: none;"} %></p></li>
+            <% end %>  
+          </li>
+          <li><%= link_to "Account", edit_user_registration_path, {:style =>"color: orange; text-decoration: none;"} %></li>
           <li><%= link_to "Log out", destroy_user_session_path, :method => :delete, :id => "orange" %></li>
         <% else %>
           <li><%= link_to "Home", root_path,:id => "white" %></li>
@@ -39,10 +39,14 @@
           <li><%= link_to "Contact", root_path + '#tf-contact',:id => "white" %></li>
           <li><%= link_to "Featured", featured_path,:id => "white" %></li>
           <li><%= link_to "Try it!", new_video_path,:id => "white" %></li>
-           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Login", new_user_session_path,:id => "orange" %></li>
-            <li><%= link_to "Signup", new_user_registration_path,:id => "orange" %></li>
-           </ul> 
+          <li>
+            <%= form_tag search_videos_path, method: :get, class: "navbar-form", role:"search" do %>
+              <%= text_field_tag :search, params[:search], class: "form-control" %>
+              <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+            <% end %>  
+          </li>
+          <li><%= link_to "Login", new_user_session_path,:id => "orange" %></li>
+          <li><%= link_to "Signup", new_user_registration_path,:id => "orange" %></li>
         <% end %>
         </ul>
       </div>

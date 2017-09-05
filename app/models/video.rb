@@ -34,9 +34,9 @@ class Video < ActiveRecord::Base
   YT_LINK_FORMAT = /\A.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/i
   validates :link, presence: true, format: YT_LINK_FORMAT
 
+  def Video.search(keyword)
+    videos = Video.all
+    videos = videos.where("lower(title) LIKE ?", "%#{keyword.downcase}%")
+  end
 
- 
-
- 
 end
-
