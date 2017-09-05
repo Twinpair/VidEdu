@@ -22,8 +22,6 @@ Rails.application.config.assets.precompile += %w( jquery.easing.min.js )
 
 
 #Precompiled CSS and JS for pages/home
-Rails.application.config.assets.precompile += %w( icons.css )
-Rails.application.config.assets.precompile += %w( font-awesome.css )
 Rails.application.config.assets.precompile += %w( owl.carousel.css )
 Rails.application.config.assets.precompile += %w( owl.theme.css )
 Rails.application.config.assets.precompile += %w( style.css )   
