@@ -28,8 +28,6 @@ gem 'ratyrate'
 gem "paperclip", "~> 4.3"
 gem 'wysihtml-rails', '0.5.3'
 gem 'searchkick', '~> 0.9.1'
-gem 'masonry-rails', '0.2.4'
-#gem 'jquery-turbolinks'
 gem 'bootstrap-glyphicons', '~> 0.0.1'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'yt', '~> 0.13.7'
