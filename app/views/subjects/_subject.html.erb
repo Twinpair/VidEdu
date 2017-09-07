@@ -8,7 +8,7 @@
       <% else %>
         <p><i>No Description</i></p>
       <% end %>
-      <% if user_signed_in? && current_user.id == subject.user_id %>
+      <% if user_signed_in? && current_user.id == subject.user_id && !subject.default_subject? %>
         <p>Created By: You</p>
         <%= link_to 'Edit', edit_subject_path(subject),:class=>"glyphicon glyphicon-edit"%> |
         <%= link_to 'Delete', subject, method: :delete, data: { confirm: 'Are you SURE? Removing this subject will delete ALL your videos under this subject!'},:class=>"glyphicon glyphicon-trash" %>

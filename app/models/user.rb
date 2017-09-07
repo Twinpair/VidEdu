@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :on => :create, :message => "cant be blank"
   validates_uniqueness_of :username, :on => :create, :message => "is already taken."
 
+  after_create :create_default_subject
+
   # def self.from_omniauth(auth)
   #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
   #       user.provider = auth.provider
@@ -74,6 +76,12 @@ end
 
   def password_required?
     super && provider.blank?
+  end
+
+  def create_default_subject
+    @user = User.last
+    @subject = Subject.new(subject: "Uncategorized", description: "Videos without a selected subject will go here", default_subject: true, user_id: @user.id)
+    @subject.save
   end
 end
 

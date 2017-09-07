@@ -5,10 +5,10 @@ class Subject < ActiveRecord::Base
 #
 # id         :integer          not null, primary key
 # t.string   "subject"
-# t.datetime "created_at",         null: false
-# t.datetime "updated_at",         null: false
 # t.text     "description"
 # t.integer  "user_id"
+# t.datetime "created_at",         null: false
+# t.datetime "updated_at",         null: false
 
   has_many :videos
   belongs_to :user

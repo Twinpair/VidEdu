@@ -2,7 +2,7 @@ class SubjectsController < ApplicationController
   before_action :must_be_logged_in, only: [:new, :create, :edit, :update, :destroy, :your_subjects]
 
   def index
-    @subjects = Subject.order('created_at DESC')
+    @subjects = Subject.where(default_subject: false).order('created_at DESC')
   end
 
   def show
@@ -28,6 +28,9 @@ class SubjectsController < ApplicationController
 
   def edit
     @subject = Subject.find(params[:id])
+    if @subject.default_subject
+      redirect_to subject_path(@subject)
+    end
   end
 
   def update
@@ -41,6 +44,9 @@ class SubjectsController < ApplicationController
 
   def destroy
     @subject = Subject.find(params[:id])
+    if @subject.default_subject
+      redirect_to subject_path(@subject)
+    end
     @subject.destroy
     redirect_to subjects_url, notice: 'Subject was successfully destroyed.'
   end

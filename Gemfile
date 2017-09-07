@@ -9,6 +9,7 @@ group :development do
   gem 'annotate', '2.6.10'
   gem 'web-console', '~> 2.0'
   gem 'sqlite3'
+  gem 'byebug'
 end
 group :production do
   gem 'rails_12factor'
