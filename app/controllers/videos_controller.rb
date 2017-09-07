@@ -36,13 +36,19 @@ class VideosController < ApplicationController
 
   def edit
     @video = Video.find(params[:id])
+
+    if !is_resource_owner?(@video)
+      redirect_to video_path(@video)
+    end
+
     @users_subjects = Subject.where(user_id: current_user.id)
   end
 
    def update
     @video = Video.find(params[:id])
-    if @video.update(video_params)
-      redirect_to @video
+
+    if !is_resource_owner?(@video) || @video.update(video_params)
+      redirect_to video_path(@video)
     else
       render :edit 
     end
@@ -50,6 +56,11 @@ class VideosController < ApplicationController
 
  def destroy
     @video = Video.find(params[:id])
+
+    if !is_resource_owner?(@video)
+      redirect_to video_path(@video)
+    end
+
     @video.destroy
     respond_to do |format|
       format.html { redirect_to videos_url, notice: 'Video was successfully destroyed.' }

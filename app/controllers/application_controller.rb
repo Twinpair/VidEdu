@@ -24,4 +24,9 @@ private
     end
   end
 
+  # Verifies if user is owner of resource
+  def is_resource_owner?(resource)
+    current_user && current_user.id == resource.user_id
+  end
+
 end

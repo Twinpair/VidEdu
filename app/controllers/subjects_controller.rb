@@ -28,15 +28,17 @@ class SubjectsController < ApplicationController
 
   def edit
     @subject = Subject.find(params[:id])
-    if @subject.default_subject
+
+    if @subject.default_subject || !is_resource_owner?(@subject)
       redirect_to subject_path(@subject)
     end
   end
 
   def update
     @subject = Subject.find(params[:id])
-    if @subject.update(subject_params)
-      redirect_to @subject, notice: 'Subject was successfully updated.'
+
+    if !is_resource_owner?(@subject) || @subject.update(subject_params)
+      redirect_to subject_path(@subject)
     else
       render :edit
     end
@@ -44,9 +46,11 @@ class SubjectsController < ApplicationController
 
   def destroy
     @subject = Subject.find(params[:id])
-    if @subject.default_subject
+
+    if @subject.default_subject || !is_resource_owner?(@subject)
       redirect_to subject_path(@subject)
     end
+
     @subject.destroy
     redirect_to subjects_url, notice: 'Subject was successfully destroyed.'
   end
