@@ -1,51 +1,23 @@
 class SubjectsController < ApplicationController
-  before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :must_be_logged_in, only: [:new, :create, :edit, :update, :destroy, :your_subjects]
 
-  def search
-    if params[:search]
-        @subjects = Subject.search(params[:search])
-      else
-        @subjects = Subject.order('created_at DESC')
-      end
-  end
-
-  # GET /subjects
   def index
-      #@subjects = Subject.all
-      if (current_user)
-        @subjects = current_user.subjects
-      else
-        @subjects = Subject.order('created_at DESC')
-      end
-
+    @subjects = Subject.order('created_at DESC')
   end
 
-  # GET /subjects/1
   def show
-    @videos = Video.order('created_at DESC')
-
-    @user = @subject.user_id
-    # @user = User.find(1)
- 
-
+    @subject = Subject.find(params[:id])
+    @videos = @subject.videos.order('created_at DESC')
+    @subject_user = User.find(@subject.user_id)
   end
 
-  # GET /subjects/new
   def new
     @subject = Subject.new
   end
 
-  # GET /subjects/1/edit
-  def edit
-    @subject = Subject.find(params[:id])
-
-  end
-
-  # POST /subjects
   def create
     @subject = Subject.new(subject_params)
-    @subject.user_id=current_user.id if current_user
-
+    @subject.user_id = current_user.id
 
     if @subject.save
       redirect_to @subject, notice: 'Subject was successfully created.'
@@ -54,8 +26,12 @@ class SubjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /subjects/1
+  def edit
+    @subject = Subject.find(params[:id])
+  end
+
   def update
+    @subject = Subject.find(params[:id])
     if @subject.update(subject_params)
       redirect_to @subject, notice: 'Subject was successfully updated.'
     else
@@ -63,20 +39,20 @@ class SubjectsController < ApplicationController
     end
   end
 
-  # DELETE /subjects/1
   def destroy
+    @subject = Subject.find(params[:id])
     @subject.destroy
     redirect_to subjects_url, notice: 'Subject was successfully destroyed.'
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subject
-      @subject = Subject.find(params[:id])
-    end
+  def your_subjects
+    @subjects = current_user.subjects
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def subject_params
-      params.require(:subject).permit(:subject, :image, :description)
-    end
+private
+
+  def subject_params
+    params.require(:subject).permit(:subject, :description)
+  end
+
 end

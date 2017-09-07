@@ -14,9 +14,14 @@
 
   <!-- Stylesheets -->
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= render 'videos/glyphicon_links' %>
 
   <!-- Javascript Files -->
   <%= javascript_include_tag 'application' %>
+
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <body>
 <% if !@custom_nav%>
@@ -42,6 +47,32 @@
       font-family: 'Voltaire',Arial,sans-serif;
       letter-spacing: 2px;
     }
+    .navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:visited{
+      color: white;
+    }
+    .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:active{
+      color: orange;
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      margin-top: 0; // remove the gap so it doesn't close
+     }
+    .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+      background-image:none !important;
+      color: orange;
+      background-color: #222222;
+    }
+    .dropdown-menu{
+      background-color: #222222;
+    }
+    .dropdown-menu > li > a{
+      color: white;
+    }
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+      background-image:none !important;
+      background-color: #222222;
+      color: orange;
+    }
   </style>
 
   <%= render 'shared/nav' %>
@@ -51,6 +82,11 @@
 
   <%= render 'shared/footer' %>
 
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
 

@@ -1,69 +1,43 @@
-
-  <%= form_for(@subject) do |f| %>
-    <% if @subject.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
-
-        <ul>
-        <% @subject.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-
- <!-- Subject Section -->
-    <section id="contact">
-        <div class="container">
-         
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <form name="sentMessage" id="contactForm" novalidate>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Upload Image</label>
-                                    <div class="field">
-                                        <%= f.file_field :image %>
-                                      </div>
-
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Subject Title</label>
-                                    <div class="field">
-                                      <%= f.text_field :subject,:class=>"form-control"  %>
-                                    </div>
-
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Description</label>
-
-
-                                    <div class="field">
-                                      <%= f.text_area :description, :class=>"form-control" %>
-                                    </div>
-
-                             
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                        
-                                <div class="actions">
-                                    <%= link_to 'Back', subjects_path, :class=>"btn btn-success btn-lg" %>
-                                    <%= f.submit "Submit", :class=> "btn btn-success btn-lg" %>
-
-                                  </div>
-                        </div>
-                    </form>
-                </div>
+<%= form_for(@subject) do |f| %>
+    <%= render 'shared/errors', object: @subject %>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Upload Image</label>
+                <div class="field"><%= f.file_field :image %></div>
+                <p class="help-block text-danger"></p>
+              </div>
             </div>
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Subject Title</label>
+                  <div class="field">
+                    <%= f.text_field :subject,:class=>"form-control"  %>
+                  </div>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Description</label>
+                <div class="field">
+                  <%= f.text_area :description, :class=>"form-control" %>
+                </div>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="actions">
+                <a href="/subjects/<%= @subject.id%>" class="btn btn-success btn-lg" >Cancel</a>
+                <%= f.submit "Submit", :class=> "btn btn-success btn-lg" %>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-<% end %>
+  <% end %>

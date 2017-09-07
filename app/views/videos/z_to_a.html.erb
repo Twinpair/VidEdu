@@ -1,4 +1,12 @@
 <% provide(:title, "Sort by Z-A") %>
 
 <%= render 'jumbotron' %>
-<%= render 'videos/show' %>
+
+  <div class="container">
+    <div id="player-wrapper"></div>
+    <div class="row">
+      <%= render 'videos/sort' if !@videos.empty?%>
+      <br>
+      <%= render @videos %>
+    </div>
+  </div>

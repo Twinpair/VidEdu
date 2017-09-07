@@ -4,32 +4,10 @@ Rails.application.routes.draw do
   #devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :users, :path_names => {:sign_in => "login"},  :controllers => {omniauth_callbacks: "omniauth_callbacks"}
 
-  resources :subjects do
-    collection do
-      get 'search'
-    end
-    resources :subjects
-  end
-
-  resources :videos do
-    resources :comments
-    collection do
-      get 'search'
-    end
-  end
-
-  resources :comments, only: [:create, :destroy]
-
-  resources :suggestions
-
-  resources :video_uploads, only: [:new, :create]
-
-  root to: 'pages#home'
+  root 'pages#home'
 
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: :logout
-
-  get 'featured' => 'pages#featured'
 
   get 'oldest_to_new' => 'videos#oldest_to_new'
   get 'a_to_z' => 'videos#a_to_z'
@@ -45,5 +23,23 @@ Rails.application.routes.draw do
   delete '/videos/', to: 'videos#destroy'
   get '/videos/#:video.id', :controller=>'videos', :action=>'update'
   delete '/videos/#:video.id',:controller=>'videos',:action=>'delete'
+
+  get 'your-videos', to: 'videos#your_videos'
+  get 'your-subjects', to: 'subjects#your_subjects'
+
+  resources :subjects
+
+  resources :videos do
+    resources :comments
+    collection do
+      get 'search'
+    end
+  end
+
+  resources :comments, only: [:create, :destroy]
+
+  resources :suggestions
+
+  resources :video_uploads, only: [:new, :create]
 
 end

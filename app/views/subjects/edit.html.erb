@@ -1,15 +1,7 @@
+<% provide(:title, "Edit Subject") %>
 
-<style type="text/css">
-    #header{
-        
-    }    
+<div class="text-center" id="edit-subject" style="margin-top: 5%; margin-bottom: 10%;">
+  <h1>Editing "<%= @subject.subject %>" Playlist</h1>
 
-</style>
-
-
-<span class='text-center'>
-    <h1>Editing "<%= @subject.subject %>"</h1>
-</span>
-
-<%= render 'form' %>
-
+  <%= render 'form' %>
+</div>

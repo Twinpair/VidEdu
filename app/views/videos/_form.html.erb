@@ -1,7 +1,4 @@
-<%= render 'glyphicon_links' %>
-
-
-  <%= simple_form_for @video do |f| %>
+<%= simple_form_for @video do |f| %>
     <%= render 'shared/errors', object: @video %>
 
     <div class="container-fluid" style="margin-top: 10px;">
@@ -46,7 +43,7 @@
           <%= f.text_area :note, :id=>"tinymce", :rows => "20", :cols => "80" %><br>
         <% if user_signed_in? %>
           <p><strong>Choose a Category</strong></p>
-          <%= collection_select(:video, :subject_id, @subject, :id, :subject, {:default=>true}, { :multiple => false}) %>
+          <%= collection_select(:video, :subject_id, @users_subjects, :id, :subject, {:default=>true}, { :multiple => false}) %>
           <%= f.text_area :note_summary, :size => "80x10", :placeholder=>"Write a Summary/Description", id:"summary_area"%>
           <div>       
             <%= f.submit 'Save', class: 'btn btn-primary', :id=>'save_btn' %>

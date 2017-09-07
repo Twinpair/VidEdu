@@ -1,14 +1,13 @@
 <% provide(:title, @video.title) %>
 
-<%= render 'glyphicon_links' %>
-
-  <div class="site-wrapper">
+<div class="site-wrapper">
     <div class="site-wrapper-inner">
       <div class="cover-container">
         <div class="inner cover">
-          <h1 class="cover-heading"><p class="text-center"><a href="<%= @video.link %>", id="url"> <%= @video.title %></a></p></h1>
+          <h1 class="cover-heading"><p class="text-center"><%= @video.title %></p></h1>
           <div class="text-center">
             <div id="uid"><%= @video.uid %></div>
+            <p>Created By: <%= @video_user ? @video_user.username : "You" %></p>
           </div>
             
           <div class="container-fluid">
@@ -46,7 +45,7 @@
             </div>
 
             <div class="row">
-            <% if current_user %>
+            <% if @video.note? %>
               <div class="save_to_local_show">
                 <span><strong>Save to computer</strong></span>&nbsp;
                 <button id="create_show" type="button" class="btn btn-primary">
@@ -68,10 +67,10 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                      <% if @user.username %>
-                        <%= @user.username %>'s Summary
+                      <% if @video_user %>
+                        <%= @video_user.username %>'s Summary
                       <% else %>
-                        Summary
+                        Your Summary
                       <% end %>
                       </a>
                     </h4>
@@ -90,10 +89,10 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                    <% if @user.username %>
-                      <%= @user.username  %>'s Review
+                    <% if @video_user %>
+                      <%= @video_user.username  %>'s Review
                     <% else %>
-                      Review
+                      Your Review
                     <% end %>
                       </a>
                     </h4>
@@ -157,7 +156,7 @@
 
             <p class="lead">
               <p class="text-center">
-                <%= link_to "Back to Featured", featured_path, :class=>"btn btn-lg btn-default" %>
+                <%= link_to "Back to Featured", videos_path, :class=>"btn btn-lg btn-default" %>
               <% if user_signed_in? %>
                 <%= link_to "Back to Your Videos", videos_path, :class=>"btn btn-lg btn-default" %>
                 <% if @video.user_id == current_user.id %>
@@ -172,5 +171,4 @@
       </div>
     </div>
 
-  <%= javascript_include_tag "show" %>
-
+    <%= javascript_include_tag "show" %>

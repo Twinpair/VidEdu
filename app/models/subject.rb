@@ -13,4 +13,6 @@ class Subject < ActiveRecord::Base
   has_many :videos
   belongs_to :user
   has_one :user
+  validates :subject, presence: true, uniqueness: {scope: :user_id, message: "Title: You already have a subject with that name"}
+  validates :user_id, presence: true
 end

@@ -1,5 +1,5 @@
-<%= render 'videos/glyphicon_links' %>
-<%= render 'videos/sort' %>
+
+<%= render 'videos/sort' if !@videos.empty?%>
 
   <div id="videos" class="transitions-enabled">
   <% @videos.each do |video| %>
