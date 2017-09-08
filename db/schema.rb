@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907010546) do
+ActiveRecord::Schema.define(version: 20170907215358) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170907010546) do
     t.text     "description"
     t.integer  "user_id"
     t.boolean  "default_subject", default: false
+    t.boolean  "private",         default: false
   end
 
   create_table "suggestions", force: :cascade do |t|
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(version: 20170907010546) do
     t.integer  "view_count"
     t.integer  "user_id"
     t.boolean  "is_public"
+    t.boolean  "private",           default: false
   end
 
   add_index "videos", ["uid"], name: "index_videos_on_uid"

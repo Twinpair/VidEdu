@@ -2,7 +2,7 @@ class SubjectsController < ApplicationController
   before_action :must_be_logged_in, only: [:new, :create, :edit, :update, :destroy, :your_subjects]
 
   def index
-    @subjects = Subject.where(default_subject: false).order('created_at DESC')
+    @subjects = Subject.where(default_subject: false, private: false).order('created_at DESC')
   end
 
   def show
@@ -57,12 +57,13 @@ class SubjectsController < ApplicationController
 
   def your_subjects
     @subjects = current_user.subjects
+    @display_private_status = true
   end
 
 private
 
   def subject_params
-    params.require(:subject).permit(:subject, :description)
+    params.require(:subject).permit(:subject, :description, :private)
   end
 
 end

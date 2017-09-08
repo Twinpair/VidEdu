@@ -1,6 +1,7 @@
 <div class="col-md-4">
     <div class="yt_video thumbnail">
       <div class="text-center">
+        <p><%= video.private? ? "(Private)" : "(Public)" if @display_private_status%></p>
         <div class="panel-heading"><h4><%= truncate video.title, length: 65 %></h4></div> 
       </div>
       <br>

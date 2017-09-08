@@ -1,5 +1,6 @@
 <div class="col-md-4">
     <div class="yt_video thumbnail" onclick="document.location='<%= subject_path(subject.id)%>'" style="cursor: pointer;">
+      <p><%= subject.private? ? "(Private)" : "(Public)" if @display_private_status%></p>
       <!-- image -->
       <h3><%= subject.subject %></h3>
       <div class="caption">

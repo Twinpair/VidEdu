@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   before_action :must_be_logged_in, only: [:create, :edit, :update, :destroy, :your_videos]
 
   def index
-    @videos = Video.order('created_at DESC')
+    @videos = Video.where(private: false).order('created_at DESC')
   end
 
   def new
@@ -69,11 +69,12 @@ class VideosController < ApplicationController
   end
 
   def search
-    @videos = params[:search].present? ? Video.search(params[:search]) : Video.all  
+    @videos = Video.search(params[:search])
   end
 
   def your_videos
-    @videos = current_user.videos
+    @videos = current_user.videos.order('created_at DESC')
+    @display_private_status = true
   end
 
   def oldest_to_new
@@ -101,7 +102,7 @@ class VideosController < ApplicationController
 private
 
   def video_params
-    params.require(:video).permit(:link, :subject, :name, :note_summary, :note, :review, :subject_id, :rating, :search, :find, :featured,:yt_description,:view_count,:category_title,:channel_title,:user_id,)
+    params.require(:video).permit(:link, :subject, :name, :note_summary, :note, :review, :subject_id, :rating, :search, :find, :featured,:yt_description,:view_count,:category_title,:channel_title,:user_id, :private)
   end
 
 end

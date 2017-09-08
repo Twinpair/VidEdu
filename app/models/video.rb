@@ -23,8 +23,12 @@ class Video < ActiveRecord::Base
   has_many :ratings
 
   def Video.search(keyword)
-    videos = Video.all
-    videos = videos.where("lower(title) LIKE ?", "%#{keyword.downcase}%")
+    if keyword
+      videos = Video.where(private: false)
+      videos = videos.where("lower(title) LIKE ?", "%#{keyword.downcase}%").order('created_at DESC')
+    else
+      Video.all
+    end
   end
 
 end

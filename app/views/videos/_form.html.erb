@@ -35,6 +35,26 @@
           <!-- Video Review section -->
           <%= f.text_area :review, :cols=>"80",:rows=>"5", :placeholder=>"Write a Review" %>
         <% end %>
+          <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Private</label>
+              <style type="text/css">
+                input[type=checkbox]
+                {
+                  /* Double-sized Checkboxes */
+                  -ms-transform: scale(2); /* IE */
+                  -moz-transform: scale(2); /* FF */
+                  -webkit-transform: scale(2); /* Safari and Chrome */
+                  -o-transform: scale(2); /* Opera */
+                  padding: 10px;
+                }
+              </style>
+              <div class="field">
+                <%= f.check_box :private %>
+              </div>
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
         </div>
 
 
