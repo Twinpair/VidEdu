@@ -3,18 +3,19 @@
       <p><%= subject.private? ? "(Private)" : "(Public)" if @display_private_status%></p>
       <!-- image -->
       <h3><%= subject.subject %></h3>
+      <p><b>(<%= pluralize subject.videos.count, "Video"%>)</b></p>
       <div class="caption">
       <% if subject.description? %>
-        <p><%= truncate subject.description, length: 150 %></p>
+        <p><i><%= truncate subject.description, length: 45 %></i></p>
       <% else %>
         <p><i>No Description</i></p>
       <% end %>
       <% if user_signed_in? && current_user.id == subject.user_id && !subject.default_subject? %>
-        <p>Created By: You</p>
+        <p><b>Created By:</b> You</p>
         <%= link_to 'Edit', edit_subject_path(subject),:class=>"glyphicon glyphicon-edit"%> |
         <%= link_to 'Delete', subject, method: :delete, data: { confirm: 'Are you SURE? Removing this subject will delete ALL your videos under this subject!'},:class=>"glyphicon glyphicon-trash" %>
       <% else %>
-        <p>Created By: <%= User.find(subject.user_id).username %></p>
+        <p><b>Created By:</b> <%= User.find(subject.user_id).username %></p>
       <% end %>
       </div>
     </div>
