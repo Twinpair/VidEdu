@@ -64,6 +64,14 @@ class VideosController < ApplicationController
     @video.assign_attributes(video_params)
     redirect_to video_path(@video) if !is_resource_owner?(@video)
     if @video.valid?
+
+      if !params[:subject][:subject].empty?
+        @subject = Subject.new(subject: params[:subject][:subject], description: "", user_id: @video.user_id)
+        @subject.private = true if !params[:subject][:private].nil?
+        @subject.save
+        @video.subject = @subject
+      end
+      
       @video.private = true if @video.subject.private?
       @video.save
       redirect_to video_path(@video)
