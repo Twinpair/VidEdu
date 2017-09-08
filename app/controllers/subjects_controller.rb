@@ -19,6 +19,7 @@ class SubjectsController < ApplicationController
     end
     
     @subject_user = User.find(@subject.user_id)
+    @display_private_status = true if is_resource_owner?(@subject)
   end
 
   def new

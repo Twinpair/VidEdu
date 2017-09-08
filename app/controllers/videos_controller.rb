@@ -19,20 +19,20 @@ class VideosController < ApplicationController
      @video = Video.new(video_params)
      @video.user_id = current_user.id
 
+    if !params[:subject][:subject].empty?
+      @subject = Subject.new(subject: params[:subject][:subject], description: "", user_id: @video.user_id)
+      @subject.private = true if !params[:subject][:private].nil?
+      @video.subject = @subject
+    end
+
     if @video.valid?
       flash[:success] = "Video Created!"
-
-      if !params[:subject][:subject].empty?
-        @subject = Subject.new(subject: params[:subject][:subject], description: "", user_id: @video.user_id)
-        @subject.private = true if !params[:subject][:private].nil?
-        @subject.save
-        @video.subject = @subject
-      end
-
+      @subject.save if !params[:subject][:subject].empty?
       @video.private = true if @video.subject.private?
       @video.save
       redirect_to video_path(@video)
     else
+      @users_subjects = Subject.where(user_id: current_user.id).order("default_subject DESC")
       render :new
     end
   end
@@ -63,19 +63,21 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     @video.assign_attributes(video_params)
     redirect_to video_path(@video) if !is_resource_owner?(@video)
-    if @video.valid?
 
-      if !params[:subject][:subject].empty?
-        @subject = Subject.new(subject: params[:subject][:subject], description: "", user_id: @video.user_id)
-        @subject.private = true if !params[:subject][:private].nil?
-        @subject.save
-        @video.subject = @subject
-      end
-      
+    if !params[:subject][:subject].empty?
+      @subject = Subject.new(subject: params[:subject][:subject], description: "", user_id: @video.user_id)
+      @subject.private = true if !params[:subject][:private].nil?
+      @subject.save
+      @video.subject = @subject
+    end
+
+    if @video.valid?
       @video.private = true if @video.subject.private?
+      @subject.save if !params[:subject][:subject].empty?
       @video.save
       redirect_to video_path(@video)
     else
+      @users_subjects = Subject.where(user_id: current_user.id).order("default_subject DESC")
       render :edit 
     end
   end
