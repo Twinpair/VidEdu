@@ -9,7 +9,7 @@ class VideosController < ApplicationController
     @video = Video.new
      
     if current_user
-      @users_subjects = Subject.where(user_id: current_user.id)
+      @users_subjects = Subject.where(user_id: current_user.id).order("default_subject DESC")
       # This will pre-select subject when user is coming from subject playlist
       @video.subject = Subject.find(params[:subject_id]) if params[:subject_id]
     end
@@ -48,7 +48,7 @@ class VideosController < ApplicationController
       redirect_to video_path(@video)
     end
 
-    @users_subjects = Subject.where(user_id: current_user.id)
+    @users_subjects = Subject.where(user_id: current_user.id).order("default_subject DESC")
   end
 
    def update

@@ -67,7 +67,7 @@ class SubjectsController < ApplicationController
   end
 
   def your_subjects
-    @subjects = current_user.subjects
+    @subjects = current_user.subjects.order("default_subject DESC")
     @display_private_status = true
   end
 
