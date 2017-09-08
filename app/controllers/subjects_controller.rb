@@ -7,7 +7,7 @@ class SubjectsController < ApplicationController
 
   def show
     @subject = Subject.find(params[:id])
-    
+
     if !is_resource_owner?(@subject) && @subject.private?
       redirect_to subjects_path
     end
@@ -41,8 +41,14 @@ class SubjectsController < ApplicationController
 
   def update
     @subject = Subject.find(params[:id])
-
-    if !is_resource_owner?(@subject) || @subject.update(subject_params)
+    @subject.assign_attributes(subject_params)
+    redirect_to subject_path(@subject) if !is_resource_owner?(@subject)
+    if @subject.valid?
+      @subject.videos.each do |video|
+        video.private = @subject.private
+        video.save
+      end
+      @subject.save
       redirect_to subject_path(@subject)
     else
       render :edit

@@ -19,8 +19,10 @@ class VideosController < ApplicationController
      @video = Video.new(video_params)
      @video.user_id = current_user.id
 
-    if @video.save
+    if @video.valid?
       flash[:success] = "Video Created!"
+      @video.private = true if @video.subject.private?
+      @video.save
       redirect_to video_path(@video)
     else
       render :new
@@ -51,8 +53,11 @@ class VideosController < ApplicationController
 
    def update
     @video = Video.find(params[:id])
-
-    if !is_resource_owner?(@video) || @video.update(video_params)
+    @video.assign_attributes(video_params)
+    redirect_to video_path(@video) if !is_resource_owner?(@video)
+    if @video.valid?
+      @video.private = true if @video.subject.private?
+      @video.save
       redirect_to video_path(@video)
     else
       render :edit 
