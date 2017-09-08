@@ -3,7 +3,7 @@
       <p><%= subject.private? ? "(Private)" : "(Public)" if @display_private_status%></p>
       <!-- image -->
       <h3><%= subject.subject %></h3>
-      <p><b>(<%= pluralize subject.videos.count, "Video"%>)</b></p>
+      <p><b>(<%= user_signed_in? && current_user.id == subject.user_id ? pluralize(subject.videos.count, "Video") : pluralize(subject.videos.where(private: false).count, "Video") %>)</b></p>
       <div class="caption">
       <% if subject.description? %>
         <p><i><%= truncate subject.description, length: 45 %></i></p>

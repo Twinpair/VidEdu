@@ -12,7 +12,12 @@ class SubjectsController < ApplicationController
       redirect_to subjects_path
     end
 
-    @videos = @subject.videos.order('created_at DESC')
+    if is_resource_owner?(@subject)
+      @videos = @subject.videos.order('created_at DESC')
+    else
+       @videos = @subject.videos.where(private: false).order('created_at DESC')
+    end
+    
     @subject_user = User.find(@subject.user_id)
   end
 
