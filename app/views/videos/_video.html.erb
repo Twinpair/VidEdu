@@ -45,7 +45,7 @@
         <% if video.user_id == current_user.id %>
           <div class = "trash_and_edit">
             <%= link_to 'Edit' ,edit_video_path(video.id),:class=>"glyphicon glyphicon-edit",:id=>'edit' %> |
-            <%= link_to 'Delete', video, :confirm => 'You sure?', :class=>"glyphicon glyphicon-trash", :method => :delete %>
+            <%= link_to 'Delete', video, method: :delete, data: { confirm: 'Are you sure?'}, :class=>"glyphicon glyphicon-trash" %>
           </div>
         <% end %>
       <% end %>

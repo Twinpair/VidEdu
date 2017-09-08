@@ -62,8 +62,17 @@ class SubjectsController < ApplicationController
       redirect_to subject_path(@subject)
     end
 
+    # Moves all subject's videos to the user's default subject
+    unless @subject.videos.empty?
+      @default_subject = Subject.where(default_subject: true, user_id: @subject.user_id)[0]
+      @subject.videos.each do |video|
+        video.subject_id = @default_subject.id
+        video.save
+      end
+    end
+
     @subject.destroy
-    redirect_to subjects_url, notice: 'Subject was successfully destroyed.'
+    redirect_to your_subjects_path, notice: 'Subject was successfully destroyed.'
   end
 
   def your_subjects

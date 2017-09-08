@@ -13,7 +13,7 @@
       <% if user_signed_in? && current_user.id == subject.user_id && !subject.default_subject? %>
         <p><b>Created By:</b> You</p>
         <%= link_to 'Edit', edit_subject_path(subject),:class=>"glyphicon glyphicon-edit"%> |
-        <%= link_to 'Delete', subject, method: :delete, data: { confirm: 'Are you SURE? Removing this subject will delete ALL your videos under this subject!'},:class=>"glyphicon glyphicon-trash" %>
+        <%= link_to 'Delete', subject, method: :delete, data: { confirm: 'If you delete this subject, all videos in it will be moved to your Uncategorized subject'},:class=>"glyphicon glyphicon-trash" %>
       <% else %>
         <p><b>Created By:</b> <%= User.find(subject.user_id).username %></p>
       <% end %>

@@ -161,7 +161,7 @@
                 <%= link_to "Back to Your Videos", videos_path, :class=>"btn btn-lg btn-default" %>
                 <% if @video.user_id == current_user.id %>
                 <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-default" %>
-                <%= link_to 'Delete', @video, :confirm => 'You sure?',:class=>"btn btn-lg btn-default", :method => :delete %>
+                <%= link_to 'Delete', @video, method: :delete, data: { confirm: 'Are you sure?'},:class=>"btn btn-lg btn-default" %>
                 <% end %>
               </p>
             </p>
