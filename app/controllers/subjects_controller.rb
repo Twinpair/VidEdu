@@ -7,6 +7,11 @@ class SubjectsController < ApplicationController
 
   def show
     @subject = Subject.find(params[:id])
+    
+    if !is_resource_owner?(@subject) && @subject.private?
+      redirect_to subjects_path
+    end
+
     @videos = @subject.videos.order('created_at DESC')
     @subject_user = User.find(@subject.user_id)
   end

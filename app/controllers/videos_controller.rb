@@ -29,6 +29,11 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+
+    if !is_resource_owner?(@video) && @video.private?
+      redirect_to videos_path
+    end
+
     @video_user = User.find(@video.user_id) if !current_user || @video.user_id != current_user.id
     @comment = Comment.new
     @comments = Comment.where(video_id: params[:id]).order('created_at DESC')
