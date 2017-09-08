@@ -62,8 +62,14 @@
         <div id="right_side" class="col-sm-6">
           <%= f.text_area :note, :id=>"tinymce", :rows => "20", :cols => "80" %><br>
         <% if user_signed_in? %>
-          <p><strong>Choose a Category</strong></p>
-          <%= collection_select(:video, :subject_id, @users_subjects, :id, :subject, {:default=>true}, { :multiple => false}) %>
+          <p><strong>Choose a Subject</strong></p>
+          <%= collection_select(:video, :subject_id, @users_subjects, :id, :subject, {:default=>true}, { :multiple => false}) %><br><br>
+          <p>OR</p>
+          <label>Create a Subject</label><br>
+          <div class="col-sm-6" style="padding: 0">
+            <input class="form-control" type="text" name="subject[subject]"><br>
+            Private Subject: &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="subject[private]">
+          </div><br><br><br><br>
           <%= f.text_area :note_summary, :size => "80x10", :placeholder=>"Write a Summary/Description", id:"summary_area"%>
           <div>       
             <%= f.submit 'Save', class: 'btn btn-primary', :id=>'save_btn' %>
