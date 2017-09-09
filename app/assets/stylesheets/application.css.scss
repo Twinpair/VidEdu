@@ -76,12 +76,6 @@
 #warning {
     margin-left: 50px;
 }
-#back {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    float: right;
-    margin-top: 20px;
-}
 #comments {
     max-height: 500px;
     overflow: auto;
@@ -127,11 +121,11 @@ iframe {
     width: 100px;
     margin-left: 10px;
 }
-#save_btn {
+#video_form_btn {
     padding-top: 15px;
     padding-bottom: 15px;
-    float: right;
-    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-top: -10px;
 }
 .rating {
     padding-top: 0px;

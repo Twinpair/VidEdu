@@ -43,6 +43,8 @@ class SubjectsController < ApplicationController
     if @subject.default_subject || !is_resource_owner?(@subject)
       redirect_to subject_path(@subject)
     end
+
+    @resource_exist = true
   end
 
   def update

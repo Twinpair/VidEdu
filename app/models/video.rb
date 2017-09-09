@@ -20,7 +20,6 @@ class Video < ActiveRecord::Base
   has_one :user
   has_many :comments
   belongs_to :subject
-  has_many :ratings
   validates :link, presence: true
   validates :subject_id, presence: { message: "Title: You already have a subject with that name" }
 

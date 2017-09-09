@@ -8,143 +8,54 @@
           <div class="text-center">
             <div id="uid"><%= @video.uid %></div>
             <p>Created By: <%= @video_user ? @video_user.username : "You" %></p>
+            <div class="text-center">
+            <% if current_user && @video.user_id == current_user.id %>
+              <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-default" %>
+              <%= link_to 'Delete', @video, method: :delete, data: { confirm: 'Are you sure?'},:class=>"btn btn-lg btn-default" %>
+            <% end %>
+            </div><br>
           </div>
             
           <div class="container-fluid">
-            <div class = "col-sm-12">
+
               <!-- LEFT side-->
               <div class="col-sm-6">
                 <div id="player"></div>
-                <p>
-                <%if @video.rating? %> <div class="star-rating" data-score="<%= @video.rating %>" ></div>  
-                  <strong>Video rated at: </strong> <%= @video.rating %> stars
-                <% else %>
-                  <strong>Video rated at: </strong> 0 stars
-                <% end %>
-                </p>
-
-                <p>
-                <% if @video.subject %>
-                  <strong>Category: </strong><%= link_to @video.subject.subject, subject_path(@video.subject.id) %>
-                <% end %>
-                </p>
+                <h3><strong>Subject: </strong><%= link_to @video.subject.subject, subject_path(@video.subject.id) %></h3>
               </div>
 
               <!-- RIGHT SIDE -->
               <div id="right_side_show" class="col-sm-6">
+                <div class="col-lg-12">
               <% if @video.note? %>
-                <p>
-                  <div id="note_area_show">
-                    <%=raw @video.note %>
-                  </div>
-                </p>
+                  <p>
+                    <div id="note_area_show">
+                      <%=raw @video.note %>
+                    </div>
+                  </p>
               <% else %>
-                <p class="text-center"><h2><i>No Notes</i></h2></p>
-              <% end %>
+                  <p class="text-center"><h2><i>No Notes</i></h2></p>
+              <% end %>    
+                </div>
               </div>
-            </div>
 
-            <div class="row">
             <% if @video.note? %>
-              <div class="save_to_local_show">
-                <span><strong>Save to computer</strong></span>&nbsp;
+              <div class="col-lg-6 text-center" style="margin-top: 25px">
+                <span><strong>Save Notes To My Computer</strong></span>&nbsp;
                 <button id="create_show" type="button" class="btn btn-primary">
                   <span class="glyphicon glyphicon-save"></span>
                 </button>
-              <% if @video %>
                 <a download="<%= @video.title %>.txt" id="downloadlink" style="display: none">Download</a>
-              <% else %>
-                <a download="VidEdu_Notes.txt" id="downloadlink" style="display: none">Download</a>
-              <% end %>
               </div>
-             <% end %>
-            </div>
-            
+            <% end %>
 
-            <div class="bs-example">
-              <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                      <% if @video_user %>
-                        <%= @video_user.username %>'s Summary
-                      <% else %>
-                        Your Summary
-                      <% end %>
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                    <% if @video.note_summary? %>
-                      <p><%= @video.note_summary %></p>
-                    <% else %>
-                      <p><i>No Summary</i></p>
-                    <% end %>
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                    <% if @video_user %>
-                      <%= @video_user.username  %>'s Review
-                    <% else %>
-                      Your Review
-                    <% end %>
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                    <% if @video.review? %>
-                      <p><%= @video.review %></p>
-                     <% else %>
-                      <p><i>No Review</i></p>
-                    <% end %>
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><%= @video.title%>'s YouTube Data</a>
-                    </h4>
-                  </div>
-                  <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <p><i><strong>Published on: </strong></i>
-                      <%= @video.published_at %>
+            </div><br>
 
-                      <p><i><strong>Channel Name: </strong></i>
-                      <%= @video.channel_title %>
-
-                      <p><i><strong>Views: </strong></i>
-                     <%= @video.view_count %>
-
-                      <p><i><strong>Youtube Category: </strong></i>
-                      <%= @video.category_title %>
-
-                      <p><i><strong>Likes/Dislikes:</strong></i>
-                        <span class="glyphicon glyphicon glyphicon-thumbs-up"></span> <%= @video.likes %>
-                        <span class="glyphicon glyphicon glyphicon-thumbs-down"></span> <%= @video.dislikes %>
-                      </p><br>
-
-                      <p><i><strong>Description</strong></i>
-                        <%=raw @video.yt_description %>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           <% if current_user %>
             <%= render 'comments/form' %>
           <% end %> 
 
-            <p id="comment_count">Comments (<%= @comments.count %>)</p>
+            <h4 class="text-center" id="comment_count">Comments (<%= @comments.count %>)</h4>
             <div class="panel panel-default" id="comments">
               <div class="panel-body">
                 <ul class="media-list">
@@ -152,20 +63,6 @@
                 </ul>
               </div>
             </div>
-
-
-            <p class="lead">
-              <p class="text-center">
-                <%= link_to "Back to Featured", videos_path, :class=>"btn btn-lg btn-default" %>
-              <% if user_signed_in? %>
-                <%= link_to "Back to Your Videos", videos_path, :class=>"btn btn-lg btn-default" %>
-                <% if @video.user_id == current_user.id %>
-                <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-default" %>
-                <%= link_to 'Delete', @video, method: :delete, data: { confirm: 'Are you sure?'},:class=>"btn btn-lg btn-default" %>
-                <% end %>
-              </p>
-            </p>
-              <% end %>
           </div>
         </div>
       </div>

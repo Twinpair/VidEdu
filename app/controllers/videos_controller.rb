@@ -19,15 +19,16 @@ class VideosController < ApplicationController
      @video = Video.new(video_params)
      @video.user_id = current_user.id
 
+     
     if !params[:subject][:subject].empty?
       @subject = Subject.new(subject: params[:subject][:subject], description: "", user_id: @video.user_id)
       @subject.private = true if !params[:subject][:private].nil?
+      @subject.save
       @video.subject = @subject
     end
-
+    
     if @video.valid?
       flash[:success] = "Video Created!"
-      @subject.save if !params[:subject][:subject].empty?
       @video.private = true if @video.subject.private?
       @video.save
       redirect_to video_path(@video)
@@ -57,6 +58,7 @@ class VideosController < ApplicationController
     end
 
     @users_subjects = Subject.where(user_id: current_user.id).order("default_subject DESC")
+    @resource_exist = true
   end
 
    def update
@@ -73,7 +75,6 @@ class VideosController < ApplicationController
 
     if @video.valid?
       @video.private = true if @video.subject.private?
-      @subject.save if !params[:subject][:subject].empty?
       @video.save
       redirect_to video_path(@video)
     else

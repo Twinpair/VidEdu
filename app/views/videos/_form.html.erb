@@ -20,66 +20,74 @@
 
           <!-- Puts the video into the IFrame -->
           <div id="iframe-div">
-            <div id="info-text" style="width: 100%; height: 390px; border: 5px solid black; margin-top: 50px;">
+            <div id="info-text" style="width: 100%; height: 410px; border: 5px solid black; margin-top: 37px;">
               <br><br>
               <h3 style="text-align: center;">Paste Your Youtube Link To Start Taking Notes</h3>
-              <br><br>
             </div>
           </div>
-
-        <% if user_signed_in? %>
-          <!-- Video Rating -->
-          <div id="star-rating"><strong>Rate it!</strong> &nbsp;</div>
-          <br><br>
-
-          <!-- Video Review section -->
-          <%= f.text_area :review, :cols=>"80",:rows=>"5", :placeholder=>"Write a Review" %>
-        <% end %>
-          <div class="row control-group">
-            <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label>Private</label>
-              <style type="text/css">
-                input[type=checkbox]
-                {
-                  /* Double-sized Checkboxes */
-                  -ms-transform: scale(2); /* IE */
-                  -moz-transform: scale(2); /* FF */
-                  -webkit-transform: scale(2); /* Safari and Chrome */
-                  -o-transform: scale(2); /* Opera */
-                  padding: 10px;
-                }
-              </style>
-              <div class="field">
-                <%= f.check_box :private %>
-              </div>
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
-        </div>
+        </div><br>
 
 
         <!-- RIGHT SIDE -->
         <div id="right_side" class="col-sm-6">
-          <%= f.text_area :note, :id=>"tinymce", :rows => "20", :cols => "80" %><br>
+          <%= f.text_area :note, :id=>"tinymce", :rows => "20", :cols => "80" %>
+        </div>
+      </div><br>
+
+      <div class = "col-sm-12 text-center">
+        <div class="col-sm-6">
         <% if user_signed_in? %>
-          <p><strong>Choose a Subject</strong></p>
-          <%= collection_select(:video, :subject_id, @users_subjects, :id, :subject, {:default=>true}, { :multiple => false}) %><br><br>
-          <p>OR</p>
-          <label>Create a Subject</label><br>
-          <div class="col-sm-6" style="padding: 0">
-            <input class="form-control" type="text" name="subject[subject]"><br>
-            Private Subject: &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="subject[private]">
-          </div><br><br><br><br>
-          <%= f.text_area :note_summary, :size => "80x10", :placeholder=>"Write a Summary/Description", id:"summary_area"%>
-          <div>       
-            <%= f.submit 'Save', class: 'btn btn-primary', :id=>'save_btn' %>
-            <%= link_to 'See Videos', videos_path, class: 'btn btn-primary', :id=>"back" %>
+          <div class="col-lg-3">
+            <p><strong>Choose a Subject</strong></p>
+            <%= collection_select(:video, :subject_id, @users_subjects, :id, :subject, {:default=>true}, { :multiple => false}) %>
+          </div>
+          <div class="col-lg-1">
+            <br><p>or</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="col-lg-7">
+              <label>Create a Subject: </label>
+              <input class="form-control" type="text" name="subject[subject]">
+            </div>
+            <div class="col-lg-5">
+              <label>Private Subject: </label>
+              <div style="text-align: center;">
+                <input type="checkbox" name="subject[private]">
+              </div>
+            </div>
           </div>
         <% end %>
         </div>
+
+        <% if user_signed_in? %>  
+          <div class="col-sm-6" style="margin: 20px 0">
+            <div class="col-lg-4 col-sm-12" style="margin-bottom: 25px;">
+              <label>Private Video: &nbsp;&nbsp;</label>
+              <%= f.check_box :private %>
+            </div>
+            <div class="col-lg-8 col-sm-12">     
+              <div class="text-center">
+                <%= link_to 'Cancel', @resource_exist ? video_path(@video) : your_videos_path, class: 'btn btn-danger', :id=>"video_form_btn" %>
+                <%= f.submit 'Save', class: 'btn btn-primary', :id=>'video_form_btn' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
+
+  <style type="text/css">
+    input[type=checkbox]
+    {
+      /* Double-sized Checkboxes */
+      -ms-transform: scale(2); /* IE */
+      -moz-transform: scale(2); /* FF */
+      -webkit-transform: scale(2); /* Safari and Chrome */
+      -o-transform: scale(2); /* Opera */
+      padding: 10px;
+    }
+  </style>
 
   <script>
 
@@ -94,12 +102,6 @@
       } 
     } 
     document.onkeypress = stopRKey; 
-
-    // Get Star Rating Images
-    $('#star-rating').raty({
-      path: '/assets/',
-      scoreName: 'video[rating]'
-    });
 
     // Initialize TinyMCE editor
     tinyMCE.init({
@@ -150,7 +152,7 @@
         console.log(URL);
         tinymce.activeEditor.getBody().setAttribute('contenteditable', true);
         $("#info-text").remove();
-        $("#iframe-div").append('<div id="player"></div>');
+        $("#iframe-div").append('<div style="margin-top: 25px;" id="player"></div>');
         console.log(URL);
         parse_embeded_code(URL);
         get_embeded_code();
@@ -177,8 +179,7 @@
     function youTubeIframeAPIReady() {
       console.log(video_id);
       player = new YT.Player('player', {
-        height: '390',
-        width: '640',
+        height: '410',
         videoId: video_id 
       });
     }

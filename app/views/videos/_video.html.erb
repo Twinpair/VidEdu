@@ -8,30 +8,13 @@
       <!-- Need to change this to the "edit" page -->
       <%= link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,), video_path(video.id), target: '_self' %>
       <div class="caption">
-      <% if video.published_at %>
-        <p>Video published on <i>YouTube</i> at <%= video.published_at.strftime('%-d %B %Y') %></p>
-      <% end %>
-        <p>
-          <div class="star-rating" data-score=<%= video.rating.to_s %> ><strong>Rating:</strong>  </div>
-        </p>
 
-      <% if video.review? %>
-        <p><strong>Review:</strong> <%= truncate video.review, length: 100 %> <%= link_to 'read more', video %></p>
-      <% else %>
-        <p><i>No Review</i></p>
-      <% end %>
+        <p><strong>Updated:</strong> <%=video.updated_at.strftime('%B %-d %Y') %></p>
 
-      <% if video.note_summary? %>
-        <p><strong>Summary:</strong> <%= truncate video.note_summary, length: 100%> <%= link_to 'read more', video %></p>
+      <% unless video.subject.default_subject? %>
+        <p><strong>Subject: </strong><%= link_to video.subject.subject, subject_path(video.subject_id) %></p>
       <% else %>
-        <p><i>No Summary</i></p>
-      <% end %>
-        <p><strong>Updated:</strong> <%=video.updated_at.strftime('%-d %B %Y %H:%M:%S') %></p>
-
-      <% if video.subject_id? %>
-        <p><strong>Subject: </strong><%= Subject.find(video.subject_id).subject %></p>
-      <% else %>
-        <p><i>Subject Undefined</i></p>
+        <p><strong>Subject: </strong>None</p>
       <% end %>
 
       <% if user_signed_in? && video.user_id == current_user.id %>
@@ -52,14 +35,3 @@
       </div>
     </div>
   </div>
-
-  <script>
-    $('.star-rating').raty({
-      path: '/assets/',
-      readOnly: true,
-      scoreName: "data-score",
-      score: function() {
-        return $(this).attr('data-score').toString();
-      }
-    });
-  </script>

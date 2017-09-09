@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908225923) do
+ActiveRecord::Schema.define(version: 20170909012152) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -69,30 +69,14 @@ ActiveRecord::Schema.define(version: 20170908225923) do
   create_table "videos", force: :cascade do |t|
     t.string   "link"
     t.string   "title"
-    t.datetime "published_at"
-    t.integer  "likes"
-    t.integer  "dislikes"
     t.string   "uid"
-    t.string   "name"
-    t.text     "video_description"
     t.string   "subject"
-    t.integer  "rating"
-    t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "note_summary"
     t.text     "note"
-    t.text     "review"
-    t.float    "time"
-    t.text     "user_reviews"
     t.integer  "subject_id"
-    t.text     "yt_description"
-    t.string   "category_title"
-    t.string   "channel_title"
-    t.integer  "view_count"
     t.integer  "user_id"
-    t.boolean  "is_public"
-    t.boolean  "private",           default: false
+    t.boolean  "private",    default: false
   end
 
   add_index "videos", ["uid"], name: "index_videos_on_uid"
