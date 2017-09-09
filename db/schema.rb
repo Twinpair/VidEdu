@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907215358) do
+ActiveRecord::Schema.define(version: 20170908225923) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170907215358) do
     t.integer  "user_id"
     t.boolean  "default_subject", default: false
     t.boolean  "private",         default: false
+    t.string   "picture"
   end
 
   create_table "suggestions", force: :cascade do |t|

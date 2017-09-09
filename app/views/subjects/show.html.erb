@@ -8,7 +8,7 @@
       <% else %>
         <h1><b><%= @subject_user.username %>'s <%= @subject.subject %> Playlist</b></h1>
       <% end %>
-        <!-- image -->
+        <%= image_tag @subject.picture? ?  @subject.picture.url : "subject-default.jpg", style: "height: 100px;" %>
         <p><lead><i style="font-size:20px;"><%= "Description: #{@subject.description}" if !@subject.description.empty? %></i></lead></p>
       <% if user_signed_in? && current_user.id == @subject.user_id && !@subject.default_subject? %>
         <p>

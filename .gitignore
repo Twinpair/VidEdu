@@ -21,3 +21,6 @@ videdu_development
 
 # Ignore byebug history
 .byebug_history
+
+# Ignore uploaded test images.
+/public/uploads

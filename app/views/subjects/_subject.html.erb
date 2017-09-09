@@ -1,7 +1,7 @@
 <div class="col-md-4">
     <div class="yt_video thumbnail" onclick="document.location='<%= subject_path(subject.id)%>'" style="cursor: pointer;">
-      <p><%= subject.private? ? "(Private)" : "(Public)" if @display_private_status%></p>
-      <!-- image -->
+      <%= subject.private? ? "(Private)" : "(Public)" if @display_private_status%>
+      <%= image_tag subject.picture? ?  subject.picture.url : "subject-default.jpg", style: " height: 262px;" %>
       <h3><%= subject.subject %></h3>
       <p><b>(<%= user_signed_in? && current_user.id == subject.user_id ? pluralize(subject.videos.count, "Video") : pluralize(subject.videos.where(private: false).count, "Video") %>)</b></p>
       <div class="caption">
