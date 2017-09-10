@@ -8,7 +8,7 @@
       <% else %>
         <h1><b><%= @subject_user.username %>'s <%= @subject.subject %> Playlist</b></h1>
       <% end %>
-        <p><b><%= pluralize @videos.count, "Videos" %> Total</b></p>
+        <h4><%= page_entries_info @videos %></h4>
         <%= image_tag @subject.picture? ?  @subject.picture.url : "subject-default.jpg", style: "height: 100px;" %>
         <p><lead><i style="font-size:20px;"><%= "Description: #{@subject.description}" if !@subject.description.empty? %></i></lead></p>
       <% if user_signed_in? && current_user.id == @subject.user_id && !@subject.default_subject? %>
@@ -36,10 +36,17 @@
 
     <div class="row">
       <%= render @videos %>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center digg_pagination">
+            <%= will_paginate @videos %>
+          </div>
+        </div>
+      </div>
     </div>
 
   <% else %>  
-    <div class="row">
+    <div class="row" style="margin-bottom: 100px;">
       <div class="text-center">
         <h1>No Videos</h1>
       </div>

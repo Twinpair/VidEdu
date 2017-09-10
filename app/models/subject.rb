@@ -19,6 +19,8 @@ class Subject < ActiveRecord::Base
   validate  :picture_size
   before_save :normalize_subject_name
 
+  self.per_page = 12
+
   def Subject.search(params)
     get_results(params[:search]).order_results(params[:sort])
   end

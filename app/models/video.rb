@@ -23,6 +23,8 @@ class Video < ActiveRecord::Base
   validates :link, presence: true
   validates :subject_id, presence: { message: "Title: You already have a subject with that name" }
 
+  self.per_page = 12
+
   def Video.search(params)
     get_results(params[:search]).order_results(params[:sort])
   end

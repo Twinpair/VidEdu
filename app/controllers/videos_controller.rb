@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   before_action :must_be_logged_in, only: [:create, :edit, :update, :destroy, :your_videos]
 
   def index
-    @videos = Video.where(private: false).order_results(params[:sort])
+    @videos = Video.where(private: false).paginate(:page => params[:page]).order_results(params[:sort])
   end
 
   def new
@@ -105,7 +105,7 @@ class VideosController < ApplicationController
   end
 
   def your_videos
-    @videos = current_user.videos.order_results(params[:sort])
+    @videos = current_user.videos.paginate(:page => params[:page]).order_results(params[:sort])
     @display_private_status = true
   end
 

@@ -2,7 +2,7 @@ class SubjectsController < ApplicationController
   before_action :must_be_logged_in, only: [:new, :create, :edit, :update, :destroy, :your_subjects]
 
   def index
-    @subjects = Subject.where(private: false, default_subject: false).order_results(params[:sort])
+    @subjects = Subject.where(private: false, default_subject: false).paginate(:page => params[:page]).order_results(params[:sort])
   end
 
   def show
@@ -13,9 +13,9 @@ class SubjectsController < ApplicationController
     end
 
     if is_resource_owner?(@subject)
-      @videos = @subject.videos.order_results(params[:sort])
+      @videos = @subject.videos.paginate(:page => params[:page]).order_results(params[:sort])
     else
-       @videos = @subject.videos.where(private: false).order_results(params[:sort])
+      @videos = @subject.videos.where(private: false).paginate(:page => params[:page]).order_results(params[:sort])
     end
     
     @subject_user = User.find(@subject.user_id)
@@ -84,7 +84,7 @@ class SubjectsController < ApplicationController
   end
 
   def your_subjects
-    @subjects = current_user.subjects.order_results(params[:sort])
+    @subjects = current_user.subjects.paginate(:page => params[:page]).order_results(params[:sort])
     @display_private_status = true
   end
 

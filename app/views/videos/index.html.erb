@@ -5,7 +5,7 @@
       <div class="text-center col-lg-12">
         <h1><b>All Videos</b></h1>
         <h3>Explore the videos that other users learned from</h3>
-        <h4><%= pluralize @videos.count, "Videos" %> Total</h4>
+        <h4><%= page_entries_info @videos %></h4>
       </div>
     </div>
   </div>
@@ -17,5 +17,12 @@
 
     <div class="row">
       <%= render @videos %>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center digg_pagination">
+            <%= will_paginate @videos %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>

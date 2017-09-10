@@ -20,4 +20,29 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      video:
+        zero:   videos
+        one:    video
+        two:    videos
+        few:    videos
+        other:  videos
+      subject:
+        zero:   subjects
+        one:    subject
+        two:    subjects
+        few:    subjects
+        other:  subjects
+  will_paginate:
+    page_entries_info:
+      single_page:
+        zero:  "No %{model} found"
+        one:   "Displaying 1 %{model}"
+        other: "Displaying all %{count} %{model}"
+      single_page_html:
+        zero:  "No %{model} found"
+        one:   "Displaying 1 %{model}"
+        other: "Displaying all %{count} %{model}"
+      multi_page: "Displaying %{model} %{from} - %{to} (%{count} total)"
+      multi_page_html: "Displaying %{model} %{from} - %{to} of %{count} total %{model}"
