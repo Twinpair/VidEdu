@@ -19,6 +19,35 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
+  <style type="text/css">
+    .navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:visited{
+      color: white;
+    }
+    .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:active{
+      color: orange;
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      margin-top: 0; // remove the gap so it doesn't close
+     }
+    .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+      background-image:none !important;
+      color: orange;
+      background-color: #222222;
+    }
+    .dropdown-menu{
+      background-color: #222222;
+    }
+    .dropdown-menu > li > a{
+      color: white;
+    }
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+      background-image:none !important;
+      background-color: #222222;
+      color: orange;
+    }
+  </style>
+  
   <!-- Navigation -->
   <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -306,12 +335,6 @@
     </div>
   </section>
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <%= javascript_include_tag 'jquery.1.11.1.js' %>
-
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <%= javascript_include_tag 'bootstrap.js' %>
+  
   <%= javascript_include_tag 'jquery.isotope.js' %>
-  <%= javascript_include_tag 'owl.carousel.js' %>
   <%= javascript_include_tag 'main.js' %>
