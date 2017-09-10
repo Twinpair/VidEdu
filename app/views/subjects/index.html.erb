@@ -5,12 +5,16 @@
       <div class="text-center col-lg-12">
         <h1><b>All Subject Playlists</b></h1>
         <h3>Explore subject playlist from other users</h3>
-        <h4><%= pluralize @subjects.count, "Subjects" %></h4>
+        <h4><%= pluralize @subjects.count, "Subjects" %> Total</h4>
       </div>
     </div>
-  </div><br>
+  </div>
 
   <div class="container text-center">
+    <%= form_tag subjects_path, method: :get do %>
+      <%= render 'shared/sort_selection' %>
+    <% end %><br>
+
     <div class="row">
       <%= render @subjects %>
     </div>

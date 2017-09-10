@@ -1,21 +1,21 @@
 <% provide(:title, "All Videos") %>
 
-
 <div class="container">
     <div class="row">
       <div class="text-center col-lg-12">
         <h1><b>All Videos</b></h1>
         <h3>Explore the videos that other users learned from</h3>
-        <h4><%= pluralize @videos.count, "Videos" %></h4>
+        <h4><%= pluralize @videos.count, "Videos" %> Total</h4>
       </div>
     </div>
-  </div><br>
+  </div>
 
   <div class="container">
-    <div id="player-wrapper"></div>
+    <%= form_tag videos_path, method: :get do %>
+      <%= render 'shared/sort_selection' %>
+    <% end %><br>
+
     <div class="row">
-      <%= render 'videos/sort' if !@videos.empty?%>
-      <br>
       <%= render @videos %>
     </div>
   </div>

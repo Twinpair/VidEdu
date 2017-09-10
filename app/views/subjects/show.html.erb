@@ -8,6 +8,7 @@
       <% else %>
         <h1><b><%= @subject_user.username %>'s <%= @subject.subject %> Playlist</b></h1>
       <% end %>
+        <p><b><%= pluralize @videos.count, "Videos" %> Total</b></p>
         <%= image_tag @subject.picture? ?  @subject.picture.url : "subject-default.jpg", style: "height: 100px;" %>
         <p><lead><i style="font-size:20px;"><%= "Description: #{@subject.description}" if !@subject.description.empty? %></i></lead></p>
       <% if user_signed_in? && current_user.id == @subject.user_id && !@subject.default_subject? %>
@@ -26,18 +27,22 @@
       </div>
     </div>
   </div>
-  <br>
+
   <div class="container">
-    <div id="player-wrapper"></div>
+  <% if !@videos.empty? %>
+    <%= form_tag subject_path(@subject), method: :get do %>
+      <%= render 'shared/sort_selection' %>
+    <% end %><br>
+
     <div class="row">
-      <% if !@videos.empty? %>
-        <%= render 'videos/sort' %>
-        <br>
-        <%= render @videos %>
-      <% else %>  
-        <div class="text-center">
-          <h1>No Videos</h1>
-        </div>
-      <% end %>
+      <%= render @videos %>
     </div>
+
+  <% else %>  
+    <div class="row">
+      <div class="text-center">
+        <h1>No Videos</h1>
+      </div>
+    </div>
+  <% end %>
   </div>

@@ -1,15 +1,14 @@
 <div class="col-md-4">
-    <div class="yt_video thumbnail">
+    <div class="yt_video thumbnail" onclick="document.location='<%= video_path(video.id)%>'" style="cursor: pointer;">
       <div class="text-center">
         <p><%= video.private? ? "(Private)" : "(Public)" if @display_private_status%></p>
         <div class="panel-heading"><h4><%= truncate video.title, length: 65 %></h4></div> 
       </div>
-      <br>
-      <!-- Need to change this to the "edit" page -->
       <%= link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,), video_path(video.id), target: '_self' %>
       <div class="caption">
 
-        <p><strong>Updated:</strong> <%=video.updated_at.strftime('%B %-d %Y') %></p>
+        <p><strong>Created:</strong> <%=video.created_at.strftime('%B %-d %Y') %></p>
+        <p><strong>Last Updated:</strong> <%=video.updated_at.strftime('%B %-d %Y') %></p>
 
       <% unless video.subject.default_subject? %>
         <p><strong>Subject: </strong><%= link_to video.subject.subject, subject_path(video.subject_id) %></p>

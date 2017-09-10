@@ -10,6 +10,8 @@
       <% else %>
         <p><i>No Description</i></p>
       <% end %>
+        <p><strong>Created:</strong> <%=subject.created_at.strftime('%B %-d %Y') %></p>
+        <p><strong>Last Updated:</strong> <%=subject.updated_at.strftime('%B %-d %Y') %></p>
       <% if user_signed_in? && current_user.id == subject.user_id && !subject.default_subject? %>
         <p><b>Created By:</b> You</p>
         <%= link_to 'Edit', edit_subject_path(subject), :class=>"glyphicon glyphicon-edit" %> |
