@@ -29,7 +29,10 @@ class VideosController < ApplicationController
     
     if @video.valid?
       flash[:success] = "Video Created!"
-      @video.private = true if @video.subject.private?
+      @video_subject = @video.subject
+      @video.private = true if @video_subject.private?
+      @video_subject.updated_at = 0.minute.from_now
+      @video_subject.save
       @video.save
       redirect_to video_path(@video)
     else
@@ -63,6 +66,7 @@ class VideosController < ApplicationController
 
    def update
     @video = Video.find(params[:id])
+    @old_video_subject = @video.subject
     @video.assign_attributes(video_params)
     redirect_to video_path(@video) if !is_resource_owner?(@video)
 
@@ -75,6 +79,12 @@ class VideosController < ApplicationController
 
     if @video.valid?
       @video.private = true if @video.subject.private?
+      @new_video_subject = @video.subject
+      if @old_video_subject != @new_video_subject
+        @new_video_subject.updated_at = 0.minute.from_now
+        @new_video_subject.save
+      end
+
       @video.save
       redirect_to video_path(@video)
     else
@@ -92,10 +102,6 @@ class VideosController < ApplicationController
 
     @video.destroy
     redirect_to your_videos_path
-  end
-
-  def search
-    @videos = Video.search(params[:search])
   end
 
   def your_videos

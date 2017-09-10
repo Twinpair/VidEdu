@@ -5,10 +5,11 @@
     <div class="row">
       <div class="text-center col-lg-12">
         <h1><b>All Videos</b></h1>
-        <h3>Explore the videos that other user leanred from</h3><br>
+        <h3>Explore the videos that other users learned from</h3>
+        <h4><%= pluralize @videos.count, "Videos" %></h4>
       </div>
     </div>
-  </div>
+  </div><br>
 
   <div class="container">
     <div id="player-wrapper"></div>

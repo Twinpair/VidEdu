@@ -27,13 +27,12 @@ Rails.application.routes.draw do
   get 'your-videos', to: 'videos#your_videos'
   get 'your-subjects', to: 'subjects#your_subjects'
 
+  get 'search', to: 'pages#search'
+
   resources :subjects
 
   resources :videos do
     resources :comments
-    collection do
-      get 'search'
-    end
   end
 
   resources :comments, only: [:create, :destroy]

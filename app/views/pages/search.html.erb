@@ -1,0 +1,46 @@
+<% provide(:title, "Search") %>
+
+<div class="container">
+    <div class="row">
+      <div class="text-center col-lg-12">
+<% if params[:filter].present? && params[:filter] == "Subjects" %>
+        <h1><b><%= params[:search].empty? ? "All Subjects" : "Search Subjects ('#{params[:search]}')" %></b></h1>
+        <h4><%= pluralize @subjects.count, "Subjects" %> Total</h4>
+      </div>
+    </div>
+  </div>
+<% else %>
+        <h1><b><%= params[:search].empty? ? "All Videos" : "Search Videos ('#{params[:search]}')" %></b></h1>
+        <h4><%= pluralize @videos.count, "Videos" %> Total</h4>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+  <div class="container">
+    <%= form_tag search_path, method: :get do %>
+      <div class="row">
+        <div class="col-lg-12">
+          <%= text_field_tag :search, params[:search], value: params[:search], type: "hidden" %>
+          <h4 class="text-center">Filter Results:<br> <%= submit_tag "Videos", name: "filter", id: "filter", class: "btn btn-primary" %>  | <%= submit_tag "Subjects", name: "filter", id: "filter", class: "btn btn-primary" %></h4>
+          <%= text_field_tag :persist_filter, params[:persist_filter], value: params[:filter], type: "hidden" if params[:filter].present? %>
+        </div>
+      </div>
+      <%= render 'shared/sort_selection' %>
+    <% end %>
+
+<% if params[:filter].present? && params[:filter] == "Subjects" %>
+  <% if !@subjects.empty? %>
+    <%= render @subjects %>
+  <% else %>
+    <h1 style="margin-top: 100px; margin-bottom: 280px;" class="text-center">No Subjects</h1>
+  <% end %>
+<% else %>
+  <% if !@videos.empty? %>
+    <br>
+    <%= render @videos %>
+  <% else %>
+    <h1 style="margin-top: 100px; margin-bottom: 280px;" class="text-center">No Videos</h1>
+  <% end %>
+<% end %>
+  </div>

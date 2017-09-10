@@ -1,9 +1,9 @@
-<div class="col-md-4">
+<div class="col-md-4 text-center">
     <div class="yt_video thumbnail" onclick="document.location='<%= subject_path(subject.id)%>'" style="cursor: pointer;">
       <%= subject.private? ? "(Private)" : "(Public)" if @display_private_status%>
       <%= image_tag subject.picture? ?  subject.picture.url : "subject-default.jpg", style: " height: 262px;" %>
       <h3><%= subject.subject %></h3>
-      <p><b>(<%= user_signed_in? && current_user.id == subject.user_id ? pluralize(subject.videos.count, "Video") : pluralize(subject.videos.where(private: false).count, "Video") %>)</b></p>
+      <p><b>(<%= pluralize(subject.videos.count, "Video") %>)</b></p>
       <div class="caption">
       <% if subject.description? %>
         <p><i><%= truncate subject.description, length: 45 %></i></p>
@@ -12,10 +12,11 @@
       <% end %>
       <% if user_signed_in? && current_user.id == subject.user_id && !subject.default_subject? %>
         <p><b>Created By:</b> You</p>
-        <%= link_to 'Edit', edit_subject_path(subject),:class=>"glyphicon glyphicon-edit"%> |
+        <%= link_to 'Edit', edit_subject_path(subject), :class=>"glyphicon glyphicon-edit" %> |
         <%= link_to 'Delete', subject, method: :delete, data: { confirm: 'If you delete this subject, all videos in it will be moved to your Uncategorized subject'},:class=>"glyphicon glyphicon-trash" %>
       <% else %>
         <p><b>Created By:</b> <%= User.find(subject.user_id).username %></p>
+        <div id="extra-margin" style="margin-bottom: 30px;"></div>
       <% end %>
       </div>
     </div>
