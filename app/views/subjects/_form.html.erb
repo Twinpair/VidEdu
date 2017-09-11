@@ -24,21 +24,10 @@
             </div>
             <div class="row control-group">
               <div class="form-group col-xs-12 floating-label-form-group controls">
-                <label style="color: red;">Attention</label>
-                <p style="color: red;">If you set or update this subject to private, all videos added or in this subject will be set to private by default</p>
-                <p style="color: red;">If you set or update this subject to public, all videos added or in this subject will be set to public by default</p>
+                <label class="alert-text">Attention</label>
+                <p class="alert-text">If you set or update this subject to private, all videos added or in this subject will be set to private by default</p>
+                <p class="alert-text">If you set or update this subject to public, all videos added or in this subject will be set to public by default</p>
                 <label>Private</label>
-                <style type="text/css">
-                  input[type=checkbox]
-                  {
-                    /* Double-sized Checkboxes */
-                    -ms-transform: scale(2); /* IE */
-                    -moz-transform: scale(2); /* FF */
-                    -webkit-transform: scale(2); /* Safari and Chrome */
-                    -o-transform: scale(2); /* Opera */
-                    padding: 10px;
-                  }
-                </style>
                 <div class="field">
                   <%= f.check_box :private %>
                 </div>
@@ -63,7 +52,7 @@
             <br>
             <div class="row">
               <div class="actions">
-                <%= link_to "Cancel", @resource_exist ? subject_path(@subject) : your_subjects_path, class: "btn btn-success btn-lg" %>
+                <%= link_to "Cancel", @resource_exist ? subject_path(@subject) : your_subjects_path, class: "btn btn-danger btn-lg" %>
                 <%= f.submit "Submit", :class=> "btn btn-success btn-lg" %>
               </div>
             </div>

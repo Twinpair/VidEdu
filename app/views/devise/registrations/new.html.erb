@@ -1,62 +1,61 @@
 <% provide(:title, "Sign Up") %>
 
-<%= stylesheet_link_tag "sign-up" %>
-
-<div id="tf-team" class="text-center">
-  <div class="overlay">
-    <div class="container">
-      <div class="section-title center">
-        <h2><strong>Sign Up!</strong></h2>
-        <div class="line">
-          <hr>
+<div class="container text-center">
+      <div class="row">
+        <div class="section-title col-lg-12">
+          <h2><strong>Sign Up!</strong></h2>
         </div>
       </div>
-      <div class="login">
-        <div class="container">
-          <div class="form">
+      <div class="row margin-bottom-30">
+        <div class="col-lg-4 col-lg-offset-4 ">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <div class="alert-text">
               <%= devise_error_messages! %>
+            </div>
 
             <div class="field">
-                <%= f.text_field :firstname,  :placeholder => "First Name", :type => "text", :required => true %>
-              </div>
+              <%= f.text_field :firstname,  :placeholder => "First Name", :type => "text", class: "form-control form-input-lg" %>
+            </div>
 
-              <div class="field">
-                <%= f.text_field :lastname,  :placeholder => "Last Name", :type => "text", :required => true %>
-              </div>
+            <div class="field">
+              <%= f.text_field :lastname,  :placeholder => "Last Name", :type => "text", class: "form-control form-input-lg" %>
+            </div>
 
-              <div class="field">
-                <%= f.text_field :username,  :placeholder => "Username", :type => "text", :required => true %>
-              </div>
+            <div class="field">
+              <%= f.text_field :username,  :placeholder => "Username", :type => "text", class: "form-control form-input-lg" %>
+            </div>
 
-              <div class="field">
-                <%= f.email_field :email,  :placeholder => "Email", :type => "email", :required => true %>
-              </div>
+            <div class="field">
+              <%= f.email_field :email,  :placeholder => "Email", :type => "email", class: "form-control form-input-lg" %>
+            </div>
 
-              <% if f.object.password_required? %>
-                <div class="field">
-                  <%= f.password_field :password, :placeholder => "Password (6 characters minimum)", autocomplete: "off", :type => "password", :required => true %>
-                </div>
+          <% if f.object.password_required? %>
+            <div class="field">
+              <%= f.password_field :password, :placeholder => "Password (8 characters minimum)", autocomplete: "off", :type => "password", class: "form-control form-input-lg" %>
+            </div>
 
-                <div class="field">
-                  <%= f.password_field :password_confirmation, :placeholder => "Password Confirmation ", autocomplete: "off", :type => "password", :required => true %>
-                </div>
-              <% end %>
+            <div class="field">
+              <%= f.password_field :password_confirmation, :placeholder => "Password Confirmation ", autocomplete: "off", :type => "password", class: "form-control form-input-lg" %>
+            </div>
+          <% end %>
 
-              <div class="actions">
-                <%= f.submit "Sign up" ,class: "btn-submit" %>
-              </div>
-            <% end %>
-          </div>
+            <div class="actions">
+              <%= f.submit "Sign up" ,class: "btn btn-success btn-lg" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+       <div class="row margin-bottom-30">
+        <div class="col-lg-12">
+          <b>
+            <ul class="footer-social">
+              <li><%= button_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), :class => "FacebookButton", :method => :get  %></li>
+              <li><%= button_to "Sign up with Twitter", user_omniauth_authorize_path(:twitter), :class => "TwitterButton", :method => :get  %></li>
+              <li><%= button_to "Sign Up with Google+", user_omniauth_authorize_path(:google_oauth2), :class => "GoogleButton", :method => :get  %></li>
+            </ul>
+            <h4><%= render "devise/shared/links" %></h4>
+          </b>
         </div>
       </div>
     </div>
-    <ul class="footer-social">
-      <li><%= button_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), :class => "FacebookButton", :method => :get  %><li>
-      <li><%= button_to "Sign up with Twitter", user_omniauth_authorize_path(:twitter), :class => "TwitterButton", :method => :get  %></li>
-      <li><%= button_to "Sign Up with Google+", user_omniauth_authorize_path(:google_oauth2), :class => "GoogleButton", :method => :get  %></li>
-    </ul>
-    <%= render "devise/shared/links" %>
-  </div>
-</div>

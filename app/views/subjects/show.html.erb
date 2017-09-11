@@ -13,9 +13,9 @@
         <p><lead><i style="font-size:20px;"><%= "Description: #{@subject.description}" if !@subject.description.empty? %></i></lead></p>
       <% if user_signed_in? && current_user.id == @subject.user_id && !@subject.default_subject? %>
         <p>
-          <%= link_to 'Edit', edit_subject_path(@subject),:class=>"glyphicon glyphicon-edit" %> 
+          <%= link_to 'Edit', edit_subject_path(@subject),:class=>"fa fa-edit edit-color" %> 
           |
-           <%= link_to 'Delete', @subject, method: :delete, data: { confirm: 'If you delete this subject, all videos in it will be moved to your Uncategorized subject'}, :class=>"glyphicon glyphicon-trash" %>   
+           <%= link_to 'Delete', @subject, method: :delete, data: { confirm: 'If you delete this subject, all videos in it will be moved to your Uncategorized subject'}, :class=>"fa fa-trash delete-color" %>   
         <p>
       <% end %>
       

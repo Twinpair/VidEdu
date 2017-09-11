@@ -154,15 +154,3 @@
       link.href = makeTextFile(textbox);
       link.style.display = 'block';
   }, false);
-
-
-
-
-      $('.star-rating').raty({
-        path: '/assets/',
-        readOnly: true,
-        scoreName: "data-score",
-        score: function() {
-            return $(this).attr('data-score').toString();
-          }
-      });

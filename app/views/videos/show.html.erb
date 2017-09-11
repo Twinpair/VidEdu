@@ -7,11 +7,11 @@
           <h1 class="cover-heading"><p class="text-center"><%= @video.title %></p></h1>
           <div class="text-center">
             <div id="uid"><%= @video.uid %></div>
-            <p>Created By: <%= @video_user ? @video_user.username : "You" %></p>
+            <p><b>Created By: <%= @video_user ? @video_user.username : "You" %></b></p>
             <div class="text-center">
             <% if current_user && @video.user_id == current_user.id %>
-              <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-default" %>
-              <%= link_to 'Delete', @video, method: :delete, data: { confirm: 'Are you sure?'},:class=>"btn btn-lg btn-default" %>
+              <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-warning" %>
+              <%= link_to 'Delete', @video, method: :delete, data: { confirm: 'Are you sure?'},:class=>"btn btn-lg btn-danger" %>
             <% end %>
             </div><br>
           </div>
@@ -21,7 +21,7 @@
               <!-- LEFT side-->
               <div class="col-sm-6">
                 <div id="player"></div>
-                <h3><strong>Subject: </strong><%= link_to @video.subject.subject, subject_path(@video.subject.id) %></h3>
+                <h3><strong>Subject: </strong><%= link_to @video.subject.subject, subject_path(@video.subject.id), class: "white-background-link" %></h3>
               </div>
 
               <!-- RIGHT SIDE -->
@@ -40,12 +40,12 @@
               </div>
 
             <% if @video.note? %>
-              <div class="col-lg-6 text-center" style="margin-top: 25px">
+              <div class="col-lg-6 text-center minor-margin">
                 <span><strong>Save Notes To My Computer</strong></span>&nbsp;
                 <button id="create_show" type="button" class="btn btn-primary">
                   <span class="glyphicon glyphicon-save"></span>
                 </button>
-                <a download="<%= @video.title %>.txt" id="downloadlink" style="display: none">Download</a>
+                <a class="white-background-link" download="<%= @video.title %>.txt" id="downloadlink" style="display: none">Download</a>
               </div>
             <% end %>
 

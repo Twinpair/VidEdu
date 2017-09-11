@@ -14,11 +14,11 @@
         <p><strong>Last Updated:</strong> <%=subject.updated_at.strftime('%B %-d %Y') %></p>
       <% if user_signed_in? && current_user.id == subject.user_id && !subject.default_subject? %>
         <p><b>Created By:</b> You</p>
-        <%= link_to 'Edit', edit_subject_path(subject), :class=>"glyphicon glyphicon-edit" %> |
-        <%= link_to 'Delete', subject, method: :delete, data: { confirm: 'If you delete this subject, all videos in it will be moved to your Uncategorized subject'},:class=>"glyphicon glyphicon-trash" %>
+        <%= link_to 'Edit', edit_subject_path(subject), :class=>"fa fa-edit edit-color" %> |
+        <%= link_to 'Delete', subject, method: :delete, data: { confirm: 'If you delete this subject, all videos in it will be moved to your Uncategorized subject'},:class=>"fa fa-trash delete-color" %>
       <% else %>
         <p><b>Created By:</b> <%= User.find(subject.user_id).username %></p>
-        <div id="extra-margin" style="margin-bottom: 30px;"></div>
+        <div class="extra-margin-on-card"></div>
       <% end %>
       </div>
     </div>

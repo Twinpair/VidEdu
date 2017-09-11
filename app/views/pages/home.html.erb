@@ -1,340 +1,306 @@
 <% provide(:title, "Home") %>
-<!-- Bootstrap -->
-  <%= stylesheet_link_tag "bootstrap" %>
 
-  <!-- Slider -->
-  <%= stylesheet_link_tag "owl.carousel" %>
-  <%= stylesheet_link_tag "owl.theme" %>
+<% content_for :head do %>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400">
+<% end %>
 
-  <!-- Stylesheet -->
-  <%= stylesheet_link_tag "style", :cache => false %>
-  <%= stylesheet_link_tag "responsive" %>
 
   <%= javascript_include_tag 'modernizr.custom.js' %>
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+  <div id="homepage">
+    <!-- Navigation -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top" id="home-page-nav">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <%= link_to "VidEdu", root_path, class: "navbar-brand" %>
+          </div>
 
-  <style type="text/css">
-    .navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:visited{
-      color: white;
-    }
-    .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:active{
-      color: orange;
-    }
-    .dropdown:hover .dropdown-menu {
-      display: block;
-      margin-top: 0; // remove the gap so it doesn't close
-     }
-    .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-      background-image:none !important;
-      color: orange;
-      background-color: #222222;
-    }
-    .dropdown-menu{
-      background-color: #222222;
-    }
-    .dropdown-menu > li > a{
-      color: white;
-    }
-    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-      background-image:none !important;
-      background-color: #222222;
-      color: orange;
-    }
-  </style>
-  
-  <!-- Navigation -->
-  <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%= link_to "VidEdu", root_path, class: "navbar-brand" %>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+              <li><a href="#tf-home" class="page-scroll">Home</a></li>
+              <li><%= link_to "Explore Videos", videos_path %></li>
+              <li><%= link_to "Explore Subjects", subjects_path %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+                <ul class="dropdown-menu">  
+                  <li><%= link_to "Add Subject", new_subject_path %></li>
+                  <li><%= link_to "Your Subjects", your_subjects_path %></li>
+                  <li><%= link_to "Add Video", new_video_path %></li>
+                  <li><%= link_to "Your Videos", your_videos_path %></li>
+                </ul>
+              </li>
+              <li>
+                <%= form_tag search_path, method: :get, class: "navbar-form", role:"search" do %>
+                  <%= text_field_tag :search, params[:search], class: "form-control" %>
+                  <%= submit_tag "Search", name: nil, class: "btn btn-success" %>
+                <% end %>  
+              </li>
+              <li><%= link_to "Account", edit_user_registration_path %></li>
+              <li><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+              <li><a href="#tf-home" class="page-scroll">Home</a></li>
+              <li><a href="#tf-about" class="page-scroll">About</a></li>
+              <li><a href="#tf-team" class="page-scroll">Team</a></li>
+              <li><a href="#tf-services" class="page-scroll">Feedback</a></li>
+              <li><a href="#tf-clients" class="page-scroll">FAQS</a></li>
+              <li><a href="#tf-contact" class="page-scroll">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore<span class="caret"></span></a>
+                <ul class="dropdown-menu">  
+                  <li><%= link_to "Explore Videos", videos_path %></li>
+                  <li><%= link_to "Explore Subjects", subjects_path %></li>
+                </ul>
+              </li>
+              <li><%= link_to "Try it!", new_video_path %></li>
+              <li>
+                <%= form_tag search_path, method: :get, class: "navbar-form", role:"search" do %>
+                  <%= text_field_tag :search, params[:search], class: "form-control" %>
+                  <%= submit_tag "Search", name: nil, class: "btn btn-success" %>
+                <% end %>  
+              </li>
+              <li><%= link_to "Login", new_user_session_path %></li>
+              <li><%= link_to "Signup", new_user_registration_path %></li>
+          <% end %>
+            </ul>
+          </div>
         </div>
+      </nav>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
-            <li><a href="#tf-home" class="page-scroll">Home</a></li>
-            <li><%= link_to "Explore Videos", videos_path %></li>
-            <li><%= link_to "Explore Subjects", subjects_path %></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
-              <ul class="dropdown-menu">  
-                <li><%= link_to "Add Subject", new_subject_path %></li>
-                <li><%= link_to "Your Subjects", your_subjects_path %></li>
-                <li><%= link_to "Add Video", new_video_path %></li>
-                <li><%= link_to "Your Videos", your_videos_path %></li>
-              </ul>
-            </li>
-            <li>
-              <%= form_tag search_path, method: :get, class: "navbar-form", role:"search" do %>
-                <%= text_field_tag :search, params[:search], class: "form-control" %>
-                <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
-              <% end %>  
-            </li>
-            <li><%= link_to "Account", edit_user_registration_path, {:style =>"color: orange;"} %></li>
-            <li><%= link_to "Log out", destroy_user_session_path, :method => :delete, :style =>"color: orange;" %></li>
-        <% else %>
-            <li><a href="#tf-home" class="page-scroll">Home</a></li>
-            <li><a href="#tf-about" class="page-scroll">About</a></li>
-            <li><a href="#tf-team" class="page-scroll">Team</a></li>
-            <li><a href="#tf-services" class="page-scroll">Feedback</a></li>
-            <li><a href="#tf-clients" class="page-scroll">FAQS</a></li>
-            <li><a href="#tf-contact" class="page-scroll">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore<span class="caret"></span></a>
-              <ul class="dropdown-menu">  
-                <li><%= link_to "Explore Videos", videos_path %></li>
-                <li><%= link_to "Explore Subjects", subjects_path %></li>
-              </ul>
-            </li>
-            <li><%= link_to "Try it!", new_video_path %></li>
-            <li>
-              <%= form_tag search_path, method: :get, class: "navbar-form", role:"search" do %>
-                <%= text_field_tag :search, params[:search], class: "form-control" %>
-                <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
-              <% end %>  
-            </li>
-            <li><%= link_to "Login", new_user_session_path,{:style=>'color:orange;'} %></li>
-            <li><%= link_to "Signup", new_user_registration_path, {:style=>'color:orange;'} %></li>
-        <% end %>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+      <!-- Header -->
+      <div id="tf-home" class="text-center">
+        <div class="overlay">
+          <div class="content">
+            <div class="header alt vert">
+              <div class="container">
+                <div class="col-md-12 text-center">
+                  <h1>Learning, <span class="emphasize">one </span>clip at a time...</h1>
+                <% if !user_signed_in? %>
+                  <p class="text-center">
+                    <%= link_to "TRY IT NOW!", new_video_path, :class=>'homeButton' %>
+                  </p>
+                <%else%>
+                  <%= link_to "Add Video", new_video_path, :class=>'homeButton' %>
+                <%end%>
+                </div>
+              </div>
+            </div>
+            <a href="#tf-about" class="fa fa-angle-down page-scroll"></a>
+          </div>
+        </div>
+      </div>
 
-    <!-- Home Page -->
-    <div id="tf-home" class="text-center">
-      <div class="overlay">
-        <div class="content">
-          <div class="header alt vert">
-            <div class="container">
+      <!-- About -->
+      <div id="tf-about" class="text-center">
+        <div class="featurette" id="sec2">
+          <div class="container">
+            <div class="row">
               <div class="col-md-12 text-center">
-                <h1>Learning, <span class = "color">one </span>clip at a time...</h1>
-              <% if !user_signed_in? %>
-                <p class="text-center">
-                  <%= link_to "TRY IT NOW!", new_video_path, :class=>'homeButton' %>
-                </p>
-              <%else%>
-                <%= link_to "Add Video", new_video_path, :class=>'homeButton' %>
-              <%end%>
+                <div class="section-title center">
+                  <h1>VidEdu is <span class="emphasize"><strong>simple </strong></span>to use!</h1>
+                  <div class="line">
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 col-md-offset-2 text-center">
+                <div class="featurette-item">
+                  <i class="fa fa-film" aria-hidden="true" id="film-icon"></i>
+                  <h4>1. Find a video</h4>
+                  <p>Any video from Youtube that you want to learn from</p>
+                </div>
+              </div>
+              <div class="col-md-2 text-center">
+                <div class="featurette-item">
+                  <i class="fa fa-exchange" aria-hidden="true" id="copy-icon"></i>
+                  <h4>2. Copy the URL</h4>
+                  <p>Once you find your video just paste the URL onto VidEdu</p>
+                </div>
+              </div>
+              <div class="col-md-2 text-center">
+                <div class="featurette-item">
+                  <i class="fa fa-file-text-o" aria-hidden="true" id="note-icon"></i>
+                  <h4>3. Take Notes</h4>
+                  <p>Once submitted, you can begin taking notes</p>
+                </div>
+              </div>
+              <div class="col-md-2 text-center">
+                <div class="featurette-item">
+                  <i class="fa fa-fire" aria-hidden="true" id="learn-icon"></i>
+                  <h4>4. Start learning</h4>
+                  <p>You can then save your notes for later, and even download them to your local drive </p>
+                </div>
               </div>
             </div>
           </div>
-          <a href="#tf-about" class="fa fa-angle-down page-scroll"></a>
         </div>
       </div>
-    </div>
 
-    <!-- About Us -->
-    <div id="tf-about" class="text-center">
-      <div class="featurette" id="sec2">
+      <!-- Team -->
+      <div id="tf-team" class="text-center">
+        <div class="overlay">
+          <div class="container">
+            <div class="section-title center">
+              <h1>Meet our <span class="emphasize"><strong>team</strong></span></h1>
+              <div class="line"><hr></div>
+            </div>
+            <div id="team" class="owl-carousel owl-theme row">
+              <div class="item">
+                <div class="thumbnail">
+                  <%= image_tag("jon.jpg", :class => "img-circle team-img") %>
+                  <div class="caption">
+                    <h3>Jonathan Raxa</h3>
+                    <p class="team-position">Team Lead</p>
+                    <p>Enjoys rap music, music production, dance, videography (editing), heath enthusiast, skateboarding, snowboarding, outdoors, martial arts, learning new things, running, knowledge hacker, podcast listener, radio listener (Sarah and Vinnie fan!), blogging, and reading. </p>
+                    <ul class="footer-social">
+                      <li><a class="reverse-a-color" href="https://twitter.com/jonathanraxa" target="_blank"><i class="fa fa-twitter" ></i></a></li>
+                      <li><a class="reverse-a-color" href="https://github.com/jonathanraxa" target="_blank"><i class="fa fa-github"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="thumbnail">
+                  <%= image_tag("eric.jpg", :class => "img-circle team-img") %>
+                  <div class="caption">
+                    <h3>Eric Gonzalez</h3>
+                    <p class="team-position">Tech Lead</p>
+                    <p>I enjoy playing video games, watching and playing sports, or anything related to tech! I'm always eager to learn and experience new things.</p>
+                    <ul class="footer-social">
+                      <li><a class="reverse-a-color" href="https://www.facebook.com/EricGonzalez1994" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                      <li><a class="reverse-a-color" href="https://twitter.com/e_gonzilla" target="_blank"><i class="fa fa-twitter" ></i></a></li>
+                      <li><a class="reverse-a-color" href="https://github.com/Twinpair/" target="_blank"><i class="fa fa-github"></i></a></li>
+                      <li><a class="reverse-a-color" href="http://www.ericgonzalez1994.com/" target="_blank">Website</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="thumbnail">
+                  <%= image_tag("gerardo.jpg", :class => "img-circle team-img") %>
+                  <div class="caption">
+                    <h3>Gerardo Gonsalez</h3>
+                    <p class="team-position">Software Engineer</p>
+                    <p>An SFSU Senior with an interest in Web Development. If he's not studying for school, you'll most likely find him watching anime, playing video games, or going out looking for good food. He also enjoy music production and videography.</p>
+                    <ul class="footer-social">
+                      <li><a class="reverse-a-color" href="https://www.facebook.com/Flavanoidz" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                      <li><a class="reverse-a-color" href="https://github.com/gegonsalez" target="_blank"><i class="fa fa-github"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="thumbnail">
+                  <%= image_tag("angelo.png", :class => "img-circle team-img") %>
+                  <div class="caption">
+                    <h3>Angelo Nucup</h3>
+                    <p class="team-position">Full Stack Developer</p>
+                    <p>I enjoy watching Anime and reading Manga. Not into sports, but I love playing badminton. I also like to travel because it’s fun to always learn and experience new things. If being a programmer doesn’t work out, I would like to be an animator. I think it’s cool and creative.</p>
+                    <ul class="footer-social">
+                      <li><a class="reverse-a-color" href="https://github.com/acanucup0610" target="_blank"><i class="fa fa-github"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div id="tf-services" class="text-center">
         <div class="container">
           <div class="row">
-            <div class="col-md-12 text-center">
-              <div class="section-title center">
-                <h1>VidEdu is <span class = "color"><strong>simple </strong></span>to use!</h1>
-                <div class="line">
-                  <hr>
-                </div>
-              </div>
+            <div class="col-lg-6">
+              <h1>Have some feedback for us or need to report a bug?</h1>
+              <a href="#tf-contact" class="homeButton page-scroll" id="feedback-btn">Contact Us</a>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-2 col-md-offset-2 text-center">
-              <div class="featurette-item">
-                <i class="fa fa-film" aria-hidden="true" id="film-icon"></i>
-                <h4>1. Find a video</h4>
-                <p>Any video from Youtube that you want to learn from</p>
-              </div>
-            </div>
-            <div class="col-md-2 text-center">
-              <div class="featurette-item">
-                <i class="fa fa-exchange" aria-hidden="true" id="copy-icon"></i>
-                <h4>2. Copy the URL</h4>
-                <p>Once you find your video just paste the URL onto VidEdu</p>
-              </div>
-            </div>
-            <div class="col-md-2 text-center">
-              <div class="featurette-item">
-                <i class="fa fa-file-text-o" aria-hidden="true" id="note-icon"></i>
-                <h4>3. Take Notes</h4>
-                <p>Once submitted, you can begin taking notes</p>
-              </div>
-            </div>
-            <div class="col-md-2 text-center">
-              <div class="featurette-item">
-                <i class="fa fa-fire" aria-hidden="true" id="learn-icon"></i>
-                <h4>4. Start learning</h4>
-                <p>You can then save your notes for later, and even download them to your local drive </p>
-              </div>
+            <div class="col-lg-6">
+              <h1>
+                <i class="fa fa-flag fa-5x" aria-hidden="true"></i> 
+                <i class="fa fa-bug" aria-hidden="true"></i><br>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+              </h1>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Our Team -->
-    <div id="tf-team" class="text-center">
-      <div class="overlay">
+      <!-- FAQ -->
+      <div id="tf-clients" class="text-center">
+        <div class="overlay">
+          <div class="container">
+            <div class="section-title center">
+              <h1><strong>FAQS</strong></h1>
+              <div class="line"><hr></div>
+            </div>
+            <div class="col-lg-6 col-lg-offset-3">
+              <strong><h3>Q: Where can I get videos?</h3></strong>
+              <p>A: Find a video on YouTube that you want to learn from. Copy the URL of the video,  paste the video URL into our "Add Video" page and then you can start taking notes.</p>
+              <br>
+              <strong><h3>Q: How do I create a Subject playlist? </h3></strong>
+              <p>A: For logged in users, go to "Add Subject" and from there you can add a title, a descriptiona, and an image to represent your subject.</p>
+              <br>
+              <strong><h3>Q: How do I share my notes, videos, or subjects with others?</h3></strong>
+              <p>A: It's simple. Just copy the url of whatever you want to share and send it away. From there, the reciever will be able to see what you shared.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div id="tf-contact" class="text-center">
         <div class="container">
-          <div class="section-title center">
-            <h2>Meet our <strong>team</strong></h2>
-            <div class="line"><hr></div>
-          </div>
-          <div id="team" class="owl-carousel owl-theme row">
-            <div class="item">
-              <div class="thumbnail">
-                <%= image_tag("jon.jpg", :class => "img-circle team-img") %>
-                <div class="caption">
-                  <h3>Jonathan Raxa</h3>
-                  <p class="team-position">Team Lead</p>
-                  <p>Enjoys rap music, music production, dance, videography (editing), heath enthusiast, skateboarding, snowboarding, outdoors, martial arts, learning new things, running, knowledge hacker, podcast listener, radio listener (Sarah and Vinnie fan!), blogging, and reading. </p>
-                  <ul class="footer-social">
-                    <li><a href="https://twitter.com/jonathanraxa" target="_blank"><i class="fa fa-twitter" ></i></a></li>
-                    <li><a href="https://github.com/jonathanraxa" target="_blank"><i class="fa fa-github"></i></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="thumbnail">
-                <%= image_tag("eric.jpg", :class => "img-circle team-img") %>
-                <div class="caption">
-                  <h3>Eric Gonzalez</h3>
-                  <p class="team-position">Tech Lead</p>
-                  <p>I enjoy playing video games, watching and playing sports, or anything related to tech! I'm always eager to learn and experience new things.</p>
-                  <ul class="footer-social">
-                    <li><a href="https://www.facebook.com/EricGonzalez1994" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="https://twitter.com/e_gonzilla" target="_blank"><i class="fa fa-twitter" ></i></a></li>
-                    <li><a href="https://github.com/Twinpair/" target="_blank"><i class="fa fa-github"></i></a></li>
-                    <li><a href="http://www.ericgonzalez1994.com/" target="_blank">Website</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="thumbnail">
-                <%= image_tag("gerardo.jpg", :class => "img-circle team-img") %>
-                <div class="caption">
-                  <h3>Gerardo Gonsalez</h3>
-                  <p class="team-position">Software Engineer</p>
-                  <p>An SFSU Senior with an interest in Web Development. If he's not studying for school, you'll most likely find him watching anime, playing video games, or going out looking for good food. He also enjoy music production and videography.</p>
-                  <ul class="footer-social">
-                    <li><a href="https://www.facebook.com/Flavanoidz" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="https://github.com/gegonsalez" target="_blank"><i class="fa fa-github"></i></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="thumbnail">
-                <%= image_tag("angelo.png", :class => "img-circle team-img") %>
-                <div class="caption">
-                  <h3>Angelo Nucup</h3>
-                  <p class="team-position">Full Stack Developer</p>
-                  <p>I enjoy watching Anime and reading Manga. Not into sports, but I love playing badminton. I also like to travel because it’s fun to always learn and experience new things. If being a programmer doesn’t work out, I would like to be an animator. I think it’s cool and creative.</p>
-                  <ul class="footer-social">
-                    <li><a href="https://github.com/acanucup0610" target="_blank"><i class="fa fa-github"></i></a></li>
-                  </ul>
-                </div>
-              </div>
+          <div class="row">
+            <div class="section-title center">
+              <h1><span class="emphasize"><strong>Contact</strong></span></h1>
+              <div class="line"><hr></div>
             </div>
           </div>
+          <%= form_for @suggestion do |f| %>
+            <div class="row control-group">
+              <div class="form-group col-xs-12 col-lg-6 col-lg-offset-3 floating-label-form-group controls">
+              <%= f.label :name %><span class="red">*</span><br />
+              <%= f.text_field :name, :type => "text", :class => "form-control", :placeholder => "Name", :id => "name", :required => true %>
+              </div>
+            </div>
+            <div class="row control-group">
+              <div class="form-group col-xs-12 col-lg-6 col-lg-offset-3 floating-label-form-group controls">
+                <%= f.label :email %><span class="red">*</span><br />
+                <%= f.text_field :email, :type => "email", :class => "form-control", :placeholder => "Email Address", :id => "email", :required => true %>
+              </div>
+            </div>
+            <div class="row control-group">
+              <div class="form-group col-xs-12 col-lg-6 col-lg-offset-3 floating-label-form-group controls">
+                <%= f.label :suggestion %><span class="red">*</span><br />
+                <%= f.text_area :suggestion, :rows => "5", :class => "form-control", :placeholder => "Suggestion", :id => "message", :required => true %>
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group button-div">
+                <%= f.submit "Submit", :action => "pages/home", :type => "submit", :class => "btn btn-success btn-lg" %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
 
-    <!-- Feedback Section -->
-    <div id="tf-services" class="text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <h1>Have some feedback for us or need to report a bug?</h1>
-            <a href="#tf-contact" class="homeButton page-scroll">Contact Us</a>
-          </div>
-          <div class="col-lg-6">
-            <h1>
-              <i class="fa fa-flag fa-5x" aria-hidden="true"></i> 
-              <i class="fa fa-bug" aria-hidden="true"></i><br>
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-            </h1>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FAQ Section -->
-    <div id="tf-clients" class="text-center">
-    <div class="overlay">
-      <div class="container">
-        <div class="section-title center">
-          <h2><strong>FAQS</strong></h2>
-          <div class="line"><hr></div>
-        </div>
-        <strong><p>Q: Where can I get videos?</p></strong>
-        <p>A: Go to a video on YouTube. Copy the URL of the video. Paste the video URL into our "Add Video" page and take notes. Be sure to save at the end of your session.</p>
-        <br>
-        <strong><p>Q: How do I create a Subject playlist? </p></strong>
-        <p>A: For logged in users, go to "Add Subject" and from there you can add a photo representing your subject, a title, and a description.</p>
-        <br>
-        <strong><p>Q: How do I share videos with other people?</p></strong>
-        <p>A: As of this moment VidEdu does not support a link sharing capability with other users.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Contact Section -->
-  <section id="tf-contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2>Contact Us</h2>
-          <h5 class="red">(All fields are required)</h5>
-        </div>
-      </div>
-      <%= form_for @suggestion do |f| %>
-        <div class="row control-group">
-          <div class="form-group col-xs-12 col-lg-6 col-lg-offset-3 floating-label-form-group controls">
-          <%= f.label :name %><span class="red">*</span><br />
-          <%= f.text_field :name, :type => "text", :class => "form-control", :placeholder => "Name", :id => "name", :required => true %>
-          </div>
-        </div>
-        <div class="row control-group">
-          <div class="form-group col-xs-12 col-lg-6 col-lg-offset-3 floating-label-form-group controls">
-            <%= f.label :email %><span class="red">*</span><br />
-            <%= f.text_field :email, :type => "email", :class => "form-control", :placeholder => "Email Address", :id => "email", :required => true %>
-          </div>
-        </div>
-        <div class="row control-group">
-          <div class="form-group col-xs-12 col-lg-6 col-lg-offset-3 floating-label-form-group controls">
-            <%= f.label :suggestion %><span class="red">*</span><br />
-            <%= f.text_area :suggestion, :rows => "5", :class => "form-control", :placeholder => "Suggestion", :id => "message", :required => true %>
-            <p class="help-block text-danger"></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group button-div">
-            <%= f.submit "Submit", :action => "pages/home", :type => "submit", :class => "btn btn-success btn-lg" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </section>
-
-  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <%= javascript_include_tag 'bootstrap.js' %>
   <%= javascript_include_tag 'jquery.isotope.js' %>
   <%= javascript_include_tag 'main.js' %>

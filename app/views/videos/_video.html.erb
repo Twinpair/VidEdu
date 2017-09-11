@@ -11,7 +11,7 @@
         <p><strong>Last Updated:</strong> <%=video.updated_at.strftime('%B %-d %Y') %></p>
 
       <% unless video.subject.default_subject? %>
-        <p><strong>Subject: </strong><%= link_to video.subject.subject, subject_path(video.subject_id) %></p>
+        <p><strong>Subject: </strong><%= link_to video.subject.subject, subject_path(video.subject_id), class: "white-background-link" %></p>
       <% else %>
         <p><strong>Subject: </strong>None</p>
       <% end %>
@@ -19,12 +19,12 @@
       <% if user_signed_in? && video.user_id == current_user.id %>
         <p><strong>Created by:</strong> <i>You!</i></p>
         <div class = "trash_and_edit">
-          <%= link_to 'Edit' , edit_video_path(video.id), :class=>"glyphicon glyphicon-edit", :id=>'edit' %> |
-          <%= link_to 'Delete', video, method: :delete, data: { confirm: 'Are you sure?'}, :class=>"glyphicon glyphicon-trash" %>
+          <%= link_to 'Edit' , edit_video_path(video.id), :class=>"fa fa-edit edit-color", :id=>'edit' %> |
+          <%= link_to 'Delete', video, method: :delete, data: { confirm: 'Are you sure?'}, :class=>"fa fa-trash delete-color" %>
         </div>
       <% else %>
         <p><strong>Created by:</strong> <i><%= User.find(video.user_id).username %></i></p>
-        <div id="extra-margin" style="margin-bottom: 30px;"></div>
+        <div class="extra-margin-on-card"></div>
       <% end %>
       </div>
     </div>

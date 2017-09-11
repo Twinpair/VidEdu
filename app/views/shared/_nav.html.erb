@@ -1,7 +1,6 @@
 <!-- Navigation -->
-  <nav id="tf-menu" class="navbar navbar-default navbar-top">
+  <nav id="site-navbar" class="navbar navbar-default navbar-top">
     <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
@@ -9,16 +8,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>        
-        <%= link_to "VidEdu", root_path, class: "navbar-brand", :id => "white" %>
+        <%= link_to "VidEdu", root_path, class: "navbar-brand" %>
       </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li><%= link_to "Home", root_path, :id => "white" %></li>
-          <li><%= link_to "Explore Videos", videos_path, :id => "white" %></li>
-          <li><%= link_to "Explore Subjects", subjects_path, :id => "white" %></li>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Explore Videos", videos_path %></li>
+          <li><%= link_to "Explore Subjects", subjects_path %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
             <ul class="dropdown-menu">  
@@ -31,18 +29,18 @@
           <li>
             <%= form_tag search_path, method: :get, class: "navbar-form", role:"search" do %>
               <%= text_field_tag :search, params[:search], class: "form-control" %>
-              <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+              <%= submit_tag "Search", name: nil, class: "btn btn-success" %>
             <% end %>  
           </li>
-          <li><%= link_to "Account", edit_user_registration_path, {:style =>"color: orange; text-decoration: none;"} %></li>
-          <li><%= link_to "Log out", destroy_user_session_path, :method => :delete, :id => "orange" %></li>
+          <li><%= link_to "Account", edit_user_registration_path %></li>
+          <li><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
         <% else %>
-          <li><%= link_to "Home", root_path,:id => "white" %></li>
-          <li><%= link_to "About", root_path + '#tf-about',:id => "white" %></li>
-          <li><%= link_to "Team", root_path + '#tf-team',:id => "white" %></li>
-          <li><%= link_to "Feedback", root_path + '#tf-services',:id => "white" %></li>
-          <li><%= link_to "FAQS", root_path + '#tf-clients',:id => "white" %></li>
-          <li><%= link_to "Contact", root_path + '#tf-contact',:id => "white" %></li>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "About", root_path + '#tf-about' %></li>
+          <li><%= link_to "Team", root_path + '#tf-team' %></li>
+          <li><%= link_to "Feedback", root_path + '#tf-services' %></li>
+          <li><%= link_to "FAQS", root_path + '#tf-clients' %></li>
+          <li><%= link_to "Contact", root_path + '#tf-contact' %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore<span class="caret"></span></a>
             <ul class="dropdown-menu">  
@@ -50,15 +48,15 @@
               <li><%= link_to "Explore Subjects", subjects_path %></li>
             </ul>
           </li>
-          <li><%= link_to "Try it!", new_video_path,:id => "white" %></li>
+          <li><%= link_to "Try it!", new_video_path %></li>
           <li>
             <%= form_tag search_path, method: :get, class: "navbar-form", role:"search" do %>
               <%= text_field_tag :search, params[:search], class: "form-control" %>
-              <%= submit_tag "Search", name: nil, class: "btn btn-default" %>
+              <%= submit_tag "Search", name: nil, class: "btn btn-success" %>
             <% end %>  
           </li>
-          <li><%= link_to "Login", new_user_session_path,:id => "orange" %></li>
-          <li><%= link_to "Signup", new_user_registration_path,:id => "orange" %></li>
+          <li><%= link_to "Login", new_user_session_path %></li>
+          <li><%= link_to "Signup", new_user_registration_path %></li>
         <% end %>
         </ul>
       </div>

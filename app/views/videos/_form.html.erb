@@ -1,13 +1,13 @@
 <%= simple_form_for @video do |f| %>
     <%= render 'shared/errors', object: @video %>
 
-    <div class="container-fluid" style="margin-top: 10px;">
-      <div class = "col-sm-12">
+    <div class="container-fluid">
+      <div class = "col-sm-12 minor-margin">
       <% if !user_signed_in? %>
-        <div class="text-center" style="color: red;">
+        <div class="text-center alert-text minor-margin">
           <h4><strong>ATTENTION - This is a guest session.</strong></h4>
-          <h4><strong>You can use the application, but your video and notes will NOT be saved. If you want to save your items, please <a href="/users/login">sign in</a> or <a href="/users/sign_up">sign up</a></strong>.</h4>
-        </div><br>
+          <h4><strong>You can use the application, but your video and notes will NOT be saved. If you want to save your items, please <a class="edit-color" href="/users/login">sign in</a> or <a class="edit-color" href="/users/sign_up">sign up</a></strong>.</h4>
+        </div>
       <% end %>
 
         <!-- LEFT side-->
@@ -20,12 +20,11 @@
 
           <!-- Puts the video into the IFrame -->
           <div id="iframe-div">
-            <div id="info-text" style="width: 100%; height: 410px; border: 5px solid black; margin-top: 37px;">
-              <br><br>
-              <h3 style="text-align: center;">Paste Your Youtube Link To Start Taking Notes</h3>
+            <div id="info-text">
+              <h3 class="text-center">Paste Your Youtube Link To Load Your Video</h3>
             </div>
           </div>
-        </div><br>
+        </div>
 
 
         <!-- RIGHT SIDE -->
@@ -50,8 +49,8 @@
               <input class="form-control" type="text" name="subject[subject]">
             </div>
             <div class="col-lg-5">
-              <label>Private Subject: </label>
-              <div style="text-align: center;">
+              <label>Private Subject </label>
+              <div class="text-center">
                 <input type="checkbox" name="subject[private]">
               </div>
             </div>
@@ -60,15 +59,17 @@
         </div>
 
         <% if user_signed_in? %>  
-          <div class="col-sm-6" style="margin: 20px 0">
-            <div class="col-lg-4 col-sm-12" style="margin-bottom: 25px;">
-              <label>Private Video: &nbsp;&nbsp;</label>
-              <%= f.check_box :private %>
-            </div>
-            <div class="col-lg-8 col-sm-12">     
+          <div class="col-sm-6" >
+            <div class="col-lg-4 col-sm-12">
+              <label>Private Video</label>
               <div class="text-center">
-                <%= link_to 'Cancel', @resource_exist ? video_path(@video) : your_videos_path, class: 'btn btn-danger', :id=>"video_form_btn" %>
-                <%= f.submit 'Save', class: 'btn btn-primary', :id=>'video_form_btn' %>
+                <%= f.check_box :private %>
+              </div>
+            </div>
+            <div class="col-lg-8 col-sm-12 margin-top-15">     
+              <div class="text-center">
+                <%= link_to 'Cancel', @resource_exist ? video_path(@video) : your_videos_path, class: 'btn btn-lg btn-danger' %>
+                <%= f.submit 'Save', class: 'btn btn-lg btn-success'%>
               </div>
             </div>
           </div>
@@ -76,18 +77,6 @@
       </div>
     </div>
   <% end %>
-
-  <style type="text/css">
-    input[type=checkbox]
-    {
-      /* Double-sized Checkboxes */
-      -ms-transform: scale(2); /* IE */
-      -moz-transform: scale(2); /* FF */
-      -webkit-transform: scale(2); /* Safari and Chrome */
-      -o-transform: scale(2); /* Opera */
-      padding: 10px;
-    }
-  </style>
 
   <script>
 

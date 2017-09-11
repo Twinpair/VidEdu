@@ -1,81 +1,67 @@
 <% provide(:title, "Edit Profile") %>
 
-<!-- Navigation==========================================-->
-
-
-<!-- Team Page==========================================-->
-<div id="tf-team" class="text-center">
-  <div class="overlay">
-    <div class="container">
-      <div class="section-title center">
-      <h2><strong>Edit <%= current_user.username %>'s Profile</strong></h2>
-      </div>
-
-    <div class="login">
-      <div class="container">
-        <div class="form">
-          <div class="form">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
-
-  <div class="field">
-      <%= f.label :First_name %><br />
-      <%= f.text_field :firstname, autofocus: true %>
-    </div>
-  <br />
-    <br />
-    <div class="field">
-      <%= f.label :Last_name %><br />
-      <%= f.text_field :lastname, autofocus: true %>
-    </div>
-  <br />
-    <br />
-    <div class="field">
-      <%= f.label :Email %><br />
-      <%= f.email_field :email, autofocus: true %>
-    </div>
-  
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
-  <br />
-    <br />
-   <% if f.object.password_required? %>
-    <div class="field">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-    </div>
-  <br />
-    <br />
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
-  <% end %>
-    <br />
-    <br />
-    <div class="field">
-      <%= f.label :current_password %> <i>(indicate current password)</i><br />
-      <%= f.password_field :current_password, autocomplete: "off" %>
-    </div>
-
-    <br />
-    <br />
-    
-    <div class="actions">
-      <%= f.submit "Update Profile", :class=> "btn btn-success btn-lg" %>
-    </div>
-  <% end %>
-</div>
-
-<br><br>
-<p style= "font-size: 20px;" ><%= button_to "Delete Account", registration_path(resource_name), :class=> "btn btn-danger btn-lg", data: { confirm: "Are you sure? (Once you delete it, it's gone forever...and we'll miss you =( ))" }, method: :delete %></p>
-
-        </div>
-      </div>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="section-title"><strong>Edit Your Account Information</strong></h2>
     </div>
   </div>
-</div>
+
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="field">
+          <%= f.label :First_name %><br />
+          <%= f.text_field :firstname, class: "form-control form-input-lg" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :Last_name %><br />
+          <%= f.text_field :lastname, class: "form-control form-input-lg" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :Email %><br />
+          <%= f.email_field :email, class: "form-control form-input-lg" %>
+        </div>
+      
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+       <% if f.object.password_required? %>
+        <div class="field">
+          <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+          <%= f.password_field :password, class: "form-control form-input-lg" %>
+        </div> 
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, class: "form-control form-input-lg" %>
+        </div>
+      <% end %>
+
+        <div class="field">
+          <%= f.label :current_password %> <i>(indicate current password)</i><br />
+          <%= f.password_field :current_password, class: "form-control form-input-lg"%>
+        </div>
+        
+        <div class="actions">
+          <a href="/your-videos" class="btn btn-lg btn-warning">Cancel</a>
+          <%= f.submit "Update Profile", :class=> "btn btn-success btn-lg" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <p class="alert-text section-title">DANGER ZONE: </p>
+      <%= button_to "Delete Account", registration_path(resource_name), :class=> "btn btn-danger btn-lg", data: { confirm: "Are you sure? Once you delete your account, all your data will be erased" }, method: :delete %>
+    </div>
+  </div>
 </div>
 
 
