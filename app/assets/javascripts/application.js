@@ -16,4 +16,3 @@
 //= require tinymce-jquery
 //= require imagesloaded
 //= require_tree .
-

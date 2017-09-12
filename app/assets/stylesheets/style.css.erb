@@ -110,6 +110,13 @@ input[type=checkbox]{
   -o-transform: scale(2); /* Opera */
   padding: 10px;
 }
+textarea {
+  resize: none;
+}
+select{
+  border-width: 1px;
+  border-color: black;
+}
 
 /* Pagination Styling */
 .digg_pagination {
@@ -210,10 +217,6 @@ input[type=checkbox]{
   color: orange;
   background-color: #222222;
 }
-.dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0; /*remove the gap so it doesn't close */
-}
 .dropdown-menu{
   background-color: #222222;
 }
@@ -243,6 +246,24 @@ input[type=checkbox]{
 }
 .navbar-default .navbar-toggle:hover>.icon-bar {
   background-color: #FFF;
+}
+@media (max-width: 768px){
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form{
+   background-color: black;
+   border-color: transparent;
+  }
+  #tf-menu.navbar-default .navbar-nav > li > a{
+    padding-bottom: 5px;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: white;
+  }
+}
+@media (min-width: 900px){
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /*remove the gap so it doesn't close */
+  }
 }
 
 /* Footer */
@@ -418,6 +439,11 @@ nav#footer p{
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	color: white;
+}
+@media (max-width: 768px){
+  #tf-home > .overlay > .content {
+   padding: 40% 0 0;
+  }
 }
 #tf-home .overlay{
 	background: -moz-linear-gradient(top,  rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, rgba(0,0,0,0.66) 35%, rgba(0,0,0,0.55) 62%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
@@ -771,9 +797,14 @@ button.btn.tf-btn.btn-default {
   max-height: 500px;
   overflow: auto;
 }
+@media (max-width: 768px){
+  #subject-text{
+    font-size: 20px;
+  }
+}
+@media
 
 /* _form.html.erb */
-
 textarea {
   padding-left: 10px;
 }

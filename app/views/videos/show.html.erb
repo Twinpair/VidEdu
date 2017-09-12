@@ -20,19 +20,25 @@
 
               <!-- LEFT side-->
               <div class="col-sm-6">
+                <h4 class="text-center"><b>Video:<b></h4>
                 <div id="player"></div>
-                <h3><strong>Subject: </strong><%= link_to @video.subject.subject, subject_path(@video.subject.id), class: "white-background-link" %></h3>
+              <% if @video.subject.default_subject?%>
+                <h3 id="subject-text"><strong>Subject: </strong>None</h3>
+              <% else %>
+                <h3 id="subject-text"><strong>Subject: </strong><%= link_to @video.subject.subject, subject_path(@video.subject.id), class: "white-background-link" %></h3>
+              <% end %>
               </div>
 
               <!-- RIGHT SIDE -->
+              <h4 class="text-center"><b>Notes:<b></h4>
               <div id="right_side_show" class="col-sm-6">
                 <div class="col-lg-12">
               <% if @video.note? %>
-                  <p>
+                  <h4>
                     <div id="note_area_show">
                       <b><%=raw @video.note %></b>
-                    </div><
-                  </p>
+                    </div>
+                  </h4>
               <% else %>
                   <p class="text-center"><h2><i>No Notes</i></h2></p>
               <% end %>    
