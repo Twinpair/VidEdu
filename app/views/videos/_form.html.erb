@@ -36,7 +36,7 @@
       <div class = "col-sm-12 text-center">
         <div class="col-sm-6">
         <% if user_signed_in? %>
-          <div class="col-lg-3">
+          <div class="col-lg-3" style="overflow: hidden;">
             <p><strong>Choose a Subject</strong></p>
             <%= collection_select(:video, :subject_id, @users_subjects, :id, :subject, {:default=>true}, { :multiple => false}) %>
           </div>
