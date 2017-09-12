@@ -23,13 +23,11 @@
   <!-- Custom -->
   <%= stylesheet_link_tag    'application', media: 'all' %>
 
-
   <!-- Javascript Files -->
   <%= javascript_include_tag 'application' %>
 </head>
 <body>
 <% if !@custom_nav%>
-
   <%= render 'shared/nav' %>
 <% end%>
 
@@ -39,11 +37,9 @@
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-  <!-- Latest compiled JavaScript -->
+  <!-- Bootstrap JS -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  <%= javascript_include_tag 'owl.carousel.js' %>
+  <%= yield :body %>
 </body>
 </html>
 
