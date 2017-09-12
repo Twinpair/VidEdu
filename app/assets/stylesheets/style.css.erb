@@ -433,12 +433,24 @@ nav#footer p{
 /* Header */
 #tf-home{
   font-family: 'Lato', sans-serif;
-	background: url(<%= asset_path("Header.jpg") %>);
-	background-size: cover;
-	background-position: center;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
 	color: white;
+}
+@media (min-width: 500px){
+  #tf-home{
+    background: url(<%= asset_path("Header.jpg") %>);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+}
+@media (max-width: 500px){
+  #tf-home{
+    background: url(<%= asset_path("Header-mobile.jpg") %>);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
 }
 @media (max-width: 768px){
   #tf-home > .overlay > .content {
@@ -528,12 +540,25 @@ ul.about-list li span{
 #tf-team{
   font-family: 'Lato', sans-serif;
   font-weight:  600;
-	background: url(<%= asset_path("SFSU-Science.jpg") %>);
-	background-size: cover;
-	background-position: center;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
 	color: #ffffff;
+}
+@media (min-width: 500px){
+  #tf-team{
+    background: url(<%= asset_path("SFSU-Science.jpg") %>);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+}
+@media (max-width: 500px){
+  #tf-team{
+    background: url(<%= asset_path("SFSU-Science-mobile.jpg") %>);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
 }
 #tf-team .overlay{
 	background: -moz-linear-gradient(top,  rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, rgba(0,0,0,0.66) 35%, rgba(0,0,0,0.55) 62%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
@@ -648,12 +673,25 @@ img.img-circle.team-img {
 #tf-clients{
   font-family: 'Lato', sans-serif;
   font-weight:  700;
-	background: url(<%= asset_path("Golden-Gate-Bridge.jpg") %>);
-	background-size: cover;
-	background-position: center;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
 	color: #ffffff;
+}
+@media (min-width: 500px){
+  #tf-clients{
+    background: url(<%= asset_path("Golden-Gate-Bridge.jpg") %>);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+}
+@media (max-width: 500px){
+  #tf-clients{
+    background: url(<%= asset_path("Golden-Gate-Bridge-mobile.jpg") %>);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
 }
 #tf-clients .overlay{
 	background: -moz-linear-gradient(top,  rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.73) 17%, rgba(0,0,0,0.66) 35%, rgba(0,0,0,0.55) 62%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
