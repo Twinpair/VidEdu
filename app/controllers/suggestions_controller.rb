@@ -1,14 +1,13 @@
 class SuggestionsController < ApplicationController
-    include SuggestionsHelper
+  include SuggestionsHelper
 
-    def index
-        @suggestions = Suggestion.all
-    end
+  def index
+    @suggestions = Suggestion.all
+  end
 
-    def create
-      @suggestion = Suggestion.new(suggestion_params)
-      @suggestion.save
-
-      redirect_to root_path
-    end
+  def create
+    @suggestion = Suggestion.new(suggestion_params)
+    @suggestion.save
+    redirect_to root_path
+  end
 end

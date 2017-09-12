@@ -1,19 +1,18 @@
-# == Schema Information
+#  == Schema Information
 #
-# Table name: videos
+#  Table name: videos
 #
-#  id           :integer          not null, primary key
-#  link         :string(255)
-#  title        :string(255)
-#  published_at :datetime
-#  duration     :string(255)
-#  likes        :integer
-#  dislikes     :integer
-#  uid          :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  subject_id   :integer
-#  yt_description :text
+#  id                     , not null, primary key
+#  t.string   "link"
+#  t.string   "title"
+#  t.string   "uid"
+#  t.string   "subject"
+#  t.datetime "created_at"
+#  t.datetime "updated_at"
+#  t.text     "note"
+#  t.integer  "subject_id"
+#  t.integer  "user_id"
+#  t.boolean  "private",    default: false
 
 class Video < ActiveRecord::Base
   belongs_to :user

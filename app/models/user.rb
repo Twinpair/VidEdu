@@ -1,4 +1,27 @@
 class User < ActiveRecord::Base
+#  == Schema Information ==
+#
+#  Table name: users
+#
+#  id                     , not null, primary key
+#  t.string   "firstname",              default: "", null: false
+#  t.string   "lastname",               default: "", null: false
+#  t.string   "username",               default: "", null: false
+#  t.string   "email",                  default: "", null: false
+#  t.string   "encrypted_password",     default: "", null: false
+#  t.string   "reset_password_token"
+#  t.datetime "reset_password_sent_at"
+#  t.datetime "remember_created_at"
+#  t.integer  "sign_in_count",          default: 0,  null: false
+#  t.datetime "current_sign_in_at"
+#  t.datetime "last_sign_in_at"
+#  t.string   "current_sign_in_ip"
+#  t.string   "last_sign_in_ip"
+#  t.string   "provider"
+#  t.string   "uid"
+#  t.string   "token"
+#  t.datetime "created_at",                          null: false
+#  t.datetime "updated_at",                          null: false
 
   has_many :subjects, dependent: :destroy
   has_many :videos, dependent: :destroy
@@ -30,13 +53,15 @@ class User < ActiveRecord::Base
   #   end
   # end
   
- def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+  def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.where(:provider => access_token.provider, :uid => access_token.uid ).first
+
     if user
       return user
     else
       registered_user = User.where(:email => access_token.info.email).first
+
       if registered_user
         return registered_user
       else
@@ -48,29 +73,29 @@ class User < ActiveRecord::Base
           password: Devise.friendly_token[0,20]
         )
       end
-   end
-end
+    end
+  end
 
 
 def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user.provider = auth.provider
-        user.uid = auth.uid
-        user.firstname = auth.info.name.split.first
-        user.lastname = auth.info.name.split.last
-        user.username = auth.info.nickname
-        user.email = auth.info.email
-    end
+  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    user.provider = auth.provider
+    user.uid = auth.uid
+    user.firstname = auth.info.name.split.first
+    user.lastname = auth.info.name.split.last
+    user.username = auth.info.nickname
+    user.email = auth.info.email
+  end
 end
 
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
-        new(session["devise.user_attributes"], without_protection: true) do |user|
-            user.attributes = params
-            user.valid?
-        end
+      new(session["devise.user_attributes"], without_protection: true) do |user|
+        user.attributes = params
+        user.valid?
+      end
     else
-        super
+      super
     end
   end
 

@@ -1,14 +1,14 @@
 class Comment < ActiveRecord::Base
-# == Schema Information
+#  == Schema Information ==
 #
-# Table name: comments
+#  Table name: comments
 #
-#  id         :integer          not null, primary key
-#  body       :text
-#  user_id    :integer
-#  video_id    :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id                     , not null, primary key
+#  t.text     "body"
+#  t.integer  "user_id"
+#  t.datetime "created_at", null: false
+#  t.datetime "updated_at", null: false
+#  t.integer  "video_id"
   
   belongs_to :user
   belongs_to :video

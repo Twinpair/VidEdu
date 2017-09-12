@@ -1,14 +1,17 @@
 class Subject < ActiveRecord::Base
-# == Schema Information
+#  == Schema Information ==
 #
-# Table name: subjects
+#  Table name: subjects
 #
-# id         :integer          not null, primary key
-# t.string   "subject"
-# t.text     "description"
-# t.integer  "user_id"
-# t.datetime "created_at",         null: false
-# t.datetime "updated_at",         null: false
+#  id                     , not null, primary key
+#  t.string   "subject"
+#  t.text     "description"
+#  t.integer  "user_id"
+#  t.boolean  "default_subject", default: false
+#  t.boolean  "private",         default: false
+#  t.string   "picture"
+#  t.datetime "created_at",       null: false
+#  t.datetime "updated_at",       null: false
 
   has_many :videos
   belongs_to :user

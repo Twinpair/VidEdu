@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   def create
     @comment = current_user.comments.build(comment_params)
     @comment.video_id = params[:video_id]
@@ -15,9 +14,10 @@ class CommentsController < ApplicationController
     end
   end
 
-  private
+private
 
   def comment_params
     params.require(:comment).permit(:body)
   end
+  
 end

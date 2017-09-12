@@ -39,6 +39,4 @@ Rails.application.routes.draw do
 
   resources :suggestions
 
-  resources :video_uploads, only: [:new, :create]
-
 end
