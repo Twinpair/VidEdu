@@ -86,7 +86,7 @@
       var evt = (evt) ? evt : ((event) ? event : null); 
       var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
       if ((evt.keyCode == 13) && (node.type=="text"))  {
-        loadVideoIntoIframe(URL);
+        loadVideoIntoIframe();
         return false;
       } 
     } 
@@ -99,6 +99,10 @@
         // Editor is disable until video is loaded
         editor.on('init', function () {
           tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
+          // If video exist, it is preloaded for the user
+          if ($('#uid').text().length > 0){
+            loadVideoIntoIframe();
+          }
         });
 
         // Keeps track of when a keydown event is excecuted
@@ -124,17 +128,17 @@
 
     // Load video to Iframe when input button is submitted
     $("#button_sbmt").click(function () {
-      loadVideoIntoIframe(URL);
+      loadVideoIntoIframe();
     });
 
     // 0. Load video into iFrame
-    function loadVideoIntoIframe(URL){
+    function loadVideoIntoIframe(){
       URL = document.getElementById("input_area").value;
 
       // If video input field is empty or is not a youtube link, an error is given.
       if (URL == "" || URL.indexOf("youtube") === -1){
         $("#video-input-error").remove();
-        $("#iframe-div").prepend('<div id="video-input-error"><br><br><h5 style="color:red;"><strong>^Please enter a youtube link^</strong></h5></div>');
+        $("#iframe-div").prepend('<div id="video-input-error"><br><h5 style="color:red;"><strong>^Please enter a youtube link^</strong></h5></div>');
       }
       else {
         $("#video-input-error").remove();
@@ -146,6 +150,7 @@
         parse_embeded_code(URL);
         get_embeded_code();
         youTubeIframeAPIReady();
+        document.getElementById('input_area').disabled = true;
       }
     }
 
@@ -203,32 +208,5 @@
     function playerSeekTo(player, seconds) {
       player.seekTo(seconds);
     }
-
-
-    // saving notes to local machine
-    $('#create').click(function(){
-      content = tinyMCE.activeEditor.getContent({format : 'text'});
-      console.log(content); 
-    });
-
-    var textFile = null,
-    makeTextFile = function (text) {
-      var data = new Blob([content], {type: 'text/plain'});
-      // If we are replacing a previously generated file we need to
-      // manually revoke the object URL to avoid memory leaks.
-      if (textFile !== null) {
-        window.URL.revokeObjectURL(textFile);
-      }
-      textFile = window.URL.createObjectURL(data);
-      return textFile;
-    };
-
-    var create = document.getElementById('create'),
-    textbox = content;
-    create.addEventListener('click', function () {
-      var link = document.getElementById('downloadlink');
-      link.href = makeTextFile(textbox);
-      link.style.display = 'block';
-    }, false);
 
   </script>
