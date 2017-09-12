@@ -12,6 +12,10 @@
             <% if current_user && @video.user_id == current_user.id %>
               <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-warning" %>
               <%= link_to 'Delete', @video, method: :delete, data: { confirm: 'Are you sure?'},:class=>"btn btn-lg btn-danger" %>
+            <% elsif current_user %>
+              <%= link_to "Take your own notes with this video", new_video_path(uid: @video.uid), :class=>"btn btn-lg btn-warning" %>
+            <% else %>
+              <h4><a class="white-background-link" href="/users/login">Login</a> or <a class="white-background-link" href="/users/sign_up">Sign Up</a></strong> to start taking your own notes with this video with a click of a button</h4>
             <% end %>
             </div><br>
           </div>
