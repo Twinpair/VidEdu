@@ -2,7 +2,7 @@
     <div class="yt_video thumbnail" onclick="document.location='<%= subject_path(subject.id)%>'" style="cursor: pointer;">
       <%= subject.private? ? "(Private)" : "(Public)" if @display_private_status%>
       <%= image_tag subject.picture? ?  subject.picture.url : "subject-default.jpg", style: " height: 262px;" %>
-      <h3><%= subject.subject %></h3>
+      <h3><%= truncate subject.subject, length: 31 %></h3>
       <p><b>(<%= pluralize(subject.videos.count, "Video") %>)</b></p>
       <div class="caption">
       <% if subject.description? %>

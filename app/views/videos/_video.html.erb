@@ -1,8 +1,8 @@
 <div class="col-md-4">
     <div class="yt_video thumbnail" onclick="document.location='<%= video_path(video.id)%>'" style="cursor: pointer;">
       <div class="text-center">
-        <p><%= video.private? ? "(Private)" : "(Public)" if @display_private_status%></p>
-        <div class="panel-heading"><h4><%= truncate video.title, length: 65 %></h4></div> 
+        <%= video.private? ? "(Private)" : "(Public)" if @display_private_status%>
+        <div class="panel-heading"><h4><%= truncate video.title, length: 35 %></h4></div> 
       </div>
       <%= link_to image_tag("https://img.youtube.com/vi/#{video.uid}/mqdefault.jpg", alt: video.title,), video_path(video.id), target: '_self' %>
       <div class="caption">
