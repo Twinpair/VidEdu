@@ -14,28 +14,23 @@ FULL PROJECT DOCUMENTATION
 ------------------------------------------------------------------------------------
 
 
-https://docs.google.com/document/d/16lotARoZ2KsIzn06sAM0vDntKwQaTTYQFjGzJO3iamU/edit?usp=sharing
+https://drive.google.com/file/d/0B-4Vah9LEYrLNDhjay13NXA2V1E/view
 
 
 ------------------------------------------------------------------------------------
-SOME NOTES ON VIDEDU FEATURES
+GETTING APP RUNNING ON YOUR LOCAL MACHINE
 ------------------------------------------------------------------------------------
+Make sure you have Rails and Git installed on your machine
 
-- Due to the "ephemeral filesystem" in Heroku, uploaded images will not be stored for more than 24 hours at a time. In other words, Heroku does NOT allow for images to be uploaded onto their servers. The image uploading feature will work for 24 hours.
-- Masonary panel transitions are still undergoing some maintenance issues. Currently panels are still grouped by three panels at a time.
-- The Search functionality is still undergoing issues that still need to be worked out.
-- Sorting is limited to the "Featured" page at the moment.
+1) git clone the repo to your local machine `git clone https://github.com/Twinpair/VidEdu.git`
 
-------------------------------------------------------------------------------------
-EDITING SOURCE FILES
-------------------------------------------------------------------------------------
+2) Run `bundle install` to install gems
 
+3) Run `rake db:migrate` to migrate the database
 
-1) Download source files via git by cloning the repo
+4) On root path you can run `rails s` to begin server
 
-2) On root - run "rails s" on terminal to begin server
-
-3) Open browser to localhost:3000 to show 'development mode'
+5) Open browser to `localhost:3000` to view application
 
 
 ------------------------------------------------------------------------------------
