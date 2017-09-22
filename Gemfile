@@ -2,18 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.8'
 gem 'pg'
-group :development do
-  gem 'eventmachine'
-  gem 'better_errors', '~> 2.1.0'
-  gem 'binding_of_caller', '0.7.2'
-  gem 'annotate', '2.6.10'
-  gem 'web-console', '~> 2.0'
-  gem 'sqlite3'
-  gem 'byebug'
-end
-group :production do
-  gem 'rails_12factor'
-end
 gem 'thin', '1.6.4'
 gem 'sass-rails',   '~> 5.0.1'
 gem 'coffee-rails', '~> 4.1.0'
@@ -26,7 +14,6 @@ gem 'active_type', '0.3.1'
 gem "paperclip", "~> 4.3"
 gem 'wysihtml-rails', '0.5.3'
 gem 'searchkick', '~> 0.9.1'
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'yt', '~> 0.13.7'
 gem 'autoprefixer-rails'
 gem 'tinymce-rails', '4.6.6'
@@ -41,3 +28,20 @@ gem 'mini_magick',             '4.7.0'
 gem 'fog',                     '1.40.0'
 gem 'will_paginate', '~> 3.1.0'
 gem 'i18n'
+
+group :development do
+  gem 'eventmachine'
+  gem 'better_errors', '~> 2.1.0'
+  gem 'binding_of_caller', '0.7.2'
+  gem 'annotate', '2.6.10'
+  gem 'web-console', '~> 2.0'
+  gem 'sqlite3'
+  gem 'byebug'
+end
+
+group :production do
+  gem 'rails_12factor'
+end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
