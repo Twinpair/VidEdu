@@ -24,3 +24,7 @@ videdu_development
 
 # Ignore uploaded test images.
 /public/uploads
+
+# Ignore test / development binary files
+video_test
+videdu_development
