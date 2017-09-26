@@ -35,10 +35,10 @@ class User < ActiveRecord::Base
 
 
   #Validations for the sign up page
-  validates_presence_of :firstname, :on => :create, :message => "cant be blank"
-  validates_presence_of :lastname, :on => :create, :message => "cant be blank"
-  validates_presence_of :username, :on => :create, :message => "cant be blank"
-  validates_uniqueness_of :username, :on => :create, :message => "is already taken."
+  validates_presence_of :firstname, :message => "cant be blank"
+  validates_presence_of :lastname, :message => "cant be blank"
+  validates_presence_of :username, :message => "cant be blank"
+  validates_uniqueness_of :username, :message => "is already taken."
 
   after_create :create_default_subject
 

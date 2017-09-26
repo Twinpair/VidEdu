@@ -13,5 +13,18 @@ require "minitest/rails"
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
-  # Add more helper methods to be used by all tests here...
+end
+
+class ActionDispatch::IntegrationTest
+  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+  fixtures :all
+
+  def sign_in_as(user)
+    get new_user_session_path
+    post user_session_path, user: { email: user.email, password: 'password' } 
+ end 
+
+ def sign_out
+    click_link_or_button('Log Out')   
+ end
 end

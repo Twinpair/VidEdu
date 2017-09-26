@@ -1,0 +1,31 @@
+one:
+  id: 1000
+  subject: "Test Subject"
+  description: "This is a test description"
+  user_id: 1000
+
+two:
+  id: 2000
+  subject: "Test Subject 2"
+  description: "This is a test description 2"
+  user_id: 2000
+
+private:
+  id: 3000
+  subject: "Private"
+  description: "Private"
+  user_id: 2000
+  private: true
+
+default:
+  id: 4000
+  subject: "Uncategorized"
+  description: "Videos without a selected subject will go here"
+  user_id: 3000
+  default_subject: true
+
+integration:
+  id: 5000
+  subject: "integration fixture"
+  description: "integration"
+  user_id: 3000

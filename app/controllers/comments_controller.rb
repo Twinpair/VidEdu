@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :must_be_logged_in
+
   def create
     @comment = current_user.comments.build(comment_params)
     @comment.video_id = params[:video_id]

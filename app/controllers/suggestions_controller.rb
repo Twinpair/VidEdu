@@ -1,5 +1,4 @@
 class SuggestionsController < ApplicationController
-  include SuggestionsHelper
 
   def index
     @suggestions = Suggestion.all
@@ -10,4 +9,11 @@ class SuggestionsController < ApplicationController
     @suggestion.save
     redirect_to root_path
   end
+
+private
+
+  def suggestion_params
+    params.require(:suggestion).permit(:name, :email, :suggestion)
+  end
+
 end

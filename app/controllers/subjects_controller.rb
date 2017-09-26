@@ -80,19 +80,19 @@ class SubjectsController < ApplicationController
     # If a user tries to destroy their default (non-deletable) subject or a subject they do not own, they are redirected back to the subject show page
     if @subject.default_subject || !is_resource_owner?(@subject)
       redirect_to subject_path(@subject)
-    end
-
-    # If a user wants to delete a subject that contains videos in it, all videos are transfered to the user's default subject before the initial subject is deleted
-    unless @subject.videos.empty?
-      @default_subject = Subject.where(default_subject: true, user_id: @subject.user_id)[0]
-      @subject.videos.each do |video|
-        video.subject_id = @default_subject.id
-        video.save
+    else
+      # If a user wants to delete a subject that contains videos in it, all videos are transfered to the user's default subject before the initial subject is deleted
+      unless @subject.videos.empty?
+        @default_subject = Subject.where(default_subject: true, user_id: @subject.user_id)[0]
+        @subject.videos.each do |video|
+          video.subject_id = @default_subject.id
+          video.save
+        end
       end
-    end
 
-    @subject.destroy
-    redirect_to your_subjects_path, notice: 'Subject was successfully destroyed.'
+      @subject.destroy
+      redirect_to your_subjects_path, notice: 'Subject was successfully destroyed.'
+    end
   end
 
   def your_subjects

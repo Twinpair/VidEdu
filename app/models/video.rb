@@ -17,7 +17,7 @@
 class Video < ActiveRecord::Base
   belongs_to :user
   has_one :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
   belongs_to :subject
   validates :link, presence: true
   validates :subject_id, presence: { message: "Title: You already have a subject with that name" }
