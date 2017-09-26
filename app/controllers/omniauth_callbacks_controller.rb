@@ -12,7 +12,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def all
-    byebug
     user = User.from_omniauth(request.env["omniauth.auth"])
 
     if user.persisted?
