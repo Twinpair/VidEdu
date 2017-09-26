@@ -22,9 +22,6 @@ class ActionDispatch::IntegrationTest
   def sign_in_as(user)
     get new_user_session_path
     post user_session_path, user: { email: user.email, password: 'password' } 
- end 
+  end 
 
- def sign_out
-    click_link_or_button('Log Out')   
- end
 end
