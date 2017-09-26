@@ -1,57 +1,19 @@
 class User < ActiveRecord::Base
-#  == Schema Information ==
-#
-#  Table name: users
-#
-#  id                     , not null, primary key
-#  t.string   "firstname",              default: "", null: false
-#  t.string   "lastname",               default: "", null: false
-#  t.string   "username",               default: "", null: false
-#  t.string   "email",                  default: "", null: false
-#  t.string   "encrypted_password",     default: "", null: false
-#  t.string   "reset_password_token"
-#  t.datetime "reset_password_sent_at"
-#  t.datetime "remember_created_at"
-#  t.integer  "sign_in_count",          default: 0,  null: false
-#  t.datetime "current_sign_in_at"
-#  t.datetime "last_sign_in_at"
-#  t.string   "current_sign_in_ip"
-#  t.string   "last_sign_in_ip"
-#  t.string   "provider"
-#  t.string   "uid"
-#  t.string   "token"
-#  t.datetime "created_at",                          null: false
-#  t.datetime "updated_at",                          null: false
-
   has_many :subjects, dependent: :destroy
   has_many :videos, dependent: :destroy
   has_many :comments, dependent: :delete_all
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:google_oauth2,:facebook,:twitter]
 
-
-  #Validations for the sign up page
+  #Validations for the  users sign up and edit page
   validates_presence_of :firstname, :message => "cant be blank"
   validates_presence_of :lastname, :message => "cant be blank"
   validates_presence_of :username, :message => "cant be blank"
   validates_uniqueness_of :username, :message => "is already taken."
 
   after_create :create_default_subject
-
-  # def self.from_omniauth(auth)
-  #   where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  #       user.provider = auth.provider
-  #       user.uid = auth.uid
-  #       user.firstname = auth.info.name.split.first
-  #       user.lastname = auth.info.name.split.last
-  #       user.username = auth.info.nickname
-  #       user.email = auth.info.email
-  #   end
-  # end
   
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -77,16 +39,16 @@ class User < ActiveRecord::Base
   end
 
 
-def self.from_omniauth(auth)
-  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    user.provider = auth.provider
-    user.uid = auth.uid
-    user.firstname = auth.info.name.split.first
-    user.lastname = auth.info.name.split.last
-    user.username = auth.info.nickname
-    user.email = auth.info.email
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.firstname = auth.info.name.split.first
+      user.lastname = auth.info.name.split.last
+      user.username = auth.info.nickname
+      user.email = auth.info.email
+    end
   end
-end
 
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
@@ -108,14 +70,5 @@ end
     @subject = Subject.new(subject: "Uncategorized", description: "Videos without a selected subject will go here", default_subject: true, user_id: @user.id)
     @subject.save
   end
+  
 end
-
-  # class << self
-  #   def from_omniauth(auth)
-  #     user = User.find_or_initialize_by(uid: auth['uid'])
-  #     user.name = auth['info']['name']
-  #     user.token = auth['credentials']['token']
-  #     user.save!
-  #     user
-  #   end
-  # end

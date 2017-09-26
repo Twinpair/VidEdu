@@ -7,7 +7,14 @@ class PagesController < ApplicationController
   end
 
   def search
+     # Persistes the video/subject filter for when a user wants to sort the results
     params[:filter] = params[:persist_filter] if params[:filter].nil? && params[:persist_filter].present?
-    params[:filter].present? && params[:filter] == "Subjects" ? @subjects = Subject.search(params).paginate(:page => params[:page]) : @videos = Video.search(params).paginate(:page => params[:page])
+    
+    # Decides whether it searches for videos or subjects 
+    if params[:filter].present? && params[:filter] == "Subjects"
+      @subjects = Subject.search(params).paginate(:page => params[:page])
+    else 
+      @videos = Video.search(params).paginate(:page => params[:page])
+    end
   end
 end

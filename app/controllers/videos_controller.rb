@@ -51,22 +51,27 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
 
     # If a user tries to open another user's video that is private then they are redirected back to /videos
-    redirect_to videos_path if !is_resource_owner?(@video) && @video.private?
-
-    @video_user = User.find(@video.user_id) if !current_user || @video.user_id != current_user.id
-    @comment = Comment.new
-    @comments = Comment.where(video_id: params[:id]).order('created_at DESC')
+    if !is_resource_owner?(@video) && @video.private?
+      redirect_to videos_path 
+    else
+      @video_user = User.find(@video.user_id) if !current_user || @video.user_id != current_user.id
+      @comment = Comment.new
+      @comments = @video.comments.order('created_at DESC')
+    end
   end
 
   def edit
     @video = Video.find(params[:id])
 
     # If a user tries to edit a video that they do not own, they are redirected back to the video's show page
-    redirect_to video_path(@video) if !is_resource_owner?(@video)
-    @users_subjects = Subject.where(user_id: current_user.id).order("default_subject DESC")
+    if !is_resource_owner?(@video)
+      redirect_to video_path(@video)
+    else
+      @users_subjects = Subject.where(user_id: current_user.id).order("default_subject DESC")
 
-    # Cancel button redirects to video show page if resource_exist is true, else it redirects to user's video path
-    @resource_exist = true
+      # Cancel button redirects to video show page if resource_exist is true, else it redirects to user's video path
+      @resource_exist = true
+    end
   end
 
    def update
@@ -75,33 +80,34 @@ class VideosController < ApplicationController
     @video.assign_attributes(video_params)
 
     # If a user tries to edit a video that they do not own, they are redirected back to the video's show page
-    redirect_to video_path(@video) if !is_resource_owner?(@video)
-
-    # If params[:subject][:subject] is not empty, then the current user is attempting to create a new subject with their video creation
-    if !params[:subject][:subject].empty?
-      @subject = Subject.new(subject: params[:subject][:subject], description: "", user_id: @video.user_id)
-      @subject.private = true if !params[:subject][:private].nil?
-      @subject.save
-      @video.subject = @subject
-    end
-
-    if @video.valid?
-
-      #Video is set to private if subject is private
-      @video.private = true if @video.subject.private?
-      @new_video_subject = @video.subject
-
-      # If the video subject is updated on the video, then the subject's updated_at attribute is updated to indicate they're was a video added to it
-      if @old_video_subject != @new_video_subject
-        @new_video_subject.updated_at = 0.minute.from_now
-        @new_video_subject.save
+    if !is_resource_owner?(@video)
+      redirect_to video_path(@video) 
+    else
+      # If params[:subject][:subject] is not empty, then the current user is attempting to create a new subject with their video creation
+      if !params[:subject][:subject].empty?
+        @subject = Subject.new(subject: params[:subject][:subject], description: "", user_id: @video.user_id)
+        @subject.private = true if !params[:subject][:private].nil?
+        @subject.save
+        @video.subject = @subject
       end
 
-      @video.save
-      redirect_to video_path(@video)
-    else
-      @users_subjects = Subject.where(user_id: current_user.id).order("default_subject DESC")
-      render :edit 
+      if @video.valid?
+        #Video is set to private if subject is private
+        @video.private = true if @video.subject.private?
+        @new_video_subject = @video.subject
+
+        # If the video subject is updated on the video, then the subject's updated_at attribute is updated to indicate they're was a video added to it
+        if @old_video_subject != @new_video_subject
+          @new_video_subject.updated_at = 0.minute.from_now
+          @new_video_subject.save
+        end
+
+        @video.save
+        redirect_to video_path(@video)
+      else
+        @users_subjects = Subject.where(user_id: current_user.id).order("default_subject DESC")
+        render :edit 
+      end
     end
   end
 
@@ -109,9 +115,12 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
 
     # If a user tries to destroy a video that they do not own, they are redirected back to the subject show page
-    redirect_to video_path(@video) if !is_resource_owner?(@video)
-    @video.destroy
-    redirect_to your_videos_path
+    if !is_resource_owner?(@video)
+      redirect_to video_path(@video) 
+    else
+      @video.destroy
+      redirect_to your_videos_path
+    end
   end
 
   def your_videos

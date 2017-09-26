@@ -11,19 +11,19 @@ class SubjectsController < ApplicationController
     # If a user is trying to access another user's private subject playlist, they will be redirected to /subbjects
     if !is_resource_owner?(@subject) && @subject.private?
       redirect_to subjects_path
-    end
-
-    # If the user who is viewing the playlist is the subject owner, all (public, private) videos are loaded
-    # else if the user is not the subject owner, only public videos are loaded
-    if is_resource_owner?(@subject)
-      @videos = @subject.videos.paginate(:page => params[:page]).order_results(params[:sort])
     else
-      @videos = @subject.videos.where(private: false).paginate(:page => params[:page]).order_results(params[:sort])
-    end
+      # If the user who is viewing the playlist is the subject owner, all (public, private) videos are loaded
+      # else if the user is not the subject owner, only public videos are loaded
+      if is_resource_owner?(@subject)
+        @videos = @subject.videos.paginate(:page => params[:page]).order_results(params[:sort])
+      else
+        @videos = @subject.videos.where(private: false).paginate(:page => params[:page]).order_results(params[:sort])
+      end
 
-    # If the user who is viewing the playlist is the subject owner, the videos will display their private status for easier maintenance 
-    @display_private_status = true if is_resource_owner?(@subject)
-    @subject_user = User.find(@subject.user_id)
+      # If the user who is viewing the playlist is the subject owner, the videos will display their private status for easier maintenance 
+      @display_private_status = true if is_resource_owner?(@subject)
+      @subject_user = User.find(@subject.user_id)
+    end
   end
 
   def new
@@ -47,30 +47,34 @@ class SubjectsController < ApplicationController
     # If a user tries to edit their default (non-editable) subject or a subject they do not own, they are redirected back to the subject show page
     if @subject.default_subject || !is_resource_owner?(@subject)
       redirect_to subject_path(@subject)
+    else
+      # Cancel button redirects to subject show page if resource exist is true, else it redirects to user's subjects path
+      @resource_exist = true
     end
-
-    # Cancel button redirects to subject show page if resource_exist is true, else it redirects to user's subjects path
-    @resource_exist = true
   end
 
   def update
     @subject = Subject.find(params[:id])
-    @subject.assign_attributes(subject_params)
 
     # If a user tries to edit a subject they do not own, they are redirected back to the subject show page
-    redirect_to subject_path(@subject) if !is_resource_owner?(@subject)
-
-    if @subject.valid?
-      # WHen a user updates their subject, all the videos in it are set to the private status of that subject
-      # EX: If a subject is uopdated to private status, all videos in it are now private
-      @subject.videos.each do |video|
-        video.private = @subject.private
-        video.save
-      end
-      @subject.save
+    if !is_resource_owner?(@subject)
       redirect_to subject_path(@subject)
     else
-      render :edit
+      @subject.assign_attributes(subject_params)
+
+      if @subject.valid?
+        # WHen a user updates their subject, all the videos in it are set to the private status of that subject
+        # EX: If a subject is uopdated to private status, all videos in it are now private
+        @subject.videos.each do |video|
+          video.private = @subject.private
+          video.save
+        end
+        
+        @subject.save
+        redirect_to subject_path(@subject)
+      else
+        render :edit
+      end
     end
   end
 

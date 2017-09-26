@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   Time.zone.now
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -16,14 +14,14 @@ protected
 
 private
 
-  # Checks if user is logged in
+  # Verifies user is logged in
   def must_be_logged_in
     unless current_user
       redirect_to new_user_session_path
     end
   end
 
-  # Verifies if user is owner of resource
+  # Verifies if user is the owner of the resource given
   def is_resource_owner?(resource)
     current_user && current_user.id == resource.user_id
   end

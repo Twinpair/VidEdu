@@ -1,19 +1,3 @@
-#  == Schema Information
-#
-#  Table name: videos
-#
-#  id                     , not null, primary key
-#  t.string   "link"
-#  t.string   "title"
-#  t.string   "uid"
-#  t.string   "subject"
-#  t.datetime "created_at"
-#  t.datetime "updated_at"
-#  t.text     "note"
-#  t.integer  "subject_id"
-#  t.integer  "user_id"
-#  t.boolean  "private",    default: false
-
 class Video < ActiveRecord::Base
   belongs_to :user
   has_one :user
