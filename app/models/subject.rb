@@ -24,15 +24,15 @@ class Subject < ActiveRecord::Base
 
   self.per_page = 12
 
-  def Subject.search(params)
+  def self.search(params)
     get_results(params[:search]).order_results(params[:sort])
   end
 
-  def Subject.get_results(search_term)
+  def self.get_results(search_term)
     search_term.empty? ? Subject.where(private: false, default_subject: false) : Subject.where(private: false, default_subject: false).where("lower(subject) LIKE ?", "%#{search_term.downcase}%")
   end
 
-  def Subject.order_results(sort_request)
+  def self.order_results(sort_request)
     if sort_request.nil? || sort_request.empty? || sort_request == "Most Recently Updated"
       self.order(updated_at: :desc)
     elsif sort_request == "Least Recently Updated"

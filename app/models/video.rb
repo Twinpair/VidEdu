@@ -24,15 +24,15 @@ class Video < ActiveRecord::Base
 
   self.per_page = 12
 
-  def Video.search(params)
+  def self.search(params)
     get_results(params[:search]).order_results(params[:sort])
   end
 
-  def Video.get_results(search_term)
+  def self.get_results(search_term)
     search_term.empty? ? Video.where(private: false) : Video.where(private: false).where("lower(title) LIKE ?", "%#{search_term.downcase}%")
   end
 
-  def Video.order_results(sort_request)
+  def self.order_results(sort_request)
     if sort_request.nil? || sort_request.empty? || sort_request == "Most Recently Updated"
       self.order(updated_at: :desc)
     elsif sort_request == "Least Recently Updated"
