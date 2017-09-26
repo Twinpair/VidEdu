@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.8'
-gem 'pg'
+gem 'pg', '~> 0.20.0'
 gem 'thin', '1.6.4'
 gem 'sass-rails',   '~> 5.0.1'
 gem 'coffee-rails', '~> 4.1.0'
@@ -42,7 +42,6 @@ group :development do
   gem 'binding_of_caller', '0.7.2'
   gem 'annotate', '2.6.10'
   gem 'web-console', '~> 2.0'
-  gem 'sqlite3'
 end
 
 group :development, :test do
