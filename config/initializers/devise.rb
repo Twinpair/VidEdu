@@ -236,15 +236,23 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook, '781360041973939', 'ea719fce657647f6c4c0ef446e23ac3a'
-  config.omniauth :twitter, 'nXh29f4P6mnvH5gmuUrSTgirz', 'N1dSToYsxJ0vz28bR1TgE2g08DxQ9n5VqSjdBnJGhFffxQHIjt'
-  #config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { scope: 'userinfo.profile,youtube' }
-  #config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { access_type: "offline", approval_prompt: "" }
-  config.omniauth :google_oauth2, "561247181954-hd6k9iumec5schpcenni8mv6nmekpqhf.apps.googleusercontent.com", "hnKZDHlgIHAeBruJ2GZy9442", { 
-    :scope => "email, profile, youtube, plus.me, http://gdata.youtube.com",
-    :access_type => "offline", 
-    :approval_prompt => "" 
-  }
+  config.omniauth :facebook, 
+    ENV['FACEBOOK_APP_ID'], 
+    ENV['FACEBOOK_APP_SECRET'],
+    token_params: { parse: :json }
+
+  config.omniauth :twitter, 
+    ENV['TWITTER_KEY'],
+    ENV['TWITTER_SECRET']
+  
+  config.omniauth :google_oauth2, 
+    ENV['GOOGLE_CLIENT_ID'],
+    ENV['GOOGLE_CLIENT_SECRET'], 
+      { 
+        :scope => "email, profile, youtube, plus.me, http://gdata.youtube.com",
+        :access_type => "offline", 
+        :approval_prompt => "" 
+      }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
