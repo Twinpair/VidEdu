@@ -18,7 +18,7 @@ class Subject < ActiveRecord::Base
     if search_term.empty?
       Subject.where(private: false, default_subject: false)
     else 
-      Subject.where(private: false, default_subject: false).where("lower(subject) LIKE ?", "%#{search_term.downcase}%")
+      Subject.where(private: false, default_subject: false).where("lower(subject) LIKE ? or lower(description) LIKE ?", "%#{search_term.downcase}%", "%#{search_term.downcase}%")
     end
   end
 

@@ -17,8 +17,15 @@ class PagesControllerTest < ActionController::TestCase
     assert_select "title", "VidEdu | Search"
   end
 
-  test "should return search results" do
+  test "should return search results based on title" do
     get :search, search: "Test"
+    assert_not_empty assigns(:videos)
+    assert_response :success
+    assert_select "title", "VidEdu | Search"
+  end
+
+   test "should return search results based on notes" do
+    get :search, search: "Number"
     assert_not_empty assigns(:videos)
     assert_response :success
     assert_select "title", "VidEdu | Search"

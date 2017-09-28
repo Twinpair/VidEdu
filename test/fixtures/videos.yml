@@ -1,14 +1,14 @@
 one:
   link: "https://www.youtube.com/watch?v=test"
   title: "Test"
-  note: "Test Note"
+  note: "number one"
   user_id: 1000
   subject_id: 1000
 
 two:
   link: "https://www.youtube.com/watch?v=test"
   title: "Test"
-  note: "Test Note"
+  note: "number two"
   user_id: 2000
   subject_id: 2000
 

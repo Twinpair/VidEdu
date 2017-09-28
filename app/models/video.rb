@@ -13,7 +13,11 @@ class Video < ActiveRecord::Base
   end
 
   def self.get_results(search_term)
-    search_term.empty? ? Video.where(private: false) : Video.where(private: false).where("lower(title) LIKE ?", "%#{search_term.downcase}%")
+    if search_term.empty?
+      Video.where(private: false)
+    else 
+      Video.where(private: false).where("lower(title) LIKE ? or lower(note) LIKE ?", "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+    end
   end
 
   def self.order_results(sort_request)

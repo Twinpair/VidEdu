@@ -1,13 +1,13 @@
 one:
   id: 1000
   subject: "Test Subject"
-  description: "This is a test description"
+  description: "one"
   user_id: 1000
 
 two:
   id: 2000
   subject: "Test Subject 2"
-  description: "This is a test description 2"
+  description: "two"
   user_id: 2000
 
 private:
