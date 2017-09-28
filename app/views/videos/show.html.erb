@@ -7,7 +7,7 @@
           <h1 class="cover-heading"><p class="text-center"><%= @video.title %></p></h1>
           <div class="text-center">
             <div id="uid"><%= @video.uid %></div>
-            <p><b>Created By: <%= @video_user ? @video_user.username : "You" %></b></p>
+            <p><b>Created By: <%= @video_user %></b></p>
             <div class="text-center">
             <% if current_user && @video.user_id == current_user.id %>
               <%= link_to "Edit", edit_video_path, :class=>"btn btn-lg btn-warning" %>

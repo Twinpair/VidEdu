@@ -25,7 +25,7 @@ class SubjectsControllerTest < ActionController::TestCase
     assert_not_empty(:subject)
     get :show, id: subject.id
     assert_response :success
-    assert_select "title", "VidEdu | #{User.find(subject.user_id).username}'s #{subject.subject} Playlist"
+    assert_select "title", "VidEdu | Your #{subject.subject} Playlist"
   end
 
   test "should redirect to index if user is trying to access a private subject that they don't own" do

@@ -60,6 +60,21 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_select "h1", "New Subject"
   end
 
+  test "unsuccessful create with non unique name" do
+    sign_in_as @user
+    get new_subject_path
+    assert_response :success
+    assert_no_difference 'Subject.count' do
+      post subjects_path, 
+        subject: {
+          subject: "integration fixture", 
+          description: "testing" 
+        } 
+    end
+    assert_template :new
+    assert_select "h1", "New Subject"
+  end
+
   test "unsuccessful create with no user" do
     get new_subject_path
     assert_response :redirect
@@ -151,6 +166,30 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_not @subject.videos[0].private?
   end
 
+  test "unsuccessful update shpuld not update videos private status" do
+    sign_in_as @user
+    patch subject_path(@subject),
+      subject: {
+        private: true
+      }
+    @subject.reload
+    assert @subject.private?
+    assert @subject.videos[0].private?
+    get edit_subject_path(@subject)
+    assert_response :success
+    assert_select "h1", "Editing \"#{@subject.subject}\" Subject"
+    patch subject_path(@subject),
+      subject: {
+        subject: " ",
+        private: false
+      }
+    assert_template :edit
+    @subject.reload
+    assert_equal 1, @subject.videos.count
+    assert @subject.private?
+    assert @subject.videos[0].private?
+  end
+
   test "unsuccessful update with blank name" do
     sign_in_as @user
     get edit_subject_path(@subject)
@@ -186,7 +225,7 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_redirected_to your_subjects_path
   end
 
-  test "should move video in subject to default subject when subject is destroyed" do
+  test "when subject is destroyed, it should move videos in the subject to the user's default subject" do
     sign_in_as @user
     default_subject = subjects(:default)
     get edit_subject_path(@subject)
@@ -197,6 +236,33 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_redirected_to your_subjects_path
   end
 
+  test "when a subject is destroyed, a private video should stay private when moved to default subject" do
+    sign_in_as @user
+    default_subject = subjects(:default)
+    assert_difference 'Subject.count', 1 do
+      post videos_path, 
+        { 
+          video: {
+            link: "https://www.youtube.com/watch?v=integration",
+            note: "",
+            private: true
+          } ,
+          subject: {
+            subject: "NEW SUBJECT",
+            private: true
+          }
+        }
+    end
+    assert_equal true, Video.last.private?
+    get edit_subject_path(@subject)
+    assert_response :success
+    assert_difference('default_subject.videos.count', 1) do
+      delete subject_path(Subject.last)
+    end
+    assert_redirected_to your_subjects_path
+    assert_equal true, Video.last.private?
+  end
+
   test "should not be able to destroy default subject" do
     sign_in_as @user
     default_subject = subjects(:default)
@@ -205,6 +271,16 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to subject_path(default_subject)
     assert_response :redirect
+  end
+
+  test "unsuccessful subject destroy should not move the videos in subject to default subject" do
+    default_subject = subjects(:default)
+    subject = subjects(:integration)
+    assert_equal 1, subject.videos.count
+    assert_no_difference('default_subject.videos.count') do
+      delete subject_path(subject)
+    end
+    assert_equal 1, subject.videos.count
   end
 
 end

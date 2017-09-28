@@ -21,9 +21,32 @@ private
     end
   end
 
-  # Verifies if user is the owner of the resource given
+  # Verifies the user is the owner of the resource given
   def is_resource_owner?(resource)
     current_user && current_user.id == resource.user_id
+  end
+
+  # Verifies user is authorized to peform certain actions
+  def authorized_user?
+    if params[:controller].eql?("subjects")
+      subject = Subject.find(params[:id])
+      if params[:action].eql?("show")
+        # If a user is trying to access another user's private subject playlist, they will be redirected to /subjects
+        redirect_to subjects_path if subject.private? && !is_resource_owner?(subject)
+      elsif params[:action].eql?("edit") || params[:action].eql?("update") || params[:action].eql?("destroy")
+        # If a user tries to alter their default (non-editable) subject or a subject they do not own, they are redirected back to the subject show page
+        redirect_to subject_path(subject) if subject.default_subject || !is_resource_owner?(subject)
+      end
+    elsif params[:controller].eql?("videos")
+      video = Video.find(params[:id])
+      if params[:action].eql?("show")
+        # If a user tries to view another user's private video, they are redirected back to /videos
+        redirect_to videos_path if video.private? && !is_resource_owner?(video)
+      elsif params[:action].eql?("edit") || params[:action].eql?("update") || params[:action].eql?("destroy")
+        # If a user tries to alter a video they do not own, they are redirected back to the videos show page
+        redirect_to video_path(video) unless is_resource_owner?(video)
+      end
+    end
   end
 
 end

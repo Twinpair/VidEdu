@@ -118,7 +118,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal 1, Subject.last.videos.count
   end
 
-  test "new video is in new suject when subject is created concurrently with video creation" do
+  test "new video is in new subject when subject is created concurrently with video creation" do
     sign_in_as @user
     get new_video_path
     assert_response :success
@@ -162,6 +162,61 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal 1, Subject.last.videos.count
   end
 
+  test "new video is private when user assigns it to private but subject concurrently created is public" do
+    sign_in_as @user
+    get new_video_path
+    assert_response :success
+    assert_difference 'Subject.count', 1 do
+      post videos_path, 
+        { 
+          video: {
+            link: "https://www.youtube.com/watch?v=integration",
+            note: "This is my notes",
+            subject_id: Subject.last,
+            private: true
+          },
+          subject: {
+            # This is Subject.last
+            subject: "NEW SUBJECT"
+          }
+        }
+    end
+    assert_not Subject.last.private?
+    assert Video.last.private?
+    assert_equal 1, Subject.last.videos.count
+  end
+
+  test "unsuccessful video create when user attempts to concurrently create a non unique subject name" do
+    get new_video_path
+    assert_response :success
+    assert_no_difference 'Video.count' do
+      post videos_path, 
+        { 
+          video: {
+            link: "https://www.youtube.com/watch?v=integration",
+            note: "This is my notes",
+            subject_id: Subject.last
+          },
+          subject: {
+            subject: "Integration Fixture"
+          }
+        }
+    end
+    assert_no_difference 'Subject.count' do
+      post videos_path, 
+        { 
+          video: {
+            link: "https://www.youtube.com/watch?v=integration",
+            note: "This is my notes",
+            subject_id: Subject.last
+          },
+          subject: {
+            subject: "Integration Fixture"
+          }
+        }
+    end
+  end
+
   test "unsuccessful video create with no user" do
     get new_video_path
     assert_response :success
@@ -178,7 +233,6 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
           }
         }
     end
-    assert_response :redirect
   end
 
   test "unsuccessful subject create with concurrent video creation with no user" do
@@ -197,7 +251,6 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
           }
         }
     end
-    assert_response :redirect
   end
 
   # UPDATE (NOTE: Links cannot be updated for existing video)

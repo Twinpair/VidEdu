@@ -3,7 +3,7 @@ class Subject < ActiveRecord::Base
   belongs_to :user
   has_one :user
   mount_uploader :picture, PictureUploader
-  validates :subject, presence: true, uniqueness: {scope: :user_id, message: "Title: You already have a subject with that name"}
+  validates :subject, presence: true, uniqueness: {scope: :user_id, case_sensitive: false, message: "Title: You already have a subject with that name"}
   validates :user_id, presence: true
   validate  :picture_size
   before_save :normalize_subject_name
@@ -15,7 +15,11 @@ class Subject < ActiveRecord::Base
   end
 
   def self.get_results(search_term)
-    search_term.empty? ? Subject.where(private: false, default_subject: false) : Subject.where(private: false, default_subject: false).where("lower(subject) LIKE ?", "%#{search_term.downcase}%")
+    if search_term.empty?
+      Subject.where(private: false, default_subject: false)
+    else 
+      Subject.where(private: false, default_subject: false).where("lower(subject) LIKE ?", "%#{search_term.downcase}%")
+    end
   end
 
   def self.order_results(sort_request)
@@ -34,8 +38,16 @@ class Subject < ActiveRecord::Base
     end
   end
 
+  def self.create_concurrent_subject(params, video)
+    subject = Subject.new(subject: params[:subject][:subject], description: "", user_id: video.user_id)
+    subject.private = true unless params[:subject][:private].nil?
+    subject.save
+    video.subject = subject
+  end
+
 private
   
+  # Normalizes cubject name before save
   def normalize_subject_name
     self.subject = subject.downcase.titleize
   end
