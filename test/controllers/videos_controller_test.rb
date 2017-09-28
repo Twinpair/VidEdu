@@ -17,6 +17,8 @@ class VideosControllerTest < ActionController::TestCase
     get :show, id: video.id
     assert_response :success
     assert_select "title", "VidEdu | #{video.title}"
+    assert_select "h1", "#{video.title}"
+    assert_select "p", "Created By: #{User.find(video.user_id).username}"
   end
 
   test "should get show for private video if user is owner" do
@@ -26,6 +28,8 @@ class VideosControllerTest < ActionController::TestCase
     get :show, id: video.id
     assert_response :success
     assert_select "title", "VidEdu | #{video.title}"
+    assert_select "h1", "#{video.title}"
+    assert_select "p", "Created By: You"
   end
 
   test "should redirect to index if user is trying to access a private video that they don't own" do

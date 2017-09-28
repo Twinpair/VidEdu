@@ -35,7 +35,7 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
-    @video_user = is_resource_owner?(@video) ? "You" : "User.find(@video.user_id).username"
+    @video_user = is_resource_owner?(@video) ? "You" : "#{User.find(@video.user_id).username}"
     @comment = Comment.new
     @comments = @video.comments.order('created_at DESC')
   end

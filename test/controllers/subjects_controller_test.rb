@@ -17,6 +17,7 @@ class SubjectsControllerTest < ActionController::TestCase
     get :show, id: subject.id
     assert_response :success
     assert_select "title", "VidEdu | #{User.find(subject.user_id).username}'s #{subject.subject} Playlist"
+    assert_select "h1", "#{User.find(subject.user_id).username}'s #{subject.subject} Playlist"
   end
 
   test "should get show for private subject if user is owner" do
@@ -26,6 +27,7 @@ class SubjectsControllerTest < ActionController::TestCase
     get :show, id: subject.id
     assert_response :success
     assert_select "title", "VidEdu | Your #{subject.subject} Playlist"
+    assert_select "h1", "Your #{subject.subject} Playlist"
   end
 
   test "should redirect to index if user is trying to access a private subject that they don't own" do
