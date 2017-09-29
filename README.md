@@ -1,4 +1,5 @@
-# VidEdu
+# VidEdu  [![Build Status](https://travis-ci.org/Twinpair/VidEdu.svg?branch=master)](https://travis-ci.org/Twinpair/VidEdu)
+
 "Video Education Across the Web"
 
 ------------------------------------------------------------------------------------
