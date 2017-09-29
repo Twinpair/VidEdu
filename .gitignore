@@ -28,3 +28,6 @@ videdu_development
 # Ignore test / development binary files
 video_test
 videdu_development
+
+# Ignore coverage folder created by simplecov gem
+coverage

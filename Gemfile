@@ -29,6 +29,7 @@ gem 'fog',                     '1.40.0'
 gem 'will_paginate', '~> 3.1.0'
 gem 'i18n'
 
+gem 'simplecov', :require => false, :group => :test
 group :test do
   gem 'minitest-rails', '2.2.1'
   gem 'rails-controller-testing', '0.0.3'
