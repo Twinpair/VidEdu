@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926234034) do
+ActiveRecord::Schema.define(version: 20170930014200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,8 +38,11 @@ ActiveRecord::Schema.define(version: 20170926234034) do
     t.integer  "user_id"
   end
 
+  add_index "subjects", ["created_at"], name: "index_subjects_on_created_at", using: :btree
   add_index "subjects", ["default_subject"], name: "index_subjects_on_default_subject", using: :btree
+  add_index "subjects", ["description"], name: "index_subjects_on_description", using: :btree
   add_index "subjects", ["private"], name: "index_subjects_on_private", using: :btree
+  add_index "subjects", ["updated_at"], name: "index_subjects_on_updated_at", using: :btree
   add_index "subjects", ["user_id"], name: "index_subjects_on_user_id", using: :btree
 
   create_table "suggestions", force: :cascade do |t|
@@ -73,6 +76,7 @@ ActiveRecord::Schema.define(version: 20170926234034) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
   create_table "videos", force: :cascade do |t|
     t.string   "link"
@@ -87,9 +91,13 @@ ActiveRecord::Schema.define(version: 20170926234034) do
     t.integer  "subject_id"
   end
 
+  add_index "videos", ["created_at"], name: "index_videos_on_created_at", using: :btree
+  add_index "videos", ["note"], name: "index_videos_on_note", using: :btree
   add_index "videos", ["private"], name: "index_videos_on_private", using: :btree
   add_index "videos", ["subject_id"], name: "index_videos_on_subject_id", using: :btree
+  add_index "videos", ["title"], name: "index_videos_on_title", using: :btree
   add_index "videos", ["uid"], name: "index_videos_on_uid", using: :btree
+  add_index "videos", ["updated_at"], name: "index_videos_on_updated_at", using: :btree
   add_index "videos", ["user_id"], name: "index_videos_on_user_id", using: :btree
 
   add_foreign_key "comments", "users"
