@@ -3,7 +3,7 @@ require 'test_helper'
 class SuggestionIntegrationTest < ActionDispatch::IntegrationTest
 
   # CREATE
-  test "successful create as guest" do
+  test "create when there is no user" do
     assert_difference 'Suggestion.count', 1 do
       post suggestions_path, 
         suggestion: {
@@ -14,8 +14,8 @@ class SuggestionIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "successful create as user" do
-    user = users(:integration)
+  test "create when user is logged in" do
+    user = users(:default)
     sign_in_as user
     assert_difference 'Suggestion.count', 1 do
       post suggestions_path, 
@@ -27,7 +27,7 @@ class SuggestionIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "unsuccessful create with blank name" do
+  test "create when name param is blanks" do
     assert_no_difference 'Suggestion.count' do
       post suggestions_path, 
         suggestion: {
@@ -38,7 +38,7 @@ class SuggestionIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "unsuccessful create with blank email" do
+  test "create when email param is blank" do
     assert_no_difference 'Suggestion.count' do
       post suggestions_path, 
         suggestion: {
@@ -49,7 +49,7 @@ class SuggestionIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "unsuccessful create with blank suggestion" do
+  test "create when suggestion param is blank" do
     assert_no_difference 'Suggestion.count' do
       post suggestions_path, 
         suggestion: {
@@ -60,7 +60,7 @@ class SuggestionIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "unsuccessful create with all params blank" do
+  test "create when all params are blank" do
     assert_no_difference 'Suggestion.count' do
       post suggestions_path, 
         suggestion: {

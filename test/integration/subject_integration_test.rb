@@ -3,12 +3,12 @@ require 'test_helper'
 class SubjectIntegrationTest < ActionDispatch::IntegrationTest
  
   def setup
-    @user = users(:integration)
-    @subject = subjects(:integration)
+    @user = users(:default)
+    @subject = subjects(:default)
   end
 
   # CREATE 
-  test "successful create with only name" do
+  test "create when only subject param is present" do
     sign_in_as @user
     get new_subject_path
     assert_response :success
@@ -26,7 +26,7 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_select "p", ""
   end
 
-  test "successful create with all params" do
+  test "create when all subject params are present" do
     sign_in_as @user
     get new_subject_path
     assert_response :success
@@ -45,7 +45,7 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_select "p", "Description: #{Subject.last.description}"
   end
 
-  test "unsuccessful create with blank name" do
+  test "create when subject param is blank" do
     sign_in_as @user
     get new_subject_path
     assert_response :success
@@ -60,14 +60,14 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_select "h1", "New Subject"
   end
 
-  test "unsuccessful create with non unique name" do
+  test "create when subject param is not unique" do
     sign_in_as @user
     get new_subject_path
     assert_response :success
     assert_no_difference 'Subject.count' do
       post subjects_path, 
         subject: {
-          subject: "integration fixture", 
+          subject: "Test Subject", 
           description: "testing" 
         } 
     end
@@ -75,31 +75,29 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_select "h1", "New Subject"
   end
 
-  test "unsuccessful create with no user" do
+  test "create when there is no user" do
     get new_subject_path
     assert_response :redirect
   end
 
   # UPDATE
-  test "successful update with only name" do
+  test "update when only subject param is present" do
     sign_in_as @user
     get edit_subject_path(@subject)
     assert_response :success
     assert_select "h1", "Editing \"#{@subject.subject}\" Subject"
     patch subject_path(@subject), 
       subject: {
-        subject: "Testing Integration Update",
-        description: ""
+        subject: "Testing Integration Update"
       } 
     assert_response :redirect
     follow_redirect!
     assert_response :success
     @subject.reload
     assert_select "h1", "Your #{@subject.subject} Playlist"
-    assert_select "p", ""
   end
 
-  test "successful update with all params" do
+  test "update when all subject params are present" do
     sign_in_as @user
     get edit_subject_path(@subject)
     assert_response :success
@@ -120,7 +118,7 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert @subject.private?
   end
 
-  test "when a public subject is made private, all it's videos should be made private as well" do
+  test "update when subject is made private and it has videos in it" do
     sign_in_as @user
     assert_equal 1, @subject.videos.count
     assert_not @subject.private?
@@ -141,7 +139,7 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert @subject.videos[0].private?
   end
 
-  test "when a private subject is made public, all it's videos should be made public as well" do
+  test "update when subject is made public and it has videos in it" do
     sign_in_as @user
     patch subject_path(@subject),
       subject: {
@@ -166,7 +164,7 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_not @subject.videos[0].private?
   end
 
-  test "unsuccessful update shpuld not update videos private status" do
+  test "update should not update subject's videos private status if update is unsuccessful" do
     sign_in_as @user
     patch subject_path(@subject),
       subject: {
@@ -190,7 +188,7 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert @subject.videos[0].private?
   end
 
-  test "unsuccessful update with blank name" do
+  test "update when subject param is blank" do
     sign_in_as @user
     get edit_subject_path(@subject)
     assert_response :success
@@ -202,32 +200,37 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_template :edit
   end
 
-  test "should not be able to update default subject" do
+  test "update when subject is default subject" do
     sign_in_as @user
-    default_subject = subjects(:default)
-    patch subject_path(default_subject), 
+    @subject.update_attributes(default_subject: true)
+    patch subject_path(@subject), 
       subject: {
         subject: "CHANGING", 
         description: "DEFAULT" 
       }
-    assert_redirected_to subject_path(default_subject)
+    assert_redirected_to subject_path(@subject)
     assert_response :redirect
+    assert_not_equal "DEFAULT", @subject.subject 
   end
   
   # DESTROY
-  test "should destroy subject" do
+  test "destroy" do
     sign_in_as @user
-    get edit_subject_path(@subject)
+    post subjects_path, 
+      subject: {
+        subject: "integration"
+      } 
+    get edit_subject_path(Subject.last)
     assert_response :success
     assert_difference('Subject.count', -1) do
-      delete subject_path(@subject)
+      delete subject_path(Subject.last)
     end
     assert_redirected_to your_subjects_path
   end
 
-  test "when subject is destroyed, it should move videos in the subject to the user's default subject" do
+  test "destroy when subject has videos in it" do
     sign_in_as @user
-    default_subject = subjects(:default)
+    default_subject = Subject.create!(subject: "Default", user_id: @user.id, default_subject: true)
     get edit_subject_path(@subject)
     assert_response :success
     assert_difference('default_subject.videos.count', 1) do
@@ -236,9 +239,9 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_redirected_to your_subjects_path
   end
 
-  test "when a subject is destroyed, a private video should stay private when moved to default subject" do
+  test "destroy when a subject has private videos in it" do
     sign_in_as @user
-    default_subject = subjects(:default)
+    default_subject = Subject.create!(subject: "Default", user_id: @user.id, default_subject: true)
     assert_difference 'Subject.count', 1 do
       post videos_path, 
         { 
@@ -254,7 +257,7 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
         }
     end
     assert_equal true, Video.last.private?
-    get edit_subject_path(@subject)
+    get edit_subject_path(Subject.last)
     assert_response :success
     assert_difference('default_subject.videos.count', 1) do
       delete subject_path(Subject.last)
@@ -263,24 +266,23 @@ class SubjectIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal true, Video.last.private?
   end
 
-  test "should not be able to destroy default subject" do
+  test "destroy when subject is default subject" do
     sign_in_as @user
-    default_subject = subjects(:default)
-    assert_no_difference('default_subject.videos.count') do
-      delete subject_path(default_subject)
+    @subject.update_attributes(default_subject: true)
+    assert_no_difference('Subject.count') do
+      delete subject_path(@subject)
     end
-    assert_redirected_to subject_path(default_subject)
+    assert_redirected_to subject_path(@subject)
     assert_response :redirect
   end
 
-  test "unsuccessful subject destroy should not move the videos in subject to default subject" do
-    default_subject = subjects(:default)
-    subject = subjects(:integration)
-    assert_equal 1, subject.videos.count
+  test "destroy when unsuccessful, videos should not be moved to default subject" do
+    default_subject = Subject.create!(subject: "Default", user_id: @user.id, default_subject: true)
+    assert_equal 1, @subject.videos.count
     assert_no_difference('default_subject.videos.count') do
-      delete subject_path(subject)
+      delete subject_path(@subject)
     end
-    assert_equal 1, subject.videos.count
+    assert_equal 1, @subject.videos.count
   end
 
 end

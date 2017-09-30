@@ -4,7 +4,8 @@ class SuggestionsControllerTest < ActionController::TestCase
 
   include Devise::TestHelpers
   
-  test "should get index" do
+  # INDEX
+  test "index" do
     get :index
     assert_response :success
   end

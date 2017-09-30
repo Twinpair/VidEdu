@@ -5,8 +5,8 @@ class VideoTest < ActiveSupport::TestCase
   def setup
     @video = Video.new(link: "https://www.youtube.com/watch?v=test", 
                         note: "Notes", 
-                        user_id: 1000,
-                        subject_id: 1000)
+                        user_id: 1,
+                        subject_id: 1)
   end
   
   test "should be valid" do

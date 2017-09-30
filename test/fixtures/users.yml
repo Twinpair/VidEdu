@@ -1,21 +1,15 @@
-one:
-  id: 1000
+default:
+  id: 1
   firstname: "Eric"
-  lastname: "Gonza"
-  username: "TEST_USER"
-  email: "test_user@gmail.com"
+  lastname: "Gonzalez"
+  username: "Twinpair"
+  email: "twinpair@example.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, "password") %>
 
-two:
-  id: 2000
-  firstname: "Max"
-  lastname: "Trouble"
-  username: "Max_trouble"
-  email: "maxtrouble@gmail,com"
-
-integration:
-  id: 3000
-  firstname: "inte"
-  lastname: "gration"
-  username: "integration"
-  email: "integration@example.com"
+other:
+  id: 2
+  firstname: "first"
+  lastname: "last"
+  username: "firstlast"
+  email: "firstlast@example.com"
   encrypted_password: <%= Devise::Encryptor.digest(User, "password") %>

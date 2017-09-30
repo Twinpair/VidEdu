@@ -3,90 +3,101 @@ require 'test_helper'
 class SubjectsControllerTest < ActionController::TestCase
 
   include Devise::TestHelpers
+
+  def setup
+    @user = users(:default)
+    @subject = subjects(:default)
+  end
   
-  test "should get index" do
+  # INDEX
+  test "index" do
     get :index
     assert_not_empty(:subjects)
     assert_response :success
     assert_select "title", "VidEdu | All Subjects"
   end
 
-  test "should get show if subject is not private" do
-    subject = subjects(:one)
+  # SHOW
+  test "show when subject is not private" do
+    get :show, id: @subject.id
     assert_not_empty(:subject)
-    get :show, id: subject.id
+    assert_not_empty(:videos)
     assert_response :success
-    assert_select "title", "VidEdu | #{User.find(subject.user_id).username}'s #{subject.subject} Playlist"
-    assert_select "h1", "#{User.find(subject.user_id).username}'s #{subject.subject} Playlist"
+    assert_select "title", "VidEdu | #{User.find(@subject.user_id).username}'s #{@subject.subject} Playlist"
+    assert_select "h1", "#{User.find(@subject.user_id).username}'s #{@subject.subject} Playlist"
   end
 
-  test "should get show for private subject if user is owner" do
-    sign_in users(:two)
-    subject = subjects(:private)
+  test "show when subject is private and user is owner" do
+    sign_in @user
+    @subject.update_attributes(private: true)
+    get :show, id: @subject.id
     assert_not_empty(:subject)
-    get :show, id: subject.id
+    assert_not_empty(:videos)
     assert_response :success
-    assert_select "title", "VidEdu | Your #{subject.subject} Playlist"
-    assert_select "h1", "Your #{subject.subject} Playlist"
+    assert_select "title", "VidEdu | Your #{@subject.subject} Playlist"
+    assert_select "h1", "Your #{@subject.subject} Playlist"
   end
 
-  test "should redirect to index if user is trying to access a private subject that they don't own" do
-    sign_in users(:one)
-    subject = subjects(:private)
+  test "show when subject is private and user is not owner" do
+    sign_in @user
+    @subject.update_attributes(user_id: 2, private: true)
+    get :show, id: @subject.id
     assert_not_empty(:subject)
-    get :show, id: subject.id
     assert_redirected_to subjects_path
   end
 
-  test "should redirect to index if guest is trying to access a private subject" do
-    subject = subjects(:private)
+  test "show when subject is private and there is no user" do
+    @subject.update_attributes(private: true)
+    get :show, id: @subject.id
     assert_not_empty(:subject)
-    get :show, id: subject.id
     assert_redirected_to subjects_path
   end
 
-  test "should get new for user" do
-    sign_in users(:one)
+  # NEW
+  test "new when user is signed in" do
+    sign_in @user
     get :new
     assert_response :success
     assert_select "title", "VidEdu | Add Subject"
   end
 
-  test "should redirect to login if guest wants to access new" do
+  test "new when there is no user" do
     get :new
     assert_redirected_to new_user_session_path
   end
 
-  test "should get edit if user is owner" do
-    sign_in users(:one)
-    subject = subjects(:one)
+  # EDIT
+  test "edit when user is owner" do
+    sign_in @user
+    get :edit, id: @subject.id
     assert_not_empty(:subject)
-    get :edit, id: subject.id
     assert_response :success
     assert_select "title", "VidEdu | Edit Subject"
   end
 
-  test "should redirect to subjects show if user tries to edit a subject he/she does not own" do
-    sign_in users(:two)
-    subject = subjects(:one)
-    get :edit, id: subject.id
-    assert_redirected_to subject_path(subject)
+  test "edit when a user is not the owner" do
+    sign_in @user
+    @subject.update_attributes(user_id: 2)
+    get :edit, id: @subject.id
+    assert_not_empty(:subject)
+    assert_redirected_to subject_path(@subject)
   end
 
-  test "should redirect to login if guest tries to edit a subject" do
-    subject = subjects(:one)
-    get :edit, id: subject.id
+  test "edit when there is no user" do
+    get :edit, id: @subject.id
+    assert_not_empty(:subject)
     assert_redirected_to new_user_session_path
   end
 
-  test "should get users subjects if logged in" do
-    sign_in users(:one)
+  # YOUR_SUBJECTS
+  test "your_subjects when user is logged in" do
+    sign_in @user
     get :your_subjects
     assert_not_empty(:subjects)
     assert_response :success
   end
 
-  test "should redirect to login if guest tries to access 'your_subjects'" do
+  test "your_subjects when there is no user" do
     get :your_subjects
     assert_redirected_to new_user_session_path
   end

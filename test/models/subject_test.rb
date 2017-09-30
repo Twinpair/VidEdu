@@ -3,7 +3,7 @@ require 'test_helper'
 class SubjectTest < ActiveSupport::TestCase
  
   def setup
-    @subject = Subject.new(subject: "text", description: "description", user_id: 1000)
+    @subject = Subject.new(subject: "text", description: "description", user_id: 1)
   end
   
   test "should be valid" do

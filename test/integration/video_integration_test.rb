@@ -3,13 +3,14 @@ require 'test_helper'
 class VideoIntegrationTest < ActionDispatch::IntegrationTest
   
   def setup
-    @user = users(:integration)
-    @video = videos(:integration)
+    @user = users(:default)
+    @video = videos(:default)
   end
 
   # CREATE 
-  test "successful create with only link param" do
+  test "create when only link param is present" do
     sign_in_as @user
+    subject = subjects(:default)
     get new_video_path
     assert_response :success
     assert_difference 'Video.count', 1 do
@@ -18,7 +19,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
           video: {
             link: "https://www.youtube.com/watch?v=integration",
             note: "",
-            subject_id: 4000 # Default subject is always pre-selected
+            subject_id: subject.id
           } ,
           subject: {
             subject: ""
@@ -31,9 +32,9 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_select "h1", "#{Video.last.title}"
   end
 
-  test "successful create with all params" do
+  test "create when all params are present" do
     sign_in_as @user
-    subject = subjects(:integration)
+    subject = subjects(:default)
     get new_video_path
     assert_response :success
     assert_difference 'Video.count', 1 do
@@ -56,9 +57,10 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_select "h1", "#{Video.last.title}"
   end
 
-  test "when video is created, default subject should have new video" do
+  test "create and verify the default subject has the new video" do
     sign_in_as @user
     subject = subjects(:default)
+    subject.update_attributes(default_subject: true)
     get new_video_path
     assert_response :success
     assert_difference 'subject.videos.count', 1 do
@@ -67,7 +69,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
           video: {
             link: "https://www.youtube.com/watch?v=integration",
             note: "These are my notes",
-            subject_id: 4000, # Default subject is always pre-selected
+            subject_id: subject.id
           },
           subject: {
             subject: ""
@@ -76,9 +78,9 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "when video is created, selected subject should have new video" do
+  test "create and verify selected subject has new video" do
     sign_in_as @user
-    subject = subjects(:integration)
+    subject = subjects(:default)
     get new_video_path
     assert_response :success
     assert_difference 'subject.videos.count', 1 do
@@ -97,7 +99,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "new subject can be created concurrently with video creation" do
+  test "create and verify new subject was also created" do
     sign_in_as @user
     get new_video_path
     assert_response :success
@@ -118,27 +120,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal 1, Subject.last.videos.count
   end
 
-  test "new video is in new subject when subject is created concurrently with video creation" do
-    sign_in_as @user
-    get new_video_path
-    assert_response :success
-    assert_equal 1, Subject.last.videos.count do
-      post videos_path, 
-        { 
-          video: {
-            link: "https://www.youtube.com/watch?v=integration",
-            note: "These are my notes",
-            subject_id: Subject.last
-          },
-          subject: {
-            # This is Subject.last
-            subject: "NEW SUBJECT"
-          }
-        }
-    end
-  end
-
-  test "new video is private when user creates private subject concurrently with video creation" do
+  test "create and verify both the video and subject are private" do
     sign_in_as @user
     get new_video_path
     assert_response :success
@@ -162,7 +144,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal 1, Subject.last.videos.count
   end
 
-  test "new video is private when user assigns it to private but subject concurrently created is public" do
+  test "create and verify the video is private but not the subject" do
     sign_in_as @user
     get new_video_path
     assert_response :success
@@ -186,7 +168,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal 1, Subject.last.videos.count
   end
 
-  test "unsuccessful video create when user attempts to concurrently create a non unique subject name" do
+  test "create when concurrent subject name is not unique" do
     get new_video_path
     assert_response :success
     assert_no_difference 'Video.count' do
@@ -217,7 +199,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "unsuccessful video create with no user" do
+  test "create when there is no user" do
     get new_video_path
     assert_response :success
     assert_no_difference 'Video.count' do
@@ -235,26 +217,8 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "unsuccessful subject create with concurrent video creation with no user" do
-    get new_video_path
-    assert_response :success
-    assert_no_difference 'Subject.count' do
-      post videos_path, 
-        { 
-          video: {
-            link: "https://www.youtube.com/watch?v=integration",
-            note: "This is my notes",
-            subject_id: Subject.last
-          },
-          subject: {
-            subject: "NEW SUBJECT"
-          }
-        }
-    end
-  end
-
-  # UPDATE (NOTE: Links cannot be updated for existing video)
-  test "successful update with notes" do
+  # UPDATE (NOTE: Links cannot be updated for existing videos)
+  test "update when updating notes" do
     sign_in_as @user
     get edit_video_path(@video)
     assert_response :success
@@ -276,7 +240,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal "These are my new notes", @video.note
   end
 
-  test "successful update with private status" do
+  test "update when updating private status" do
     sign_in_as @user
     get edit_video_path(@video)
     assert_response :success
@@ -298,25 +262,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert @video.private?
   end
 
-  test "when video is updated with updated subject, updated subject should have new video" do
-    sign_in_as @user
-    subject = subjects(:default)
-    get edit_video_path(@video)
-    assert_response :success
-    assert_difference 'subject.videos.count', 1 do
-      patch video_path(@video), 
-        { 
-          video: {
-            subject_id: subject.id
-          },
-          subject: {
-            subject: ""
-          }
-        }
-    end
-  end
-
-  test "new subject can be created concurrently with video update" do
+  test "update when creating concurrent subject" do
     sign_in_as @user
     get edit_video_path(@video)
     assert_response :success
@@ -336,25 +282,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal 1, Subject.last.videos.count
   end
 
-  test "video is in new subject when created concurrently with video update" do
-    sign_in_as @user
-    get edit_video_path(@video)
-    assert_response :success
-    assert_equal 1, Subject.last.videos.count do
-      patch video_path(@video), 
-        { 
-          video: {
-            note: "These are my new notes"
-          },
-          subject: {
-            # This is Subject.last
-            subject: "NEW SUBJECT"
-          }
-        }
-    end
-  end
-
-  test "updated video is private when user creates private subject concurrently with video update" do
+  test "update and verify bboth video and private are private" do
     sign_in_as @user
     get video_path(@video) 
     assert_response :success
@@ -378,7 +306,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
   end
 
   # DESTROY
-  test "should destroy video" do
+  test "destroy" do
     sign_in_as @user
     get edit_video_path(@video)
     assert_response :success
@@ -388,7 +316,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_redirected_to your_videos_path
   end
 
-  test "when video is destroyed, all its comments should be destroyed as well" do
+  test "destroy and verify all it's comments are destroyed as well" do
     sign_in_as @user
     get video_path(@video)
     assert_response :success

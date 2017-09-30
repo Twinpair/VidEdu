@@ -3,7 +3,7 @@ require 'test_helper'
 class CommentTest < ActiveSupport::TestCase
 
   def setup
-    @comment = Comment.new(body: "text", user_id: 1000, video_id: 1000)
+    @comment = Comment.new(body: "text", user_id: 1000, video_id: 1)
   end
   
   test "should be valid" do

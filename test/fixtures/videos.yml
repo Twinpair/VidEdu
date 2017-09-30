@@ -1,28 +1,6 @@
-one:
+default:
   link: "https://www.youtube.com/watch?v=test"
   title: "Test"
-  note: "number one"
-  user_id: 1000
-  subject_id: 1000
-
-two:
-  link: "https://www.youtube.com/watch?v=test"
-  title: "Test"
-  note: "number two"
-  user_id: 2000
-  subject_id: 2000
-
-private:
-  link: "https://www.youtube.com/watch?v=test"
-  title: "Test"
-  note: "Test Note"
-  user_id: 2000
-  subject_id: 3000
-  private: true
-
-integration:
-  link: "https://www.youtube.com/watch?v=test"
-  title: "integration"
-  note: "integration note"
-  user_id: 3000
-  subject_id: 5000
+  note: "Test Notes"
+  user_id: 1
+  subject_id: 1
