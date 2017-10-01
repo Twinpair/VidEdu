@@ -57,7 +57,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_select "h1", "#{Video.last.title}"
   end
 
-  test "create and verify the default subject has the new video" do
+  test "create and verify a default subject was concurrently created and has the new video" do
     sign_in_as @user
     subject = subjects(:default)
     subject.update_attributes(default_subject: true)
@@ -78,7 +78,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "create and verify selected subject has new video" do
+  test "create and verify the selected subject has the new video" do
     sign_in_as @user
     subject = subjects(:default)
     get new_video_path
@@ -99,7 +99,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "create and verify new subject was also created" do
+  test "create and verify a new subject was concurrently created" do
     sign_in_as @user
     get new_video_path
     assert_response :success
@@ -168,7 +168,8 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal 1, Subject.last.videos.count
   end
 
-  test "create when concurrent subject name is not unique" do
+  test "create when concurrent created subject name is not unique" do
+    sign_in_as @user
     get new_video_path
     assert_response :success
     assert_no_difference 'Video.count' do
@@ -180,7 +181,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
             subject_id: Subject.last
           },
           subject: {
-            subject: "Integration Fixture"
+            subject: "Test Subject"
           }
         }
     end
@@ -193,7 +194,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
             subject_id: Subject.last
           },
           subject: {
-            subject: "Integration Fixture"
+            subject: "Test Subject"
           }
         }
     end
@@ -282,7 +283,7 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert_equal 1, Subject.last.videos.count
   end
 
-  test "update and verify bboth video and private are private" do
+  test "update and verify both video and private are private" do
     sign_in_as @user
     get video_path(@video) 
     assert_response :success
@@ -303,6 +304,38 @@ class VideoIntegrationTest < ActionDispatch::IntegrationTest
     assert Subject.last.private?
     assert @video.private?
     assert_equal 1, Subject.last.videos.count
+  end
+
+  test "update when concurrent created subject name is not unique" do
+    sign_in_as @user
+    get video_path(@video) 
+    assert_response :success
+    assert_no_difference 'Video.count' do
+      patch video_path(@video),
+        { 
+          video: {
+            link: "https://www.youtube.com/watch?v=integration",
+            note: "This is my notes",
+            subject_id: Subject.last
+          },
+          subject: {
+            subject: "Test Subject"
+          }
+        }
+    end
+    assert_no_difference 'Subject.count' do
+      patch video_path(@video), 
+        { 
+          video: {
+            link: "https://www.youtube.com/watch?v=integration",
+            note: "This is my notes",
+            subject_id: Subject.last
+          },
+          subject: {
+            subject: "Test Subject"
+          }
+        }
+    end
   end
 
   # DESTROY

@@ -17,6 +17,68 @@ class SubjectsControllerTest < ActionController::TestCase
     assert_select "title", "VidEdu | All Subjects"
   end
 
+  test "index when sort is 'Most Recently Updated'" do
+    new_subject = Subject.create!(subject: "Cats", user_id: @user.id)
+    @subject.update_attributes(description: "Update")
+    get :index, sort: "Most Recently Updated"
+    assert_response :success
+    assert_select "title", "VidEdu | All Subjects"
+    assert_not_empty(:subjects)
+    results = assigns(:subjects)
+    assert_operator results.index(@subject), :<, results.index(new_subject)
+  end
+
+  test "index when sort is 'Least Recently Updated'" do
+    new_subject = Subject.create!(subject: "Cats", user_id: @user.id)
+    @subject.update_attributes(description: "Update")
+    get :index, sort: "Least Recently Updated"
+    assert_response :success
+    assert_select "title", "VidEdu | All Subjects"
+    assert_not_empty(:subjects)
+    results = assigns(:subjects)
+    assert_operator results.index(new_subject), :<, results.index(@subject)
+  end
+
+  test "index when sort is 'Most Recently Created'" do
+    new_subject = Subject.create!(subject: "Cats", user_id: @user.id)
+    get :index, sort: "Most Recently Created"
+    assert_response :success
+    assert_select "title", "VidEdu | All Subjects"
+    assert_not_empty(:subjects)
+    results = assigns(:subjects)
+    assert_operator results.index(new_subject), :<, results.index(@subject)
+  end
+
+  test "index when sort is 'Least Recently Created'" do
+    new_subject = Subject.create!(subject: "Cats", user_id: @user.id)
+    get :index, sort: "Least Recently Created"
+    assert_response :success
+    assert_select "title", "VidEdu | All Subjects"
+    assert_not_empty(:subjects)
+    results = assigns(:subjects)
+    assert_operator results.index(@subject), :<, results.index(new_subject)
+  end
+
+  test "index when sort is 'Title: A-Z'" do
+    new_subject = Subject.create!(subject: "Cats", user_id: @user.id)
+    get :index, sort: "Title: A-Z"
+    assert_response :success
+    assert_select "title", "VidEdu | All Subjects"
+    assert_not_empty(:subjects)
+    results = assigns(:subjects)
+    assert_operator results.index(new_subject), :<, results.index(@subject)
+  end
+
+  test "index when sort is 'Title: Z-A'" do
+    new_subject = Subject.create!(subject: "Cats", user_id: @user.id)
+    get :index, sort: "Title: Z-A"
+    assert_response :success
+    assert_select "title", "VidEdu | All Subjects"
+    assert_not_empty(:subjects)
+    results = assigns(:subjects)
+    assert_operator results.index(@subject), :<, results.index(new_subject)
+  end
+
   # SHOW
   test "show when subject is not private" do
     get :show, id: @subject.id
