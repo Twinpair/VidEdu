@@ -14,7 +14,7 @@ gem "paperclip",            '~> 4.3'
 gem 'wysihtml-rails',         '0.5.3'
 gem 'searchkick',           '~> 0.9.1'
 gem 'yt',                   '~> 0.13.7'
-gem 'autoprefixer-rails',     '7.1.4'
+gem 'autoprefixer-rails'
 gem 'tinymce-rails',          '4.6.6'
 gem 'devise',                 '3.5.2'
 gem 'certified',              '1.0.0'
@@ -46,11 +46,11 @@ group :development do
 end
 
 group :development, :test do
-  gem 'byebug', '9.1.0'
+  gem 'byebug'
 end
 
 group :production do
-  gem 'rails_12factor', '0.0.3'
+  gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
