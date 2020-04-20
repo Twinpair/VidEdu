@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
+ruby "~> 2.5.0"
 
 gem 'rails',                  '4.2.8'
-gem 'ruby',                   '2.5.7'
 gem 'pg',                   '~> 0.20.0'
 gem 'thin',                   '1.6.4'
 gem 'sass-rails',           '~> 5.0.1'
